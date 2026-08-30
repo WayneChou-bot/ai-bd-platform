@@ -7,7 +7,6 @@
 **探索、研究、評估、觸及、學習 — 每個建議背後都有可追溯的證據、
 可重現的評分，以及由人工控制的對外接觸。**
 
-[![Tests](https://img.shields.io/badge/tests-86%20passing-2ea44f?logo=vitest&logoColor=white)](#-測試)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](package.json)
 [![Demo](https://img.shields.io/badge/demo-%E9%9B%B6%20API%20%E9%87%91%E9%91%B0-8b5cf6)](#-快速開始零金鑰示範)
@@ -128,22 +127,13 @@ Gmail LIVE：在 Google Cloud 建立 OAuth **電腦版**用戶端，把 ID／sec
 | `DEMO_RECIPIENT_OVERRIDE` | **所有**寄送轉送到此 — 安全閥 |
 | `SUPABASE_URL` ＋ service key | 本機選填；持久化 LIVE 部署必填 |
 
-## 🧪 測試
+## 🧪 工程紀律
 
-**86 個測試**，分四層 — 單元（評分、schema、狀態機、提及引擎、嚴格 schema 轉換、
-郵件 adapter）、代理行為（回覆分類、prompt injection 圍欄）、端到端流程（管線、觸及、
-提及掃描→轉換→研究、含**斷言人工核准暫停**的示範播放）、以及評估
-（fixture 從原始資料列重新產生並精確比對）。失敗可見性本身也在測試範圍：
-測試斷言重試成功後，FAILED 的那一列**仍然存在**。
-
-```bash
-npm test             # vitest run
-npx tsc --noEmit     # 嚴格型別檢查
-npm run lint
-```
-
-> 確定性測試證明系統**穩定**。證明情報**品質**（golden dataset、Precision@10、
-> Evidence Support Rate）列於 roadmap。
+每次變更都經過嚴格 TypeScript、ESLint 與 86 個測試把關 — 涵蓋單元（評分、schema、
+狀態機、提及引擎）、代理行為（回覆分類、prompt injection 圍欄）、端到端流程
+（管線、觸及、含**斷言人工核准暫停**的示範播放）與評估 — fixture 從原始資料列
+重新產生並精確比對。失敗可見性本身也在測試範圍：重試成功後，FAILED 的那一列
+必須仍然存在。
 
 ## 🗺️ 刻意不做的範圍
 

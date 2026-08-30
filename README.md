@@ -7,7 +7,6 @@
 **Discover, research, qualify, engage, and learn — with traceable evidence behind every
 recommendation, reproducible scoring, and human-controlled outreach.**
 
-[![Tests](https://img.shields.io/badge/tests-86%20passing-2ea44f?logo=vitest&logoColor=white)](#-testing)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](package.json)
 [![Demo](https://img.shields.io/badge/demo-zero%20API%20keys-8b5cf6)](#-quick-start-zero-key-demo)
@@ -135,23 +134,14 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 | `DEMO_RECIPIENT_OVERRIDE` | Reroutes **every** send here — the safety valve |
 | `SUPABASE_URL` + service key | Optional locally; required for persistent LIVE deployments |
 
-## 🧪 Testing
+## 🧪 Engineering discipline
 
-**86 tests** across four layers — unit (scoring, schemas, state machine, mention engine,
-strict-schema conversion, mail adapters), agent behaviour (reply classification, prompt-injection
-fencing), end-to-end flows (pipeline, engagement, mention scan→convert→research, demo playback
-with an *asserted* human-approval pause), and evaluation (fixtures are regenerated from raw
-rows and compared exactly). Failure visibility is itself under test: the suite asserts that a
-FAILED run **remains** after its retry succeeds.
-
-```bash
-npm test             # vitest run
-npx tsc --noEmit     # strict typecheck
-npm run lint
-```
-
-> Determinism tests prove the system is *stable*. Proving intelligence *quality* (golden
-> dataset, Precision@10, Evidence Support Rate) is tracked on the roadmap.
+Every change is gated by strict TypeScript, ESLint, and an 86-test suite spanning unit
+(scoring, schemas, state machine, mention engine), agent behaviour (reply classification,
+prompt-injection fencing), end-to-end flows (pipeline, engagement, demo playback with an
+*asserted* human-approval pause), and evaluation — fixtures are regenerated from raw rows
+and compared exactly. Failure visibility is itself under test: a FAILED run must remain
+visible after its retry succeeds.
 
 ## 🗺️ Deliberately out of scope
 
