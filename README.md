@@ -19,8 +19,7 @@ recommendation, reproducible scoring, and human-controlled outreach.**
 ---
 
 > **Status** — Portfolio MVP complete. Zero-key **Demo Mode** is ready for public deployment.
-> **Gmail LIVE** is designed for controlled, single-user local use. Multi-user SaaS and
-> enterprise capabilities are deliberately out of scope.
+> **Gmail LIVE** is designed for controlled, single-user local use.
 
 This is a **portfolio-grade, single-user system** — deliberately *not* a Salesforce/HubSpot
 CRM replacement. Instead of managing a book of business, it answers two questions with
@@ -142,14 +141,6 @@ prompt-injection fencing), end-to-end flows (pipeline, engagement, demo playback
 *asserted* human-approval pause), and evaluation — fixtures are regenerated from raw rows
 and compared exactly. Failure visibility is itself under test: a FAILED run must remain
 visible after its retry succeeds.
-
-## 🗺️ Deliberately out of scope
-
-Multi-user SaaS (auth, workspaces, RBAC, RLS), a durable job queue with retries and
-dead-letter, the full Resend receiving path, a real campaign/sequence model, CRM sync, and
-human-labelled quality evaluation are all understood — and deliberately deferred. This is a
-portfolio-grade single-user system; shipping half of an auth stack would make it worse, not
-better.
 
 ## 🏗️ Built with
 

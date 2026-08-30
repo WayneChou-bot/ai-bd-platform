@@ -19,7 +19,7 @@
 ---
 
 > **狀態** — 作品集 MVP 完成。零金鑰的 **Demo 模式**可直接公開部署；
-> **Gmail LIVE** 為受控的本機單人使用而設計。多使用者 SaaS 與企業能力刻意不在本版範圍內。
+> **Gmail LIVE** 為受控的本機單人使用而設計。
 
 這是一個 **portfolio 等級的單人系統** — 刻意**不是** Salesforce／HubSpot 那種 CRM
 替代品。它不管理客戶簿，而是用可稽核的證據回答兩個問題：
@@ -134,13 +134,6 @@ Gmail LIVE：在 Google Cloud 建立 OAuth **電腦版**用戶端，把 ID／sec
 （管線、觸及、含**斷言人工核准暫停**的示範播放）與評估 — fixture 從原始資料列
 重新產生並精確比對。失敗可見性本身也在測試範圍：重試成功後，FAILED 的那一列
 必須仍然存在。
-
-## 🗺️ 刻意不做的範圍
-
-多使用者 SaaS（認證、工作區、RBAC、RLS）、durable job queue（重試＋dead-letter）、
-完整 Resend 收信路徑、真正的 campaign／sequence 模型、CRM 同步、人工標註品質評估 —
-這些差距都已理解，並且刻意延後。這是 portfolio 等級的單人系統；硬塞半套 Auth
-只會讓它更差，不會更好。
 
 ## 🏗️ 技術棧
 
