@@ -144,19 +144,19 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
                 transition={n.status === "RUNNING" ? { duration: 1.6, repeat: Infinity, ease: "easeInOut" } : { duration: 0.3 }}
               >
                 <div className="absolute inset-x-3 top-0 h-0.5 rounded-b" style={{ background: TONE[n.key] }} />
-                <div className="flex items-center justify-between">
-                  <div className="text-[11px] font-semibold tracking-wider" style={{ color: TONE[n.key] }}>{t(n.short)}</div>
-                  <span className="flex items-center gap-1.5 text-[11px] text-muted">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="min-w-0 truncate text-[11px] font-semibold tracking-wider" style={{ color: TONE[n.key] }}>{t(n.short)}</div>
+                  <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-[11px] text-muted">
                     <span className={cn("inline-block h-2 w-2 rounded-full", n.status === "RUNNING" ? "pulse" : "", n.status === "RUNNING" || n.status === "READY" ? "bg-engage" : n.status === "QUEUED" ? "bg-learn" : "bg-white/20")} />
                     {t(n.status)}
                   </span>
                 </div>
                 <div className="mt-0.5 truncate text-sm font-medium" title={t(n.label)}>{t(n.label)}</div>
                 {compact ? (
-                  <div className="tabular mt-2 flex items-center gap-3 text-xs">
-                    <span><span className="text-muted">{t("Completed")} </span><Counter value={n.completed} /><span className="text-muted"> / </span><Counter value={n.input} /></span>
-                    {n.failed > 0 && <span className="text-danger">{t("Failed")} <Counter value={n.failed} /></span>}
-                    {n.remaining > 0 && <span className="text-learn">{t("Remaining")} <Counter value={n.remaining} /></span>}
+                  <div className="tabular mt-2 flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
+                    <span className="whitespace-nowrap"><span className="text-muted">{t("Completed")} </span><Counter value={n.completed} /><span className="text-muted"> / </span><Counter value={n.input} /></span>
+                    {n.failed > 0 && <span className="whitespace-nowrap text-danger">{t("Failed")} <Counter value={n.failed} /></span>}
+                    {n.remaining > 0 && <span className="whitespace-nowrap text-learn">{t("Remaining")} <Counter value={n.remaining} /></span>}
                   </div>
                 ) : (
                   <div className="tabular mt-2 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs">
