@@ -118,12 +118,15 @@ export async function startDemoPlayback(repo: Repository, opts: { pace?: number;
           await repo.addAgentRun(failed);
           log(`⚠ ${lead.company_name}: source unavailable — retrying`, "warn");
           await sleep(pace * 3);
-          // The FAILED row stays (§23: never hide failures); the retry is its own run.
-          const retry: AgentRun = { ...failed, id: newId("run"), status: "RETRYING", retry_count: 1, error: null, started_at: new Date().toISOString(), completed_at: null, latency_ms: null, created_at: new Date().toISOString() };
-          await repo.addAgentRun(retry);
-          await sleep(pace);
+          // The FAILED row stays (§23: never hide failures). The retry IS the
+          // researchLead run below — exactly ONE successful AgentRun, marked
+          // retry_count=1 (a duplicate hand-made retry row double-counted the
+          // board; caught in external review v3).
           await researchLead(repo, lead.id, ctx);
-          await repo.updateAgentRun({ ...retry, status: "COMPLETED", completed_at: new Date().toISOString(), latency_ms: 1200, output_summary: "recovered on retry 1 / 2" });
+          const rerun = (await repo.agentRuns())
+            .filter((r) => r.agent === "research" && r.lead_id === lead.id && r.status === "COMPLETED")
+            .sort((a, b) => b.created_at.localeCompare(a.created_at))[0];
+          if (rerun) await repo.updateAgentRun({ ...rerun, retry_count: 1, output_summary: `${rerun.output_summary} — recovered on retry 1 / 2` });
           log(`Researched ${lead.company_name} (retry succeeded)`);
           await sleep(pace);
           continue;
@@ -193,8 +196,13 @@ export async function startDemoPlayback(repo: Repository, opts: { pace?: number;
             await sleep(pace);
             continue;
           }
-          if (st.approvalGranted) log("✓ Approved by a human", "ok");
-          else log("No approval received — continuing simulated demo playback (nothing external was sent)", "warn");
+          if (!st.approvalGranted) {
+            // No human, no send — the gate fails closed (external review v3:
+            // a timeout must never impersonate an approval, even in demo data).
+            log("No approval received before timeout — draft skipped, nothing was sent", "warn");
+            continue;
+          }
+          log("✓ Approved by a human", "ok");
         }
         await approveAndSend(repo, sendId, ctx);
         log(`✓ Approved & sent (simulated) → ${lead.company_name}`, "ok");
@@ -226,7 +234,7 @@ export async function startDemoPlayback(repo: Repository, opts: { pace?: number;
       st.step = "learn";
       log("✓ Learning Agent refreshed insights", "ok");
       st.step = "done";
-      log("Demo complete — open Analytics", "ok");
+      log("Demo complete", "ok");
     } catch (e) {
       st.error = (e as Error).message;
       st.step = "failed";

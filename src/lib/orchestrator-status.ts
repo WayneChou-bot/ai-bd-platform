@@ -23,12 +23,20 @@ export async function orchestratorStatus(repo: Repository, projectId?: string) {
     const running = mine.filter((r) => r.status === "RUNNING");
     const last = [...mine].sort((a, b) => (b.started_at ?? b.created_at).localeCompare(a.started_at ?? a.created_at))[0];
     const recentlyActive = last && last.completed_at ? now - new Date(last.completed_at).getTime() < 4000 : false;
+    // Lead progress vs run attempts (external review v3): for lead-scoped
+    // agents, input/completed count DISTINCT LEADS so a recovered retry can't
+    // read as an unfinished lead; failed stays run-based (failures are never
+    // hidden) and the full attempt history lives in the Agent Runs table.
+    const withLead = mine.filter((r) => r.lead_id);
+    const leadBased = withLead.length > 0;
     return {
       ...n,
       status: running.length ? "RUNNING" : mine.some((r) => r.status === "QUEUED" || r.status === "RETRYING") ? "QUEUED" : mine.length ? "READY" : "IDLE",
       active: running.length > 0 || recentlyActive,
-      input: mine.length,
-      completed: mine.filter((r) => r.status === "COMPLETED").length,
+      input: leadBased ? new Set(withLead.map((r) => r.lead_id)).size : mine.length,
+      completed: leadBased ? new Set(withLead.filter((r) => r.status === "COMPLETED").map((r) => r.lead_id)).size : mine.filter((r) => r.status === "COMPLETED").length,
+      attempts: mine.length,
+      recovered: mine.filter((r) => r.status === "COMPLETED" && r.retry_count > 0).length,
       failed: mine.filter((r) => r.status === "FAILED").length,
       remaining: mine.filter((r) => r.status === "QUEUED" || r.status === "RUNNING" || r.status === "RETRYING").length,
       current: last?.lead_id ? leadName.get(last.lead_id) ?? null : null,

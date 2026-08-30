@@ -87,7 +87,9 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
   const [s, setS] = useState(initial);
   const demo = useDemoPlayer();
   const serverActive = s.nodes.some((n) => n.active);
-  const live = demo.playing || serverActive;
+  // Honest status semantics (external review v3): a recorded replay is not
+  // "Live — jobs running" — nothing is executing on the server.
+  const researchDone = demo.frame && demo.frame.step === "done" ? demo.frame.nodes.find((n) => n.key === "research") ?? null : null;
 
   // Poll only while real jobs are active (§33). The demo replay is fully
   // client-side and never touches the server.
@@ -111,7 +113,7 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
           <h2 className="text-sm font-semibold">{t("Agent Orchestrator")}</h2>
-          <div className="text-xs text-muted">{live ? <span className="text-engage">● {t("Live — jobs running")}</span> : t("Idle — animations run only while jobs are active")}</div>
+          <div className="text-xs text-muted">{demo.playing ? <span className="text-research">▶ {t("Recorded demo playing")}</span> : serverActive ? <span className="text-engage">● {t("Live — jobs running")}</span> : t("Idle — animations run only while jobs are active")}</div>
         </div>
         <div className="flex items-center gap-2">
           {demo.frame && <span className="text-xs text-muted">{t("Demo")}: {demo.frame.step}</span>}
@@ -166,6 +168,7 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
                   <div className="tabular mt-2 flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
                     <span className="whitespace-nowrap"><span className="text-muted">{t("Completed")} </span><Counter value={n.completed} /><span className="text-muted"> / </span><Counter value={n.input} /></span>
                     {n.failed > 0 && <span className="whitespace-nowrap text-danger">{t("Failed")} <Counter value={n.failed} /></span>}
+                    {n.recovered > 0 && <span className="whitespace-nowrap text-engage">↻ {t("Recovered")} <Counter value={n.recovered} /></span>}
                     {n.remaining > 0 && <span className="whitespace-nowrap text-learn">{t("Remaining")} <Counter value={n.remaining} /></span>}
                   </div>
                 ) : (
@@ -173,6 +176,8 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
                     <span className="text-muted">{t("Input")}</span><span className="text-right"><Counter value={n.input} /></span>
                     <span className="text-muted">{t("Completed")}</span><span className="text-right"><Counter value={n.completed} /></span>
                     <span className="text-muted">{t("Failed")}</span><span className={cn("text-right", n.failed && "text-danger")}><Counter value={n.failed} /></span>
+                    {n.attempts !== n.input && (<><span className="text-muted">{t("Attempts")}</span><span className="text-right"><Counter value={n.attempts} /></span></>)}
+                    {n.recovered > 0 && (<><span className="text-muted">↻ {t("Recovered")}</span><span className="text-right text-engage"><Counter value={n.recovered} /></span></>)}
                     <span className="text-muted">{t("Remaining")}</span><span className="text-right"><Counter value={n.remaining} /></span>
                   </div>
                 )}
@@ -208,12 +213,21 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
             </ul>
           </div>
           <div className="glass rounded-xl p-4">
-            <div className="mb-2 text-sm font-semibold">{t("Demo playback")}</div>
+            <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+              <div className="text-sm font-semibold">{t("Demo playback")}</div>
+              {demo.frame && <span className="rounded bg-research/15 px-1.5 py-0.5 text-[11px] text-research">{t("Recorded replay — isolated from dashboard data")}</span>}
+            </div>
             {!canStartDemo ? (
               <p className="text-xs text-muted">{t("Demo playback is available in DEMO mode only — it creates a fresh simulated project, which stays separate from your real LIVE data. Set APP_MODE=demo in .env.local and restart to run it.")}</p>
             ) : demoLog.length === 0 ? (
               <p className="text-xs text-muted">{t("Press Start Demo to watch Discover → Research → Qualify → Engage → Reply → Learn run end to end — including one injected source failure with retry (§41).")} {t("It is a deterministic browser-side replay of one real agent run (recorded with the mock provider): every visitor plays their own copy, the approval pause waits for YOUR click, and nothing external is ever sent.")}</p>
             ) : (
+              <>
+              {researchDone && (
+                <div className="mb-2 rounded-lg border border-engage/30 bg-engage/10 px-3 py-2 text-xs text-engage">
+                  ✓ {t("Research completed")} — {researchDone.completed}/{researchDone.input} {t("leads researched")} · {researchDone.failed} {t("source failure recovered on retry")}
+                </div>
+              )}
               <ul className="space-y-1 text-xs">
                 {demoLog.slice(-14).map((l, i) => (
                   <li key={i} className={cn("flex gap-2", l.tone === "ok" && "text-engage", l.tone === "warn" && "text-learn", l.tone === "fail" && "text-danger", !l.tone && "text-fg/80")}>
@@ -221,6 +235,7 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
                   </li>
                 ))}
               </ul>
+              </>
             )}
           </div>
         </div>

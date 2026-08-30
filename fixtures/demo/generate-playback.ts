@@ -27,7 +27,7 @@ interface Frame {
   /** how many entries of the shared log are visible at this frame */
   logLen: number;
   waitingApproval: { company: string; subject: string } | null;
-  nodes: Array<{ key: string; label: string; short: string; status: string; input: number; completed: number; failed: number; remaining: number; current: string | null }>;
+  nodes: Array<{ key: string; label: string; short: string; status: string; input: number; completed: number; attempts: number; recovered: number; failed: number; remaining: number; current: string | null }>;
 }
 
 async function main() {
@@ -47,7 +47,7 @@ async function main() {
       step: st.step,
       logLen: st.log.length,
       waitingApproval: st.waitingApproval ? { company: st.waitingApproval.company, subject: st.waitingApproval.subject } : null,
-      nodes: (status?.nodes ?? []).map((n) => ({ key: n.key, label: n.label, short: n.short, status: n.status, input: n.input, completed: n.completed, failed: n.failed, remaining: n.remaining, current: n.current ?? null })),
+      nodes: (status?.nodes ?? []).map((n) => ({ key: n.key, label: n.label, short: n.short, status: n.status, input: n.input, completed: n.completed, attempts: n.attempts, recovered: n.recovered, failed: n.failed, remaining: n.remaining, current: n.current ?? null })),
     });
     if (st.waitingApproval && !approved) {
       const pauseStart = Date.now();
@@ -62,7 +62,7 @@ async function main() {
   const status = st.projectId ? await orchestratorStatus(repo, st.projectId) : null;
   frames.push({
     t: Date.now() - t0 - pausedMs, step: st.step, logLen: st.log.length, waitingApproval: null,
-    nodes: (status?.nodes ?? []).map((n) => ({ key: n.key, label: n.label, short: n.short, status: n.status, input: n.input, completed: n.completed, failed: n.failed, remaining: n.remaining, current: n.current ?? null })),
+    nodes: (status?.nodes ?? []).map((n) => ({ key: n.key, label: n.label, short: n.short, status: n.status, input: n.input, completed: n.completed, attempts: n.attempts, recovered: n.recovered, failed: n.failed, remaining: n.remaining, current: n.current ?? null })),
   });
   if (st.error) throw new Error(`recorded demo failed: ${st.error}`);
   if (st.step !== "done") throw new Error(`recorded demo ended in step "${st.step}"`);

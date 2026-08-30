@@ -28,6 +28,10 @@ const zh: Record<string, string> = {
   "Input": "輸入", "Completed": "完成", "Failed": "失敗", "Remaining": "剩餘", "Current": "目前", "Last": "最近", "Elapsed": "耗時",
   "Learn ↺ Discover — outcomes feed the next targeting round": "學習 ↺ 探索 — 結果回饋到下一輪目標選擇",
   "Activity stream": "活動紀錄", "Demo playback": "示範播放",
+  "Recorded demo playing": "錄製示範播放中",
+  "Recorded replay — isolated from dashboard data": "錄製重播 — 獨立於儀表板資料",
+  "Recovered": "重試恢復", "Attempts": "嘗試次數",
+  "Research completed": "研究完成", "leads researched": "個潛客研究完成", "source failure recovered on retry": "次來源失敗經重試恢復",
   "Press Start Demo to watch Discover → Research → Qualify → Engage → Reply → Learn run end to end — including one injected source failure with retry (§41).":
     "按下「開始示範」，完整看一遍 探索 → 研究 → 評估 → 接觸 → 回覆 → 學習，包含一次刻意注入的來源失敗與重試（§41）。",
   "It is a deterministic browser-side replay of one real agent run (recorded with the mock provider): every visitor plays their own copy, the approval pause waits for YOUR click, and nothing external is ever sent.":

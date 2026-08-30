@@ -24,8 +24,18 @@ describe("demo playback (§34, §35, §41)", () => {
     const leads = await repo.leads(pid);
     expect(leads.length).toBe(12);
     const runs = (await repo.agentRuns()).filter((r) => r.project_id === pid);
-    expect(runs.some((r) => r.agent === "research" && r.retry_count === 1 && r.status === "COMPLETED")).toBe(true);
-    expect(runs.some((r) => r.agent === "research" && r.status === "FAILED")).toBe(true);
+    // Exact counts (external review v3): 12 leads → 13 research attempts =
+    // 12 successes + 1 injected failure; the recovered retry is exactly ONE
+    // successful run marked retry_count=1, never a duplicate row.
+    const research = runs.filter((r) => r.agent === "research");
+    expect(research.length).toBe(13);
+    expect(research.filter((r) => r.status === "COMPLETED").length).toBe(12);
+    expect(research.filter((r) => r.status === "FAILED").length).toBe(1);
+    const retryLeadId = research.find((r) => r.status === "FAILED")!.lead_id;
+    const retryLeadRuns = research.filter((r) => r.lead_id === retryLeadId);
+    expect(retryLeadRuns.filter((r) => r.status === "COMPLETED").length).toBe(1);
+    expect(retryLeadRuns.find((r) => r.status === "COMPLETED")!.retry_count).toBe(1);
+    expect(runs.filter((r) => r.agent === "qualification" && r.status === "COMPLETED").length).toBe(12);
     expect(runs.some((r) => r.status === "RETRYING" || r.status === "RUNNING" || r.status === "QUEUED")).toBe(false);
     expect(runs.filter((r) => r.agent === "outreach" && r.status === "COMPLETED").length).toBe(6);
     expect(runs.some((r) => r.agent === "reply")).toBe(true);

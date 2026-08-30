@@ -3,257 +3,257 @@
  "note": "Recorded from a real run of the real agents with the mock provider — the browser replays it so every visitor gets a reliable, instance-independent demo.",
  "log": [
   {
-   "at": "2026-08-30T08:50:53.232Z",
-   "text": "Created project \"LLM Wiki Agent (demo 08:50)\"",
+   "at": "2026-08-30T09:18:54.179Z",
+   "text": "Created project \"LLM Wiki Agent (demo 09:18)\"",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:50:53.232Z",
+   "at": "2026-08-30T09:18:54.179Z",
    "text": "Understanding product…"
   },
   {
-   "at": "2026-08-30T08:50:53.755Z",
+   "at": "2026-08-30T09:18:54.702Z",
    "text": "✓ Product understood: Developer Tool / Knowledge Management",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:50:53.755Z",
+   "at": "2026-08-30T09:18:54.702Z",
    "text": "Generating ICP…"
   },
   {
-   "at": "2026-08-30T08:50:54.278Z",
+   "at": "2026-08-30T09:18:55.225Z",
    "text": "✓ ICP ready: Hiring knowledge engineers, Launching RAG systems…",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:50:54.278Z",
+   "at": "2026-08-30T09:18:55.225Z",
    "text": "Discovering leads…"
   },
   {
-   "at": "2026-08-30T08:50:54.808Z",
+   "at": "2026-08-30T09:18:55.757Z",
    "text": "✓ 12 discovered",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:50:54.838Z",
+   "at": "2026-08-30T09:18:55.787Z",
    "text": "Researched Acme AI"
   },
   {
-   "at": "2026-08-30T08:50:55.102Z",
+   "at": "2026-08-30T09:18:56.051Z",
    "text": "Researched Northwind Labs"
   },
   {
-   "at": "2026-08-30T08:50:55.365Z",
+   "at": "2026-08-30T09:18:56.314Z",
    "text": "Researched Quantleaf Analytics"
   },
   {
-   "at": "2026-08-30T08:50:55.626Z",
+   "at": "2026-08-30T09:18:56.574Z",
    "text": "⚠ Orbital DevTools: source unavailable — retrying",
    "tone": "warn"
   },
   {
-   "at": "2026-08-30T08:50:56.670Z",
+   "at": "2026-08-30T09:18:57.356Z",
    "text": "Researched Orbital DevTools (retry succeeded)"
   },
   {
-   "at": "2026-08-30T08:50:56.933Z",
+   "at": "2026-08-30T09:18:57.617Z",
    "text": "Researched Helios Platform"
   },
   {
-   "at": "2026-08-30T08:50:57.196Z",
+   "at": "2026-08-30T09:18:57.880Z",
    "text": "Researched Maya Chen — Independent AI Consultant"
   },
   {
-   "at": "2026-08-30T08:50:57.460Z",
+   "at": "2026-08-30T09:18:58.143Z",
    "text": "Researched Atlas Biotech Informatics"
   },
   {
-   "at": "2026-08-30T08:50:57.723Z",
+   "at": "2026-08-30T09:18:58.406Z",
    "text": "Researched Lumen Fintech"
   },
   {
-   "at": "2026-08-30T08:50:57.985Z",
+   "at": "2026-08-30T09:18:58.671Z",
    "text": "Researched Meridian Health AI"
   },
   {
-   "at": "2026-08-30T08:50:58.248Z",
+   "at": "2026-08-30T09:18:58.933Z",
    "text": "Researched Sable Security"
   },
   {
-   "at": "2026-08-30T08:50:58.511Z",
+   "at": "2026-08-30T09:18:59.196Z",
    "text": "Researched DataWorks"
   },
   {
-   "at": "2026-08-30T08:50:58.774Z",
+   "at": "2026-08-30T09:18:59.460Z",
    "text": "Researched BrightPath EdTech"
   },
   {
-   "at": "2026-08-30T08:50:59.035Z",
+   "at": "2026-08-30T09:18:59.720Z",
    "text": "✓ 12 / 12 researched",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:50:59.038Z",
+   "at": "2026-08-30T09:18:59.723Z",
    "text": "Acme AI: 89 HIGH FIT"
   },
   {
-   "at": "2026-08-30T08:50:59.247Z",
+   "at": "2026-08-30T09:18:59.931Z",
    "text": "Northwind Labs: 83 HIGH FIT"
   },
   {
-   "at": "2026-08-30T08:50:59.456Z",
+   "at": "2026-08-30T09:19:00.141Z",
    "text": "Quantleaf Analytics: 84 HIGH FIT"
   },
   {
-   "at": "2026-08-30T08:50:59.666Z",
+   "at": "2026-08-30T09:19:00.351Z",
    "text": "Orbital DevTools: 82 HIGH FIT"
   },
   {
-   "at": "2026-08-30T08:50:59.875Z",
+   "at": "2026-08-30T09:19:00.561Z",
    "text": "Helios Platform: 85 HIGH FIT"
   },
   {
-   "at": "2026-08-30T08:51:00.085Z",
+   "at": "2026-08-30T09:19:00.770Z",
    "text": "Maya Chen — Independent AI Consultant: 71 MEDIUM FIT"
   },
   {
-   "at": "2026-08-30T08:51:00.294Z",
+   "at": "2026-08-30T09:19:00.980Z",
    "text": "Atlas Biotech Informatics: 65 MEDIUM FIT"
   },
   {
-   "at": "2026-08-30T08:51:00.503Z",
+   "at": "2026-08-30T09:19:01.190Z",
    "text": "Lumen Fintech: 83 HIGH FIT"
   },
   {
-   "at": "2026-08-30T08:51:00.713Z",
+   "at": "2026-08-30T09:19:01.400Z",
    "text": "Meridian Health AI: 83 HIGH FIT"
   },
   {
-   "at": "2026-08-30T08:51:00.922Z",
+   "at": "2026-08-30T09:19:01.608Z",
    "text": "Sable Security: 81 HIGH FIT"
   },
   {
-   "at": "2026-08-30T08:51:01.144Z",
+   "at": "2026-08-30T09:19:01.818Z",
    "text": "DataWorks: 64 MEDIUM FIT"
   },
   {
-   "at": "2026-08-30T08:51:01.353Z",
+   "at": "2026-08-30T09:19:02.026Z",
    "text": "BrightPath EdTech: 65 MEDIUM FIT"
   },
   {
-   "at": "2026-08-30T08:51:01.562Z",
+   "at": "2026-08-30T09:19:02.235Z",
    "text": "✓ 8 High Fit · 4 Medium Fit · 0 Rejected",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:01.565Z",
+   "at": "2026-08-30T09:19:02.238Z",
    "text": "Draft for Acme AI: “A note on your recent hiring at Acme AI”"
   },
   {
-   "at": "2026-08-30T08:51:01.825Z",
+   "at": "2026-08-30T09:19:02.498Z",
    "text": "⏸ Waiting for a human — nothing is sent until you approve",
    "tone": "warn"
   },
   {
-   "at": "2026-08-30T08:51:02.280Z",
+   "at": "2026-08-30T09:19:02.951Z",
    "text": "✓ Approved by a human",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:02.281Z",
+   "at": "2026-08-30T09:19:02.952Z",
    "text": "✓ Approved & sent (simulated) → Acme AI",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:02.543Z",
+   "at": "2026-08-30T09:19:03.214Z",
    "text": "Draft for Northwind Labs: “A note on your documentation setup at Northwind Labs”"
   },
   {
-   "at": "2026-08-30T08:51:02.804Z",
+   "at": "2026-08-30T09:19:03.475Z",
    "text": "✓ Approved & sent (simulated) → Northwind Labs",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:03.065Z",
+   "at": "2026-08-30T09:19:03.737Z",
    "text": "Draft for Quantleaf Analytics: “A note on your recent post at Quantleaf Analytics”"
   },
   {
-   "at": "2026-08-30T08:51:03.325Z",
+   "at": "2026-08-30T09:19:03.997Z",
    "text": "✓ Approved & sent (simulated) → Quantleaf Analytics",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:03.586Z",
+   "at": "2026-08-30T09:19:04.258Z",
    "text": "Draft for Orbital DevTools: “A note on your documentation setup at Orbital DevTools”"
   },
   {
-   "at": "2026-08-30T08:51:03.846Z",
+   "at": "2026-08-30T09:19:04.519Z",
    "text": "✓ Approved & sent (simulated) → Orbital DevTools",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:04.108Z",
+   "at": "2026-08-30T09:19:04.781Z",
    "text": "Draft for Helios Platform: “A note on your recent launch at Helios Platform”"
   },
   {
-   "at": "2026-08-30T08:51:04.368Z",
+   "at": "2026-08-30T09:19:05.042Z",
    "text": "✓ Approved & sent (simulated) → Helios Platform",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:04.629Z",
+   "at": "2026-08-30T09:19:05.303Z",
    "text": "Draft for Maya Chen — Independent AI Consultant: “A note on your documentation setup at Maya Chen”"
   },
   {
-   "at": "2026-08-30T08:51:04.889Z",
+   "at": "2026-08-30T09:19:05.564Z",
    "text": "✓ Approved & sent (simulated) → Maya Chen — Independent AI Consultant",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:05.547Z",
+   "at": "2026-08-30T09:19:06.222Z",
    "text": "↩ Acme AI replied → meeting_requested",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:05.942Z",
+   "at": "2026-08-30T09:19:06.615Z",
    "text": "↩ Northwind Labs replied → interested",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:06.335Z",
+   "at": "2026-08-30T09:19:07.007Z",
    "text": "↩ Quantleaf Analytics replied → interested",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:06.728Z",
+   "at": "2026-08-30T09:19:07.400Z",
    "text": "↩ Helios Platform replied → meeting_requested",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:06.730Z",
+   "at": "2026-08-30T09:19:07.401Z",
    "text": "Orbital DevTools: no response recorded"
   },
   {
-   "at": "2026-08-30T08:51:06.730Z",
+   "at": "2026-08-30T09:19:07.401Z",
    "text": "✓ Learning Agent refreshed insights",
    "tone": "ok"
   },
   {
-   "at": "2026-08-30T08:51:06.730Z",
-   "text": "Demo complete — open Analytics",
+   "at": "2026-08-30T09:19:07.401Z",
+   "text": "Demo complete",
    "tone": "ok"
   }
  ],
  "frames": [
   {
-   "t": 2,
+   "t": 3,
    "step": "project",
    "logLen": 0,
    "waitingApproval": null,
    "nodes": []
   },
   {
-   "t": 93,
+   "t": 94,
    "step": "understanding",
    "logLen": 2,
    "waitingApproval": null,
@@ -265,6 +265,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -276,6 +278,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -287,6 +291,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -298,6 +304,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -309,6 +317,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -320,6 +330,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -327,7 +339,7 @@
    ]
   },
   {
-   "t": 546,
+   "t": 547,
    "step": "icp",
    "logLen": 4,
    "waitingApproval": null,
@@ -339,6 +351,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -350,6 +364,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -361,6 +377,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -372,6 +390,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -383,6 +403,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -394,6 +416,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -401,7 +425,7 @@
    ]
   },
   {
-   "t": 1102,
+   "t": 1100,
    "step": "discover",
    "logLen": 6,
    "waitingApproval": null,
@@ -413,6 +437,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -424,6 +450,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -435,6 +463,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -446,6 +476,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -457,6 +489,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -468,6 +502,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -487,6 +523,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -498,6 +536,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Acme AI"
@@ -509,6 +549,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -520,6 +562,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -531,6 +575,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -542,6 +588,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -561,6 +609,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -572,6 +622,8 @@
      "status": "READY",
      "input": 2,
      "completed": 2,
+     "attempts": 2,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Northwind Labs"
@@ -583,6 +635,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -594,6 +648,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -605,6 +661,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -616,6 +674,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -623,7 +683,7 @@
    ]
   },
   {
-   "t": 2187,
+   "t": 2186,
    "step": "research",
    "logLen": 10,
    "waitingApproval": null,
@@ -635,6 +695,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -646,6 +708,8 @@
      "status": "READY",
      "input": 3,
      "completed": 3,
+     "attempts": 3,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Quantleaf Analytics"
@@ -657,6 +721,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -668,6 +734,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -679,6 +747,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -690,6 +760,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -709,6 +781,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -720,6 +794,8 @@
      "status": "READY",
      "input": 4,
      "completed": 3,
+     "attempts": 4,
+     "recovered": 0,
      "failed": 1,
      "remaining": 0,
      "current": "Orbital DevTools"
@@ -731,6 +807,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -742,6 +820,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -753,6 +833,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -764,6 +846,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -771,81 +855,7 @@
    ]
   },
   {
-   "t": 3181,
-   "step": "research",
-   "logLen": 11,
-   "waitingApproval": null,
-   "nodes": [
-    {
-     "key": "discovery",
-     "label": "Discovery Agent",
-     "short": "DISCOVER",
-     "status": "READY",
-     "input": 1,
-     "completed": 1,
-     "failed": 0,
-     "remaining": 0,
-     "current": null
-    },
-    {
-     "key": "research",
-     "label": "Research Agent",
-     "short": "RESEARCH",
-     "status": "QUEUED",
-     "input": 5,
-     "completed": 3,
-     "failed": 1,
-     "remaining": 1,
-     "current": "Orbital DevTools"
-    },
-    {
-     "key": "qualification",
-     "label": "Qualification Agent",
-     "short": "QUALIFY",
-     "status": "IDLE",
-     "input": 0,
-     "completed": 0,
-     "failed": 0,
-     "remaining": 0,
-     "current": null
-    },
-    {
-     "key": "outreach",
-     "label": "Outreach Agent",
-     "short": "ENGAGE",
-     "status": "IDLE",
-     "input": 0,
-     "completed": 0,
-     "failed": 0,
-     "remaining": 0,
-     "current": null
-    },
-    {
-     "key": "reply",
-     "label": "Reply Agent",
-     "short": "REPLY",
-     "status": "IDLE",
-     "input": 0,
-     "completed": 0,
-     "failed": 0,
-     "remaining": 0,
-     "current": null
-    },
-    {
-     "key": "learning",
-     "label": "Learning Agent",
-     "short": "LEARN",
-     "status": "IDLE",
-     "input": 0,
-     "completed": 0,
-     "failed": 0,
-     "remaining": 0,
-     "current": null
-    }
-   ]
-  },
-  {
-   "t": 3452,
+   "t": 3182,
    "step": "research",
    "logLen": 12,
    "waitingApproval": null,
@@ -857,6 +867,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -866,8 +878,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 6,
-     "completed": 5,
+     "input": 4,
+     "completed": 4,
+     "attempts": 5,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "Orbital DevTools"
@@ -879,6 +893,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -890,6 +906,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -901,6 +919,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -912,6 +932,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -919,7 +941,7 @@
    ]
   },
   {
-   "t": 3723,
+   "t": 3454,
    "step": "research",
    "logLen": 13,
    "waitingApproval": null,
@@ -931,6 +953,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -940,8 +964,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 7,
-     "completed": 6,
+     "input": 5,
+     "completed": 5,
+     "attempts": 6,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "Helios Platform"
@@ -953,6 +979,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -964,6 +992,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -975,6 +1005,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -986,6 +1018,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -993,7 +1027,7 @@
    ]
   },
   {
-   "t": 3994,
+   "t": 3724,
    "step": "research",
    "logLen": 14,
    "waitingApproval": null,
@@ -1005,6 +1039,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1014,8 +1050,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 8,
-     "completed": 7,
+     "input": 6,
+     "completed": 6,
+     "attempts": 7,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "Maya Chen"
@@ -1027,6 +1065,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1038,6 +1078,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1049,6 +1091,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1060,6 +1104,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1067,7 +1113,7 @@
    ]
   },
   {
-   "t": 4265,
+   "t": 3996,
    "step": "research",
    "logLen": 15,
    "waitingApproval": null,
@@ -1079,6 +1125,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1088,8 +1136,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 9,
-     "completed": 8,
+     "input": 7,
+     "completed": 7,
+     "attempts": 8,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "Atlas Biotech Informatics"
@@ -1101,6 +1151,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1112,6 +1164,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1123,6 +1177,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1134,6 +1190,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1141,7 +1199,7 @@
    ]
   },
   {
-   "t": 4537,
+   "t": 4267,
    "step": "research",
    "logLen": 16,
    "waitingApproval": null,
@@ -1153,6 +1211,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1162,8 +1222,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 10,
-     "completed": 9,
+     "input": 8,
+     "completed": 8,
+     "attempts": 9,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "Lumen Fintech"
@@ -1175,6 +1237,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1186,6 +1250,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1197,6 +1263,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1208,6 +1276,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1215,7 +1285,7 @@
    ]
   },
   {
-   "t": 4809,
+   "t": 4538,
    "step": "research",
    "logLen": 17,
    "waitingApproval": null,
@@ -1227,6 +1297,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1236,8 +1308,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 11,
-     "completed": 10,
+     "input": 9,
+     "completed": 9,
+     "attempts": 10,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "Meridian Health AI"
@@ -1249,6 +1323,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1260,6 +1336,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1271,6 +1349,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1282,6 +1362,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1289,7 +1371,7 @@
    ]
   },
   {
-   "t": 5080,
+   "t": 4810,
    "step": "research",
    "logLen": 18,
    "waitingApproval": null,
@@ -1301,6 +1383,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1310,8 +1394,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 12,
-     "completed": 11,
+     "input": 10,
+     "completed": 10,
+     "attempts": 11,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "Sable Security"
@@ -1323,6 +1409,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1334,6 +1422,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1345,6 +1435,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1356,6 +1448,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1363,7 +1457,7 @@
    ]
   },
   {
-   "t": 5351,
+   "t": 5081,
    "step": "research",
    "logLen": 19,
    "waitingApproval": null,
@@ -1375,6 +1469,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1384,8 +1480,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 13,
-     "completed": 12,
+     "input": 11,
+     "completed": 11,
+     "attempts": 12,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "DataWorks"
@@ -1397,6 +1495,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1408,6 +1508,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1419,6 +1521,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1430,6 +1534,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1437,7 +1543,7 @@
    ]
   },
   {
-   "t": 5622,
+   "t": 5352,
    "step": "research",
    "logLen": 20,
    "waitingApproval": null,
@@ -1449,6 +1555,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1458,8 +1566,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -1471,6 +1581,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1482,6 +1594,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1493,6 +1607,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1504,6 +1620,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1511,7 +1629,7 @@
    ]
   },
   {
-   "t": 5893,
+   "t": 5624,
    "step": "qualify",
    "logLen": 22,
    "waitingApproval": null,
@@ -1523,6 +1641,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1532,8 +1652,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -1545,6 +1667,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Acme AI"
@@ -1556,6 +1680,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1567,6 +1693,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1578,6 +1706,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1585,7 +1715,7 @@
    ]
   },
   {
-   "t": 6075,
+   "t": 5806,
    "step": "qualify",
    "logLen": 23,
    "waitingApproval": null,
@@ -1597,6 +1727,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1606,8 +1738,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -1619,6 +1753,8 @@
      "status": "READY",
      "input": 2,
      "completed": 2,
+     "attempts": 2,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Northwind Labs"
@@ -1630,6 +1766,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1641,6 +1779,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1652,6 +1792,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1659,7 +1801,7 @@
    ]
   },
   {
-   "t": 6256,
+   "t": 5987,
    "step": "qualify",
    "logLen": 24,
    "waitingApproval": null,
@@ -1671,6 +1813,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1680,8 +1824,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -1693,6 +1839,8 @@
      "status": "READY",
      "input": 3,
      "completed": 3,
+     "attempts": 3,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Quantleaf Analytics"
@@ -1704,6 +1852,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1715,6 +1865,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1726,6 +1878,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1733,7 +1887,7 @@
    ]
   },
   {
-   "t": 6436,
+   "t": 6258,
    "step": "qualify",
    "logLen": 25,
    "waitingApproval": null,
@@ -1745,6 +1899,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1754,8 +1910,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -1767,6 +1925,8 @@
      "status": "READY",
      "input": 4,
      "completed": 4,
+     "attempts": 4,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Orbital DevTools"
@@ -1778,6 +1938,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1789,6 +1951,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1800,6 +1964,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1807,7 +1973,7 @@
    ]
   },
   {
-   "t": 6708,
+   "t": 6439,
    "step": "qualify",
    "logLen": 26,
    "waitingApproval": null,
@@ -1819,6 +1985,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1828,8 +1996,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -1841,6 +2011,8 @@
      "status": "READY",
      "input": 5,
      "completed": 5,
+     "attempts": 5,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Helios Platform"
@@ -1852,6 +2024,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1863,6 +2037,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1874,6 +2050,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1881,7 +2059,7 @@
    ]
   },
   {
-   "t": 6888,
+   "t": 6620,
    "step": "qualify",
    "logLen": 27,
    "waitingApproval": null,
@@ -1893,6 +2071,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1902,8 +2082,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -1915,6 +2097,8 @@
      "status": "READY",
      "input": 6,
      "completed": 6,
+     "attempts": 6,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Maya Chen"
@@ -1926,6 +2110,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1937,6 +2123,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1948,6 +2136,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1955,7 +2145,7 @@
    ]
   },
   {
-   "t": 7069,
+   "t": 6891,
    "step": "qualify",
    "logLen": 28,
    "waitingApproval": null,
@@ -1967,6 +2157,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -1976,8 +2168,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -1989,6 +2183,8 @@
      "status": "READY",
      "input": 7,
      "completed": 7,
+     "attempts": 7,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Atlas Biotech Informatics"
@@ -2000,6 +2196,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2011,6 +2209,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2022,6 +2222,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2029,7 +2231,7 @@
    ]
   },
   {
-   "t": 7341,
+   "t": 7072,
    "step": "qualify",
    "logLen": 29,
    "waitingApproval": null,
@@ -2041,6 +2243,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2050,8 +2254,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2063,6 +2269,8 @@
      "status": "READY",
      "input": 8,
      "completed": 8,
+     "attempts": 8,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Lumen Fintech"
@@ -2074,6 +2282,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2085,6 +2295,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2096,6 +2308,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2103,7 +2317,7 @@
    ]
   },
   {
-   "t": 7521,
+   "t": 7254,
    "step": "qualify",
    "logLen": 30,
    "waitingApproval": null,
@@ -2115,6 +2329,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2124,8 +2340,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2137,6 +2355,8 @@
      "status": "READY",
      "input": 9,
      "completed": 9,
+     "attempts": 9,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Meridian Health AI"
@@ -2148,6 +2368,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2159,6 +2381,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2170,6 +2394,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2177,7 +2403,7 @@
    ]
   },
   {
-   "t": 7702,
+   "t": 7436,
    "step": "qualify",
    "logLen": 31,
    "waitingApproval": null,
@@ -2189,6 +2415,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2198,8 +2426,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2211,6 +2441,8 @@
      "status": "READY",
      "input": 10,
      "completed": 10,
+     "attempts": 10,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Sable Security"
@@ -2222,6 +2454,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2233,6 +2467,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2244,6 +2480,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2251,7 +2489,7 @@
    ]
   },
   {
-   "t": 7974,
+   "t": 7708,
    "step": "qualify",
    "logLen": 32,
    "waitingApproval": null,
@@ -2263,6 +2501,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2272,8 +2512,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2285,6 +2527,8 @@
      "status": "READY",
      "input": 11,
      "completed": 11,
+     "attempts": 11,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "DataWorks"
@@ -2296,6 +2540,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2307,6 +2553,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2318,6 +2566,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2325,7 +2575,7 @@
    ]
   },
   {
-   "t": 8155,
+   "t": 7890,
    "step": "qualify",
    "logLen": 33,
    "waitingApproval": null,
@@ -2337,6 +2587,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2346,8 +2598,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2359,6 +2613,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2370,6 +2626,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2381,6 +2639,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2392,6 +2652,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2399,7 +2661,7 @@
    ]
   },
   {
-   "t": 8336,
+   "t": 8070,
    "step": "engage",
    "logLen": 35,
    "waitingApproval": null,
@@ -2411,6 +2673,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2420,8 +2684,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2433,6 +2699,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2444,6 +2712,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Acme AI"
@@ -2455,6 +2725,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2466,6 +2738,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2473,7 +2747,7 @@
    ]
   },
   {
-   "t": 8608,
+   "t": 8342,
    "step": "awaiting_approval",
    "logLen": 36,
    "waitingApproval": {
@@ -2488,6 +2762,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2497,8 +2773,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2510,6 +2788,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2521,6 +2801,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Acme AI"
@@ -2532,6 +2814,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2543,6 +2827,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2550,7 +2836,7 @@
    ]
   },
   {
-   "t": 8698,
+   "t": 8432,
    "step": "engage",
    "logLen": 38,
    "waitingApproval": null,
@@ -2562,6 +2848,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2571,8 +2859,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2584,6 +2874,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2595,6 +2887,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Acme AI"
@@ -2606,6 +2900,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2617,6 +2913,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2624,7 +2922,7 @@
    ]
   },
   {
-   "t": 8970,
+   "t": 8703,
    "step": "engage",
    "logLen": 39,
    "waitingApproval": null,
@@ -2636,6 +2934,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2645,8 +2945,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2658,6 +2960,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2669,6 +2973,8 @@
      "status": "READY",
      "input": 2,
      "completed": 2,
+     "attempts": 2,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Northwind Labs"
@@ -2680,6 +2986,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2691,6 +2999,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2698,7 +3008,7 @@
    ]
   },
   {
-   "t": 9241,
+   "t": 8975,
    "step": "engage",
    "logLen": 40,
    "waitingApproval": null,
@@ -2710,6 +3020,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2719,8 +3031,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2732,6 +3046,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2743,6 +3059,8 @@
      "status": "READY",
      "input": 2,
      "completed": 2,
+     "attempts": 2,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Northwind Labs"
@@ -2754,6 +3072,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2765,6 +3085,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2772,7 +3094,7 @@
    ]
   },
   {
-   "t": 9514,
+   "t": 9247,
    "step": "engage",
    "logLen": 41,
    "waitingApproval": null,
@@ -2784,6 +3106,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2793,8 +3117,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2806,6 +3132,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2817,6 +3145,8 @@
      "status": "READY",
      "input": 3,
      "completed": 3,
+     "attempts": 3,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Quantleaf Analytics"
@@ -2828,6 +3158,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2839,6 +3171,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2846,7 +3180,7 @@
    ]
   },
   {
-   "t": 9786,
+   "t": 9428,
    "step": "engage",
    "logLen": 42,
    "waitingApproval": null,
@@ -2858,6 +3192,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2867,8 +3203,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2880,6 +3218,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2891,6 +3231,8 @@
      "status": "READY",
      "input": 3,
      "completed": 3,
+     "attempts": 3,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Quantleaf Analytics"
@@ -2902,6 +3244,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2913,6 +3257,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2920,7 +3266,7 @@
    ]
   },
   {
-   "t": 9968,
+   "t": 9700,
    "step": "engage",
    "logLen": 43,
    "waitingApproval": null,
@@ -2932,6 +3278,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2941,8 +3289,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2954,6 +3304,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -2965,6 +3317,8 @@
      "status": "READY",
      "input": 4,
      "completed": 4,
+     "attempts": 4,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Orbital DevTools"
@@ -2976,6 +3330,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2987,6 +3343,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -2994,7 +3352,7 @@
    ]
   },
   {
-   "t": 10240,
+   "t": 9971,
    "step": "engage",
    "logLen": 44,
    "waitingApproval": null,
@@ -3006,6 +3364,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3015,8 +3375,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3028,6 +3390,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3039,6 +3403,8 @@
      "status": "READY",
      "input": 4,
      "completed": 4,
+     "attempts": 4,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Orbital DevTools"
@@ -3050,6 +3416,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3061,6 +3429,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3068,7 +3438,7 @@
    ]
   },
   {
-   "t": 10512,
+   "t": 10243,
    "step": "engage",
    "logLen": 45,
    "waitingApproval": null,
@@ -3080,6 +3450,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3089,8 +3461,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3102,6 +3476,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3113,6 +3489,8 @@
      "status": "READY",
      "input": 5,
      "completed": 5,
+     "attempts": 5,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Helios Platform"
@@ -3124,6 +3502,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3135,6 +3515,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3142,7 +3524,7 @@
    ]
   },
   {
-   "t": 10784,
+   "t": 10515,
    "step": "engage",
    "logLen": 46,
    "waitingApproval": null,
@@ -3154,6 +3536,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3163,8 +3547,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3176,6 +3562,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3187,6 +3575,8 @@
      "status": "READY",
      "input": 5,
      "completed": 5,
+     "attempts": 5,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Helios Platform"
@@ -3198,6 +3588,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3209,6 +3601,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3216,7 +3610,7 @@
    ]
   },
   {
-   "t": 11056,
+   "t": 10787,
    "step": "engage",
    "logLen": 47,
    "waitingApproval": null,
@@ -3228,6 +3622,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3237,8 +3633,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3250,6 +3648,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3261,6 +3661,8 @@
      "status": "READY",
      "input": 6,
      "completed": 6,
+     "attempts": 6,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Maya Chen"
@@ -3272,6 +3674,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3283,6 +3687,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3290,7 +3696,7 @@
    ]
   },
   {
-   "t": 11328,
+   "t": 11059,
    "step": "engage",
    "logLen": 48,
    "waitingApproval": null,
@@ -3302,6 +3708,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3311,8 +3719,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3324,6 +3734,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3335,6 +3747,8 @@
      "status": "READY",
      "input": 6,
      "completed": 6,
+     "attempts": 6,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Maya Chen"
@@ -3346,6 +3760,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3357,6 +3773,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3364,7 +3782,7 @@
    ]
   },
   {
-   "t": 11599,
+   "t": 11331,
    "step": "reply",
    "logLen": 48,
    "waitingApproval": null,
@@ -3376,6 +3794,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3385,8 +3805,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3398,6 +3820,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3409,6 +3833,8 @@
      "status": "READY",
      "input": 6,
      "completed": 6,
+     "attempts": 6,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Maya Chen"
@@ -3420,6 +3846,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3431,6 +3859,8 @@
      "status": "IDLE",
      "input": 0,
      "completed": 0,
+     "attempts": 0,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3438,7 +3868,7 @@
    ]
   },
   {
-   "t": 11961,
+   "t": 11694,
    "step": "reply",
    "logLen": 49,
    "waitingApproval": null,
@@ -3450,6 +3880,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3459,8 +3891,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3472,6 +3906,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3483,6 +3919,8 @@
      "status": "READY",
      "input": 6,
      "completed": 6,
+     "attempts": 6,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Maya Chen"
@@ -3494,6 +3932,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Acme AI"
@@ -3505,6 +3945,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3512,7 +3954,7 @@
    ]
   },
   {
-   "t": 12324,
+   "t": 12058,
    "step": "reply",
    "logLen": 50,
    "waitingApproval": null,
@@ -3524,6 +3966,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3533,8 +3977,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3546,6 +3992,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3557,6 +4005,8 @@
      "status": "READY",
      "input": 6,
      "completed": 6,
+     "attempts": 6,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Maya Chen"
@@ -3568,6 +4018,8 @@
      "status": "READY",
      "input": 2,
      "completed": 2,
+     "attempts": 2,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Northwind Labs"
@@ -3579,6 +4031,8 @@
      "status": "READY",
      "input": 2,
      "completed": 2,
+     "attempts": 2,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3586,7 +4040,7 @@
    ]
   },
   {
-   "t": 12776,
+   "t": 12511,
    "step": "reply",
    "logLen": 51,
    "waitingApproval": null,
@@ -3598,6 +4052,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3607,8 +4063,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3620,6 +4078,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3631,6 +4091,8 @@
      "status": "READY",
      "input": 6,
      "completed": 6,
+     "attempts": 6,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Maya Chen"
@@ -3642,6 +4104,8 @@
      "status": "READY",
      "input": 3,
      "completed": 3,
+     "attempts": 3,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Quantleaf Analytics"
@@ -3653,6 +4117,8 @@
      "status": "READY",
      "input": 3,
      "completed": 3,
+     "attempts": 3,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3660,7 +4126,7 @@
    ]
   },
   {
-   "t": 13138,
+   "t": 12874,
    "step": "done",
    "logLen": 55,
    "waitingApproval": null,
@@ -3672,6 +4138,8 @@
      "status": "READY",
      "input": 1,
      "completed": 1,
+     "attempts": 1,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null
@@ -3681,8 +4149,10 @@
      "label": "Research Agent",
      "short": "RESEARCH",
      "status": "READY",
-     "input": 14,
-     "completed": 13,
+     "input": 12,
+     "completed": 12,
+     "attempts": 13,
+     "recovered": 1,
      "failed": 1,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3694,6 +4164,8 @@
      "status": "READY",
      "input": 12,
      "completed": 12,
+     "attempts": 12,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "BrightPath EdTech"
@@ -3705,6 +4177,8 @@
      "status": "READY",
      "input": 6,
      "completed": 6,
+     "attempts": 6,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Maya Chen"
@@ -3716,6 +4190,8 @@
      "status": "READY",
      "input": 4,
      "completed": 4,
+     "attempts": 4,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": "Helios Platform"
@@ -3727,6 +4203,8 @@
      "status": "READY",
      "input": 5,
      "completed": 5,
+     "attempts": 5,
+     "recovered": 0,
      "failed": 0,
      "remaining": 0,
      "current": null

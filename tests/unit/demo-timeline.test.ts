@@ -51,9 +51,13 @@ describe("demo playback timeline", () => {
     }
   });
 
-  it("shows the injected source failure with retry (§41) in the final board", () => {
-    const last = frames[frames.length - 1];
-    const failedSomewhere = last.nodes.some((n) => n.failed > 0);
-    expect(failedSomewhere).toBe(true);
+  it("ends with exact lead-vs-attempt numbers — retry recovered, nothing double-counted (§41)", () => {
+    // External review v3: the recovered retry must be ONE successful run, so
+    // the board reads 12/12 leads with 13 attempts — never 13/14.
+    const byKey = Object.fromEntries(frames[frames.length - 1].nodes.map((n) => [n.key, n]));
+    expect(byKey.research).toMatchObject({ input: 12, completed: 12, attempts: 13, failed: 1, recovered: 1 });
+    expect(byKey.qualification).toMatchObject({ input: 12, completed: 12, failed: 0 });
+    expect(byKey.outreach).toMatchObject({ completed: 6, failed: 0 });
+    expect(byKey.discovery).toMatchObject({ completed: 1, failed: 0 });
   });
 });
