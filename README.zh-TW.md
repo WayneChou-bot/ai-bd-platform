@@ -20,8 +20,7 @@
 ---
 
 > **狀態** — 作品集 MVP 完成。零金鑰的 **Demo 模式**可直接公開部署；
-> **Gmail LIVE** 為受控的本機單人使用而設計。多使用者 SaaS 與企業能力列於
-> [Roadmap](docs/ROADMAP.md)。
+> **Gmail LIVE** 為受控的本機單人使用而設計。多使用者 SaaS 與企業能力刻意不在本版範圍內。
 
 這是一個 **portfolio 等級的單人系統** — 刻意**不是** Salesforce／HubSpot 那種 CRM
 替代品。它不管理客戶簿，而是用可稽核的證據回答兩個問題：
@@ -108,7 +107,7 @@ flowchart LR
 |---|---|---|
 | 🎬 **Demo** | ✅ 建議使用 | 公開作品集部署 — 零金鑰、mock LLM、模擬寄送、記憶體資料 |
 | 📮 **Gmail LIVE** | ✅ 本機已驗證 | 單人本機使用 — 真實搜尋（Tavily）、真實 LLM、透過自己的 Gmail 真實寄收，每封信轉送到 `DEMO_RECIPIENT_OVERRIDE` |
-| 🧪 **Resend** | ⚠️ 實驗性 | Adapter 已存在，但收信內容擷取與 RFC Message-ID 回信比對仍是[未來工作](docs/ROADMAP.md) |
+| 🧪 **Resend** | ⚠️ 實驗性 | Adapter 已存在，但收信內容擷取與 RFC Message-ID 回信比對仍是未來工作 |
 
 LIVE 的安全防線：金鑰不進瀏覽器；狀態頁遮罩信箱；沒設收件人覆寫時應用程式**拒絕啟動**，
 除非明確設定 `ALLOW_REAL_OUTREACH=true`；沒設 Supabase 時資料存在記憶體、重啟即清空
@@ -145,11 +144,12 @@ npm run lint
 > 確定性測試證明系統**穩定**。證明情報**品質**（golden dataset、Precision@10、
 > Evidence Support Rate）列於 roadmap。
 
-## 🗺️ Roadmap
+## 🗺️ 刻意不做的範圍
 
 多使用者 SaaS（認證、工作區、RBAC、RLS）、durable job queue（重試＋dead-letter）、
 完整 Resend 收信路徑、真正的 campaign／sequence 模型、CRM 同步、人工標註品質評估 —
-分階段計畫見 [docs/ROADMAP.md](docs/ROADMAP.md)。
+這些差距都已理解，並且刻意延後。這是 portfolio 等級的單人系統；硬塞半套 Auth
+只會讓它更差，不會更好。
 
 ## 🏗️ 技術棧
 

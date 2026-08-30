@@ -21,7 +21,7 @@ recommendation, reproducible scoring, and human-controlled outreach.**
 
 > **Status** — Portfolio MVP complete. Zero-key **Demo Mode** is ready for public deployment.
 > **Gmail LIVE** is designed for controlled, single-user local use. Multi-user SaaS and
-> enterprise capabilities remain [roadmap items](docs/ROADMAP.md).
+> enterprise capabilities are deliberately out of scope.
 
 This is a **portfolio-grade, single-user system** — deliberately *not* a Salesforce/HubSpot
 CRM replacement. Instead of managing a book of business, it answers two questions with
@@ -114,7 +114,7 @@ original language.
 |---|---|---|
 | 🎬 **Demo** | ✅ Recommended | Public portfolio deployment — zero keys, mock LLM, simulated delivery, in-memory data |
 | 📮 **Gmail LIVE** | ✅ Verified locally | Single-user local use — real search (Tavily), real LLM, real send/receive through your own Gmail, every send rerouted to `DEMO_RECIPIENT_OVERRIDE` |
-| 🧪 **Resend** | ⚠️ Experimental | Adapter exists, but inbound content retrieval and RFC Message-ID reply threading remain [future work](docs/ROADMAP.md) |
+| 🧪 **Resend** | ⚠️ Experimental | Adapter exists, but inbound content retrieval and RFC Message-ID reply threading remain future work |
 
 Safety rails in LIVE: keys never reach the browser; addresses are masked on status pages;
 without a recipient override the app **refuses to start** unless `ALLOW_REAL_OUTREACH=true`
@@ -152,11 +152,13 @@ npm run lint
 > Determinism tests prove the system is *stable*. Proving intelligence *quality* (golden
 > dataset, Precision@10, Evidence Support Rate) is tracked on the roadmap.
 
-## 🗺️ Roadmap
+## 🗺️ Deliberately out of scope
 
-Multi-user SaaS (auth, workspaces, RBAC, RLS), durable job queue with retries and dead-letter,
-full Resend receiving path, a real campaign/sequence model, CRM sync, and human-labelled
-quality evaluation — see [docs/ROADMAP.md](docs/ROADMAP.md) for the staged plan.
+Multi-user SaaS (auth, workspaces, RBAC, RLS), a durable job queue with retries and
+dead-letter, the full Resend receiving path, a real campaign/sequence model, CRM sync, and
+human-labelled quality evaluation are all understood — and deliberately deferred. This is a
+portfolio-grade single-user system; shipping half of an auth stack would make it worse, not
+better.
 
 ## 🏗️ Built with
 
