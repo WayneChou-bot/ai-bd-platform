@@ -7,10 +7,13 @@
 **Discover, research, qualify, engage, and learn — with traceable evidence behind every
 recommendation, reproducible scoring, and human-controlled outreach.**
 
+[![CI](https://github.com/WayneChou-bot/ai-bd-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/WayneChou-bot/ai-bd-platform/actions/workflows/ci.yml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](package.json)
-[![Demo](https://img.shields.io/badge/demo-zero%20API%20keys-8b5cf6)](#-quick-start-zero-key-demo)
+[![Demo](https://img.shields.io/badge/demo-zero%20API%20keys-8b5cf6)](https://ai-bd-platform.vercel.app/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+### **[🚀 Live Demo](https://ai-bd-platform.vercel.app/)**
 
 **English** · [繁體中文](README.zh-TW.md)
 
@@ -133,14 +136,20 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 | `DEMO_RECIPIENT_OVERRIDE` | Reroutes **every** send here — the safety valve |
 | `SUPABASE_URL` + service key | Optional locally; required for persistent LIVE deployments |
 
-## 🧪 Engineering discipline
+## 🧪 Testing
 
-Every change is gated by strict TypeScript, ESLint, and an 86-test suite spanning unit
-(scoring, schemas, state machine, mention engine), agent behaviour (reply classification,
-prompt-injection fencing), end-to-end flows (pipeline, engagement, demo playback with an
-*asserted* human-approval pause), and evaluation — fixtures are regenerated from raw rows
-and compared exactly. Failure visibility is itself under test: a FAILED run must remain
-visible after its retry succeeds.
+**86 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
+mention engine, strict-schema conversion, mail adapters), agent behaviour (reply
+classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, demo
+playback with an *asserted* human-approval pause), and evaluation — fixtures are regenerated
+from raw rows and compared exactly. Failure visibility is itself under test: a FAILED run
+must remain visible after its retry succeeds. All of it runs in CI on every push.
+
+```bash
+npm test             # vitest run
+npm run typecheck    # strict tsc
+npm run lint
+```
 
 ## 🏗️ Built with
 

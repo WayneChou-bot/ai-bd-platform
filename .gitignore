@@ -23,5 +23,3 @@ scratch/
 docs/internal/
 docs/
 
-# test suite is developed locally, not published
-tests/

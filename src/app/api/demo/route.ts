@@ -14,6 +14,9 @@ export async function POST(req: Request) {
     return ok ? NextResponse.json({ approved: true }) : new NextResponse("Nothing is waiting for approval", { status: 409 });
   }
   const st = await startDemoPlayback(await repo());
+  // The project is created asynchronously — wait briefly so the client gets
+  // the new projectId in this response and can follow it immediately.
+  for (let i = 0; i < 20 && !st.projectId; i++) await new Promise((r) => setTimeout(r, 100));
   return NextResponse.json({ running: st.running, projectId: st.projectId, step: st.step });
 }
 export async function GET() {

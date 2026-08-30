@@ -6,6 +6,7 @@
  * gaming dashboard — no effects without a state behind them.
  */
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, animate, motion } from "framer-motion";
 import { AlertTriangle, Play, RotateCcw, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -46,22 +47,44 @@ const fmtElapsed = (ms: number | null) => { if (ms == null) return null; const s
 
 export function Orchestrator({ initial, projectId, canStartDemo, compact = false, locale = "en" }: { initial: OrchestratorStatus; projectId?: string; canStartDemo?: boolean; compact?: boolean; locale?: Locale }) {
   const t = tr(locale);
+  const router = useRouter();
   const [s, setS] = useState(initial);
   const [starting, setStarting] = useState(false);
+  // While a demo runs, follow ITS project — not the one this page was rendered
+  // for (public-deploy review: the client used to discard /api/demo's projectId,
+  // so KPIs and agent cards kept showing the old fixture project).
+  const [demoProject, setDemoProject] = useState<string | null>(null);
+  // Derived, not set in an effect: a running playback's project always wins.
+  const pollProject = (s.playback.running && s.playback.projectId) || demoProject || projectId;
   const live = s.playback.running || s.nodes.some((n) => n.active);
 
   // Poll only while something is happening (§33: animate only when jobs are active).
   useEffect(() => {
-    const url = `/api/orchestrator${projectId ? `?project=${projectId}` : ""}`;
+    const url = `/api/orchestrator${pollProject ? `?project=${pollProject}` : ""}`;
     let stop = false;
     const tick = async () => { try { const r = await fetch(url, { cache: "no-store" }); if (!stop) setS(await r.json()); } catch { /* ignore */ } };
     const id = setInterval(tick, live ? 1200 : 6000);
     return () => { stop = true; clearInterval(id); };
-  }, [projectId, live]);
+  }, [pollProject, live]);
+
+  // Re-render the server components on every step transition so KPIs /
+  // funnel / top leads follow the live demo.
+  const prevStep = useRef(initial.playback.step);
+  useEffect(() => {
+    if (prevStep.current !== s.playback.step) {
+      prevStep.current = s.playback.step;
+      router.refresh();
+    }
+  }, [s.playback.step, router]);
 
   const start = async () => {
     setStarting(true);
-    try { await fetch("/api/demo", { method: "POST" }); } finally { setTimeout(() => setStarting(false), 800); }
+    try {
+      const res = await fetch("/api/demo", { method: "POST" });
+      const j = (await res.json().catch(() => null)) as { projectId?: string | null } | null;
+      if (j?.projectId) setDemoProject(j.projectId);
+      router.refresh();
+    } finally { setTimeout(() => setStarting(false), 800); }
   };
   const approve = async () => {
     try { await fetch("/api/demo?action=approve", { method: "POST" }); } catch { /* next poll reflects the state */ }
