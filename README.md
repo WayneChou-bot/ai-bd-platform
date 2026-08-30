@@ -122,8 +122,9 @@ is set knowingly; without Supabase, data is in-memory and resets on restart (Set
 
 ## ⚙️ Configuration
 
-Copy [`.env.example`](.env.example) to `.env.local`. Demo needs nothing. For Gmail LIVE see
-the step-by-step guide: [docs/setup-gmail.zh-TW.md](docs/setup-gmail.zh-TW.md).
+Copy [`.env.example`](.env.example) to `.env.local`. Demo needs nothing. For Gmail LIVE,
+create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local`, then run
+`npm run gmail:auth` to obtain a refresh token.
 
 | Key | Purpose |
 |---|---|

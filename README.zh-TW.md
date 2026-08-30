@@ -116,7 +116,8 @@ LIVE 的安全防線：金鑰不進瀏覽器；狀態頁遮罩信箱；沒設收
 ## ⚙️ 設定
 
 複製 [`.env.example`](.env.example) 為 `.env.local`。Demo 什麼都不用填。
-Gmail LIVE 的逐步教學見 [docs/setup-gmail.zh-TW.md](docs/setup-gmail.zh-TW.md)。
+Gmail LIVE：在 Google Cloud 建立 OAuth **電腦版**用戶端，把 ID／secret 填進
+`.env.local`，再執行 `npm run gmail:auth` 取得 refresh token。
 
 | 變數 | 用途 |
 |---|---|

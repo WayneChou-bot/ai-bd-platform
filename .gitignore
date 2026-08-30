@@ -21,3 +21,4 @@ private/
 scratch/
 *.local.*
 docs/internal/
+docs/
