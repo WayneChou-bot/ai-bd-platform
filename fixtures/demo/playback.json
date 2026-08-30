@@ -1,0 +1,3737 @@
+{
+ "version": "1",
+ "note": "Recorded from a real run of the real agents with the mock provider — the browser replays it so every visitor gets a reliable, instance-independent demo.",
+ "log": [
+  {
+   "at": "2026-08-30T08:50:53.232Z",
+   "text": "Created project \"LLM Wiki Agent (demo 08:50)\"",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:50:53.232Z",
+   "text": "Understanding product…"
+  },
+  {
+   "at": "2026-08-30T08:50:53.755Z",
+   "text": "✓ Product understood: Developer Tool / Knowledge Management",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:50:53.755Z",
+   "text": "Generating ICP…"
+  },
+  {
+   "at": "2026-08-30T08:50:54.278Z",
+   "text": "✓ ICP ready: Hiring knowledge engineers, Launching RAG systems…",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:50:54.278Z",
+   "text": "Discovering leads…"
+  },
+  {
+   "at": "2026-08-30T08:50:54.808Z",
+   "text": "✓ 12 discovered",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:50:54.838Z",
+   "text": "Researched Acme AI"
+  },
+  {
+   "at": "2026-08-30T08:50:55.102Z",
+   "text": "Researched Northwind Labs"
+  },
+  {
+   "at": "2026-08-30T08:50:55.365Z",
+   "text": "Researched Quantleaf Analytics"
+  },
+  {
+   "at": "2026-08-30T08:50:55.626Z",
+   "text": "⚠ Orbital DevTools: source unavailable — retrying",
+   "tone": "warn"
+  },
+  {
+   "at": "2026-08-30T08:50:56.670Z",
+   "text": "Researched Orbital DevTools (retry succeeded)"
+  },
+  {
+   "at": "2026-08-30T08:50:56.933Z",
+   "text": "Researched Helios Platform"
+  },
+  {
+   "at": "2026-08-30T08:50:57.196Z",
+   "text": "Researched Maya Chen — Independent AI Consultant"
+  },
+  {
+   "at": "2026-08-30T08:50:57.460Z",
+   "text": "Researched Atlas Biotech Informatics"
+  },
+  {
+   "at": "2026-08-30T08:50:57.723Z",
+   "text": "Researched Lumen Fintech"
+  },
+  {
+   "at": "2026-08-30T08:50:57.985Z",
+   "text": "Researched Meridian Health AI"
+  },
+  {
+   "at": "2026-08-30T08:50:58.248Z",
+   "text": "Researched Sable Security"
+  },
+  {
+   "at": "2026-08-30T08:50:58.511Z",
+   "text": "Researched DataWorks"
+  },
+  {
+   "at": "2026-08-30T08:50:58.774Z",
+   "text": "Researched BrightPath EdTech"
+  },
+  {
+   "at": "2026-08-30T08:50:59.035Z",
+   "text": "✓ 12 / 12 researched",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:50:59.038Z",
+   "text": "Acme AI: 89 HIGH FIT"
+  },
+  {
+   "at": "2026-08-30T08:50:59.247Z",
+   "text": "Northwind Labs: 83 HIGH FIT"
+  },
+  {
+   "at": "2026-08-30T08:50:59.456Z",
+   "text": "Quantleaf Analytics: 84 HIGH FIT"
+  },
+  {
+   "at": "2026-08-30T08:50:59.666Z",
+   "text": "Orbital DevTools: 82 HIGH FIT"
+  },
+  {
+   "at": "2026-08-30T08:50:59.875Z",
+   "text": "Helios Platform: 85 HIGH FIT"
+  },
+  {
+   "at": "2026-08-30T08:51:00.085Z",
+   "text": "Maya Chen — Independent AI Consultant: 71 MEDIUM FIT"
+  },
+  {
+   "at": "2026-08-30T08:51:00.294Z",
+   "text": "Atlas Biotech Informatics: 65 MEDIUM FIT"
+  },
+  {
+   "at": "2026-08-30T08:51:00.503Z",
+   "text": "Lumen Fintech: 83 HIGH FIT"
+  },
+  {
+   "at": "2026-08-30T08:51:00.713Z",
+   "text": "Meridian Health AI: 83 HIGH FIT"
+  },
+  {
+   "at": "2026-08-30T08:51:00.922Z",
+   "text": "Sable Security: 81 HIGH FIT"
+  },
+  {
+   "at": "2026-08-30T08:51:01.144Z",
+   "text": "DataWorks: 64 MEDIUM FIT"
+  },
+  {
+   "at": "2026-08-30T08:51:01.353Z",
+   "text": "BrightPath EdTech: 65 MEDIUM FIT"
+  },
+  {
+   "at": "2026-08-30T08:51:01.562Z",
+   "text": "✓ 8 High Fit · 4 Medium Fit · 0 Rejected",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:01.565Z",
+   "text": "Draft for Acme AI: “A note on your recent hiring at Acme AI”"
+  },
+  {
+   "at": "2026-08-30T08:51:01.825Z",
+   "text": "⏸ Waiting for a human — nothing is sent until you approve",
+   "tone": "warn"
+  },
+  {
+   "at": "2026-08-30T08:51:02.280Z",
+   "text": "✓ Approved by a human",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:02.281Z",
+   "text": "✓ Approved & sent (simulated) → Acme AI",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:02.543Z",
+   "text": "Draft for Northwind Labs: “A note on your documentation setup at Northwind Labs”"
+  },
+  {
+   "at": "2026-08-30T08:51:02.804Z",
+   "text": "✓ Approved & sent (simulated) → Northwind Labs",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:03.065Z",
+   "text": "Draft for Quantleaf Analytics: “A note on your recent post at Quantleaf Analytics”"
+  },
+  {
+   "at": "2026-08-30T08:51:03.325Z",
+   "text": "✓ Approved & sent (simulated) → Quantleaf Analytics",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:03.586Z",
+   "text": "Draft for Orbital DevTools: “A note on your documentation setup at Orbital DevTools”"
+  },
+  {
+   "at": "2026-08-30T08:51:03.846Z",
+   "text": "✓ Approved & sent (simulated) → Orbital DevTools",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:04.108Z",
+   "text": "Draft for Helios Platform: “A note on your recent launch at Helios Platform”"
+  },
+  {
+   "at": "2026-08-30T08:51:04.368Z",
+   "text": "✓ Approved & sent (simulated) → Helios Platform",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:04.629Z",
+   "text": "Draft for Maya Chen — Independent AI Consultant: “A note on your documentation setup at Maya Chen”"
+  },
+  {
+   "at": "2026-08-30T08:51:04.889Z",
+   "text": "✓ Approved & sent (simulated) → Maya Chen — Independent AI Consultant",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:05.547Z",
+   "text": "↩ Acme AI replied → meeting_requested",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:05.942Z",
+   "text": "↩ Northwind Labs replied → interested",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:06.335Z",
+   "text": "↩ Quantleaf Analytics replied → interested",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:06.728Z",
+   "text": "↩ Helios Platform replied → meeting_requested",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:06.730Z",
+   "text": "Orbital DevTools: no response recorded"
+  },
+  {
+   "at": "2026-08-30T08:51:06.730Z",
+   "text": "✓ Learning Agent refreshed insights",
+   "tone": "ok"
+  },
+  {
+   "at": "2026-08-30T08:51:06.730Z",
+   "text": "Demo complete — open Analytics",
+   "tone": "ok"
+  }
+ ],
+ "frames": [
+  {
+   "t": 2,
+   "step": "project",
+   "logLen": 0,
+   "waitingApproval": null,
+   "nodes": []
+  },
+  {
+   "t": 93,
+   "step": "understanding",
+   "logLen": 2,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 546,
+   "step": "icp",
+   "logLen": 4,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 1102,
+   "step": "discover",
+   "logLen": 6,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 1644,
+   "step": "research",
+   "logLen": 8,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Acme AI"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 1915,
+   "step": "research",
+   "logLen": 9,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 2,
+     "completed": 2,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Northwind Labs"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 2187,
+   "step": "research",
+   "logLen": 10,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 3,
+     "completed": 3,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Quantleaf Analytics"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 2458,
+   "step": "research",
+   "logLen": 11,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 4,
+     "completed": 3,
+     "failed": 1,
+     "remaining": 0,
+     "current": "Orbital DevTools"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 3181,
+   "step": "research",
+   "logLen": 11,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "QUEUED",
+     "input": 5,
+     "completed": 3,
+     "failed": 1,
+     "remaining": 1,
+     "current": "Orbital DevTools"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 3452,
+   "step": "research",
+   "logLen": 12,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 6,
+     "completed": 5,
+     "failed": 1,
+     "remaining": 0,
+     "current": "Orbital DevTools"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 3723,
+   "step": "research",
+   "logLen": 13,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 7,
+     "completed": 6,
+     "failed": 1,
+     "remaining": 0,
+     "current": "Helios Platform"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 3994,
+   "step": "research",
+   "logLen": 14,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 8,
+     "completed": 7,
+     "failed": 1,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 4265,
+   "step": "research",
+   "logLen": 15,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 9,
+     "completed": 8,
+     "failed": 1,
+     "remaining": 0,
+     "current": "Atlas Biotech Informatics"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 4537,
+   "step": "research",
+   "logLen": 16,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 10,
+     "completed": 9,
+     "failed": 1,
+     "remaining": 0,
+     "current": "Lumen Fintech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 4809,
+   "step": "research",
+   "logLen": 17,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 11,
+     "completed": 10,
+     "failed": 1,
+     "remaining": 0,
+     "current": "Meridian Health AI"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 5080,
+   "step": "research",
+   "logLen": 18,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 12,
+     "completed": 11,
+     "failed": 1,
+     "remaining": 0,
+     "current": "Sable Security"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 5351,
+   "step": "research",
+   "logLen": 19,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 13,
+     "completed": 12,
+     "failed": 1,
+     "remaining": 0,
+     "current": "DataWorks"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 5622,
+   "step": "research",
+   "logLen": 20,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 5893,
+   "step": "qualify",
+   "logLen": 22,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Acme AI"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 6075,
+   "step": "qualify",
+   "logLen": 23,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 2,
+     "completed": 2,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Northwind Labs"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 6256,
+   "step": "qualify",
+   "logLen": 24,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 3,
+     "completed": 3,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Quantleaf Analytics"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 6436,
+   "step": "qualify",
+   "logLen": 25,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 4,
+     "completed": 4,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Orbital DevTools"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 6708,
+   "step": "qualify",
+   "logLen": 26,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 5,
+     "completed": 5,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Helios Platform"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 6888,
+   "step": "qualify",
+   "logLen": 27,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 6,
+     "completed": 6,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 7069,
+   "step": "qualify",
+   "logLen": 28,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 7,
+     "completed": 7,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Atlas Biotech Informatics"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 7341,
+   "step": "qualify",
+   "logLen": 29,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 8,
+     "completed": 8,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Lumen Fintech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 7521,
+   "step": "qualify",
+   "logLen": 30,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 9,
+     "completed": 9,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Meridian Health AI"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 7702,
+   "step": "qualify",
+   "logLen": 31,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 10,
+     "completed": 10,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Sable Security"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 7974,
+   "step": "qualify",
+   "logLen": 32,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 11,
+     "completed": 11,
+     "failed": 0,
+     "remaining": 0,
+     "current": "DataWorks"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 8155,
+   "step": "qualify",
+   "logLen": 33,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 8336,
+   "step": "engage",
+   "logLen": 35,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Acme AI"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 8608,
+   "step": "awaiting_approval",
+   "logLen": 36,
+   "waitingApproval": {
+    "company": "Acme AI",
+    "subject": "A note on your recent hiring at Acme AI"
+   },
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Acme AI"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 8698,
+   "step": "engage",
+   "logLen": 38,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Acme AI"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 8970,
+   "step": "engage",
+   "logLen": 39,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 2,
+     "completed": 2,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Northwind Labs"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 9241,
+   "step": "engage",
+   "logLen": 40,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 2,
+     "completed": 2,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Northwind Labs"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 9514,
+   "step": "engage",
+   "logLen": 41,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 3,
+     "completed": 3,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Quantleaf Analytics"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 9786,
+   "step": "engage",
+   "logLen": 42,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 3,
+     "completed": 3,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Quantleaf Analytics"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 9968,
+   "step": "engage",
+   "logLen": 43,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 4,
+     "completed": 4,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Orbital DevTools"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 10240,
+   "step": "engage",
+   "logLen": 44,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 4,
+     "completed": 4,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Orbital DevTools"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 10512,
+   "step": "engage",
+   "logLen": 45,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 5,
+     "completed": 5,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Helios Platform"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 10784,
+   "step": "engage",
+   "logLen": 46,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 5,
+     "completed": 5,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Helios Platform"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 11056,
+   "step": "engage",
+   "logLen": 47,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 6,
+     "completed": 6,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 11328,
+   "step": "engage",
+   "logLen": 48,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 6,
+     "completed": 6,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 11599,
+   "step": "reply",
+   "logLen": 48,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 6,
+     "completed": 6,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "IDLE",
+     "input": 0,
+     "completed": 0,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 11961,
+   "step": "reply",
+   "logLen": 49,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 6,
+     "completed": 6,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Acme AI"
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 12324,
+   "step": "reply",
+   "logLen": 50,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 6,
+     "completed": 6,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "READY",
+     "input": 2,
+     "completed": 2,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Northwind Labs"
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "READY",
+     "input": 2,
+     "completed": 2,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 12776,
+   "step": "reply",
+   "logLen": 51,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 6,
+     "completed": 6,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "READY",
+     "input": 3,
+     "completed": 3,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Quantleaf Analytics"
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "READY",
+     "input": 3,
+     "completed": 3,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  },
+  {
+   "t": 13138,
+   "step": "done",
+   "logLen": 55,
+   "waitingApproval": null,
+   "nodes": [
+    {
+     "key": "discovery",
+     "label": "Discovery Agent",
+     "short": "DISCOVER",
+     "status": "READY",
+     "input": 1,
+     "completed": 1,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    },
+    {
+     "key": "research",
+     "label": "Research Agent",
+     "short": "RESEARCH",
+     "status": "READY",
+     "input": 14,
+     "completed": 13,
+     "failed": 1,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "qualification",
+     "label": "Qualification Agent",
+     "short": "QUALIFY",
+     "status": "READY",
+     "input": 12,
+     "completed": 12,
+     "failed": 0,
+     "remaining": 0,
+     "current": "BrightPath EdTech"
+    },
+    {
+     "key": "outreach",
+     "label": "Outreach Agent",
+     "short": "ENGAGE",
+     "status": "READY",
+     "input": 6,
+     "completed": 6,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Maya Chen"
+    },
+    {
+     "key": "reply",
+     "label": "Reply Agent",
+     "short": "REPLY",
+     "status": "READY",
+     "input": 4,
+     "completed": 4,
+     "failed": 0,
+     "remaining": 0,
+     "current": "Helios Platform"
+    },
+    {
+     "key": "learning",
+     "label": "Learning Agent",
+     "short": "LEARN",
+     "status": "READY",
+     "input": 5,
+     "completed": 5,
+     "failed": 0,
+     "remaining": 0,
+     "current": null
+    }
+   ]
+  }
+ ]
+}

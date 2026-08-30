@@ -52,11 +52,12 @@ npm run dev          # APP_MODE defaults to demo — no keys needed
 
 Open http://localhost:3000 → **Agents** → **▶ Start Demo**.
 
-A fresh simulated project runs the whole loop — Discover → Research → Qualify → Engage →
-Reply → Learn — including one deliberately injected source failure with retry. The demo
-**pauses at the first outreach draft and waits for you to click Approve**: the first draft
-demonstrates the human approval gate; remaining simulated drafts auto-advance to keep the
-demo brisk. Nothing external is ever sent.
+The whole loop plays — Discover → Research → Qualify → Engage → Reply → Learn — including
+one deliberately injected source failure with retry. It is a deterministic browser-side
+replay of one real agent run (recorded with the mock provider), so it works identically on
+serverless deployments and every visitor gets their own copy. The demo **pauses at the
+first outreach draft and waits for you to click Approve** — the human approval gate is
+enforced, not narrated. Nothing external is ever sent.
 
 ## 🔁 The loop
 
@@ -138,8 +139,8 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 
 ## 🧪 Testing
 
-**86 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
-mention engine, strict-schema conversion, mail adapters), agent behaviour (reply
+**91 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
+mention engine, strict-schema conversion, demo-recording integrity, mail adapters), agent behaviour (reply
 classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, demo
 playback with an *asserted* human-approval pause), and evaluation — fixtures are regenerated
 from raw rows and compared exactly. Failure visibility is itself under test: a FAILED run

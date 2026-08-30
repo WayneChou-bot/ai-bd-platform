@@ -2,18 +2,27 @@
 /**
  * Agent Orchestrator (Spec §22, §33). Animations communicate state:
  * connectors carry particles only while the downstream node is active,
- * counters tween on change, the active node pulses. Enterprise SaaS, not a
- * gaming dashboard — no effects without a state behind them.
+ * counters tween on change, the active node pulses.
+ *
+ * The public demo is a CLIENT-SIDE replay (v0.3 addendum): serverless
+ * deployments spread requests across instances, so server-memory playback
+ * falls apart in public. fixtures/demo/playback.json is recorded from one
+ * real run of the real agents (mock provider); the browser replays it, so
+ * every visitor gets a deterministic, instance-independent demo — the
+ * human-approval pause included.
  */
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, animate, motion } from "framer-motion";
-import { AlertTriangle, Play, RotateCcw, Send } from "lucide-react";
+import { AlertTriangle, Play, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { OrchestratorStatus } from "@/lib/orchestrator-status";
 import { tr, type Locale } from "@/lib/i18n";
+import timeline from "../../../fixtures/demo/playback.json";
 
 const TONE: Record<string, string> = { discovery: "var(--c-discover)", research: "var(--c-research)", qualification: "var(--c-qualify)", outreach: "var(--c-engage)", reply: "var(--c-reply)", learning: "var(--c-learn)" };
+
+type ServerNode = OrchestratorStatus["nodes"][number];
+type Frame = (typeof timeline)["frames"][number];
 
 function Counter({ value }: { value: number }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -45,64 +54,70 @@ function Connector({ active, color }: { active: boolean; color: string }) {
 
 const fmtElapsed = (ms: number | null) => { if (ms == null) return null; const s = Math.floor(ms / 1000); return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; };
 
+/** Browser-side deterministic replay of the recorded demo run. */
+function useDemoPlayer() {
+  const [idx, setIdx] = useState<number | null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clear = () => { if (timer.current) { clearTimeout(timer.current); timer.current = null; } };
+
+  useEffect(() => {
+    if (idx == null) return;
+    const frames = timeline.frames;
+    if (idx >= frames.length - 1) return; // done
+    if (frames[idx].waitingApproval) return; // hold for the human — Approve advances idx
+    const delay = Math.min(Math.max(frames[idx + 1].t - frames[idx].t, 60), 1600);
+    timer.current = setTimeout(() => setIdx(idx + 1), delay);
+    return clear;
+  }, [idx]);
+
+  const start = useCallback(() => { clear(); setIdx(0); }, []);
+  const approve = useCallback(() => { setIdx((i) => (i == null ? i : i + 1)); }, []);
+
+  const frame: Frame | null = idx == null ? null : timeline.frames[idx];
+  const playing = frame != null && frame.step !== "done";
+  const waiting = frame?.waitingApproval != null; // derived — the recording pauses on exactly one frame
+  return { frame, playing, waiting, start, approve };
+}
+
+const frameNodes = (f: Frame): ServerNode[] =>
+  f.nodes.map((n) => ({ ...n, active: n.status === "RUNNING", elapsedMs: null, error: null, queued: 0 } as unknown as ServerNode));
+
 export function Orchestrator({ initial, projectId, canStartDemo, compact = false, locale = "en" }: { initial: OrchestratorStatus; projectId?: string; canStartDemo?: boolean; compact?: boolean; locale?: Locale }) {
   const t = tr(locale);
-  const router = useRouter();
   const [s, setS] = useState(initial);
-  const [starting, setStarting] = useState(false);
-  // While a demo runs, follow ITS project — not the one this page was rendered
-  // for (public-deploy review: the client used to discard /api/demo's projectId,
-  // so KPIs and agent cards kept showing the old fixture project).
-  const [demoProject, setDemoProject] = useState<string | null>(null);
-  // Derived, not set in an effect: a running playback's project always wins.
-  const pollProject = (s.playback.running && s.playback.projectId) || demoProject || projectId;
-  const live = s.playback.running || s.nodes.some((n) => n.active);
+  const demo = useDemoPlayer();
+  const serverActive = s.nodes.some((n) => n.active);
+  const live = demo.playing || serverActive;
 
-  // Poll only while something is happening (§33: animate only when jobs are active).
+  // Poll only while real jobs are active (§33). The demo replay is fully
+  // client-side and never touches the server.
   useEffect(() => {
-    const url = `/api/orchestrator${pollProject ? `?project=${pollProject}` : ""}`;
+    const url = `/api/orchestrator${projectId ? `?project=${projectId}` : ""}`;
     let stop = false;
     const tick = async () => { try { const r = await fetch(url, { cache: "no-store" }); if (!stop) setS(await r.json()); } catch { /* ignore */ } };
-    const id = setInterval(tick, live ? 1200 : 6000);
+    const id = setInterval(tick, serverActive ? 1200 : 6000);
     return () => { stop = true; clearInterval(id); };
-  }, [pollProject, live]);
+  }, [projectId, serverActive]);
 
-  // Re-render the server components on every step transition so KPIs /
-  // funnel / top leads follow the live demo.
-  const prevStep = useRef(initial.playback.step);
-  useEffect(() => {
-    if (prevStep.current !== s.playback.step) {
-      prevStep.current = s.playback.step;
-      router.refresh();
-    }
-  }, [s.playback.step, router]);
-
-  const start = async () => {
-    setStarting(true);
-    try {
-      const res = await fetch("/api/demo", { method: "POST" });
-      const j = (await res.json().catch(() => null)) as { projectId?: string | null } | null;
-      if (j?.projectId) setDemoProject(j.projectId);
-      router.refresh();
-    } finally { setTimeout(() => setStarting(false), 800); }
-  };
-  const approve = async () => {
-    try { await fetch("/api/demo?action=approve", { method: "POST" }); } catch { /* next poll reflects the state */ }
-  };
-  const wa = s.playback.waitingApproval;
+  // What the panel shows: the replay when one is loaded, live data otherwise.
+  const nodes = demo.frame ? frameNodes(demo.frame) : s.nodes;
+  const demoLog = demo.frame ? timeline.log.slice(0, demo.frame.logLen) : [];
+  const logT0 = timeline.log.length ? new Date(timeline.log[0].at).getTime() : 0;
+  const relTimeOf = (at: string) => `+${((new Date(at).getTime() - logT0) / 1000).toFixed(1).padStart(5, " ")}s`;
+  const wa = demo.waiting && demo.frame ? demo.frame.waitingApproval : null;
 
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
           <h2 className="text-sm font-semibold">{t("Agent Orchestrator")}</h2>
           <div className="text-xs text-muted">{live ? <span className="text-engage">● {t("Live — jobs running")}</span> : t("Idle — animations run only while jobs are active")}</div>
         </div>
         <div className="flex items-center gap-2">
-          {s.playback.step !== "idle" && <span className="text-xs text-muted">{t("Demo")}: {s.playback.step}</span>}
+          {demo.frame && <span className="text-xs text-muted">{t("Demo")}: {demo.frame.step}</span>}
           {canStartDemo && (
-            <button onClick={start} disabled={s.playback.running || starting} className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-white hover:bg-accent/90 disabled:opacity-50">
-              {s.playback.running ? <RotateCcw size={14} className="animate-spin" /> : <Play size={14} />} {s.playback.running ? t("Running…") : s.playback.step === "done" ? t("Run demo again") : t("Start Demo")}
+            <button onClick={demo.start} disabled={demo.playing} className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-white hover:bg-accent/90 disabled:opacity-50">
+              <Play size={14} /> {demo.playing ? t("Running…") : demo.frame ? t("Run demo again") : t("Start Demo")}
             </button>
           )}
         </div>
@@ -117,21 +132,16 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
               <span className="ml-2 text-fg/90">“{wa.subject}” → {wa.company}</span>
               <div className="text-xs text-muted">{t("The pipeline is paused — nothing is sent until you approve.")}</div>
             </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <a href={`/leads/${wa.leadId}?tab=messages`} className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 px-3 py-1.5 text-sm text-fg/90 hover:bg-white/5">
-                {t("View draft")}
-              </a>
-              <button onClick={approve} className="inline-flex items-center gap-1.5 rounded-lg bg-engage px-3 py-1.5 text-sm font-medium text-white hover:bg-engage/90">
-                <Send size={14} /> {t("Approve & continue")}
-              </button>
-            </div>
+            <button onClick={demo.approve} className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-engage px-3 py-1.5 text-sm font-medium text-white hover:bg-engage/90">
+              <Send size={14} /> {t("Approve & continue")}
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
 
       <div className="glass overflow-hidden rounded-xl p-4">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:flex xl:items-stretch">
-          {s.nodes.map((n, i) => (
+          {nodes.map((n, i) => (
             <div key={n.key} className="contents">
               <motion.div
                 layout
@@ -172,7 +182,7 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
                   {n.error && n.status !== "READY" && <div className="mt-1 flex items-start gap-1 text-learn"><AlertTriangle size={12} className="mt-0.5 shrink-0" /><span className="line-clamp-2">{n.error}</span></div>}
                 </div>
               </motion.div>
-              {i < s.nodes.length - 1 && <Connector active={s.nodes[i + 1].active || (n.active && s.nodes[i + 1].status !== "IDLE" && s.playback.running)} color={TONE[s.nodes[i + 1].key]} />}
+              {i < nodes.length - 1 && <Connector active={nodes[i + 1].active || (n.active && nodes[i + 1].status !== "IDLE" && demo.playing)} color={TONE[nodes[i + 1].key]} />}
             </div>
           ))}
         </div>
@@ -198,16 +208,16 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
             </ul>
           </div>
           <div className="glass rounded-xl p-4">
-            <div className="mb-2 flex items-center justify-between text-sm font-semibold"><span>{t("Demo playback")}</span>{s.playback.error && <span className="text-xs text-danger">{s.playback.error}</span>}</div>
-            {!canStartDemo && s.playback.log.length === 0 ? (
+            <div className="mb-2 text-sm font-semibold">{t("Demo playback")}</div>
+            {!canStartDemo ? (
               <p className="text-xs text-muted">{t("Demo playback is available in DEMO mode only — it creates a fresh simulated project, which stays separate from your real LIVE data. Set APP_MODE=demo in .env.local and restart to run it.")}</p>
-            ) : s.playback.log.length === 0 ? (
-              <p className="text-xs text-muted">{t("Press Start Demo to create a fresh project and watch Discover → Research → Qualify → Engage → Reply → Learn run end to end — including one injected source failure with retry (§41). No external APIs are called.")} {t("The first draft demonstrates the human approval gate — the demo pauses until you act. Remaining simulated drafts auto-advance to keep the demo brisk; nothing external is ever sent.")}</p>
+            ) : demoLog.length === 0 ? (
+              <p className="text-xs text-muted">{t("Press Start Demo to watch Discover → Research → Qualify → Engage → Reply → Learn run end to end — including one injected source failure with retry (§41).")} {t("It is a deterministic browser-side replay of one real agent run (recorded with the mock provider): every visitor plays their own copy, the approval pause waits for YOUR click, and nothing external is ever sent.")}</p>
             ) : (
               <ul className="space-y-1 text-xs">
-                {s.playback.log.map((l, i) => (
+                {demoLog.slice(-14).map((l, i) => (
                   <li key={i} className={cn("flex gap-2", l.tone === "ok" && "text-engage", l.tone === "warn" && "text-learn", l.tone === "fail" && "text-danger", !l.tone && "text-fg/80")}>
-                    <span className="tabular w-11 shrink-0 text-muted">{l.at.slice(11, 19)}</span><span>{l.text}</span>
+                    <span className="tabular w-14 shrink-0 whitespace-pre text-muted">{relTimeOf(l.at)}</span><span>{l.text}</span>
                   </li>
                 ))}
               </ul>

@@ -28,8 +28,10 @@ const zh: Record<string, string> = {
   "Input": "輸入", "Completed": "完成", "Failed": "失敗", "Remaining": "剩餘", "Current": "目前", "Last": "最近", "Elapsed": "耗時",
   "Learn ↺ Discover — outcomes feed the next targeting round": "學習 ↺ 探索 — 結果回饋到下一輪目標選擇",
   "Activity stream": "活動紀錄", "Demo playback": "示範播放",
-  "Press Start Demo to create a fresh project and watch Discover → Research → Qualify → Engage → Reply → Learn run end to end — including one injected source failure with retry (§41). No external APIs are called.":
-    "按下「開始示範」會建立一個全新專案，完整跑一遍 探索 → 研究 → 評估 → 接觸 → 回覆 → 學習，包含一次刻意注入的來源失敗與重試（§41）。全程不呼叫任何外部 API。",
+  "Press Start Demo to watch Discover → Research → Qualify → Engage → Reply → Learn run end to end — including one injected source failure with retry (§41).":
+    "按下「開始示範」，完整看一遍 探索 → 研究 → 評估 → 接觸 → 回覆 → 學習，包含一次刻意注入的來源失敗與重試（§41）。",
+  "It is a deterministic browser-side replay of one real agent run (recorded with the mock provider): every visitor plays their own copy, the approval pause waits for YOUR click, and nothing external is ever sent.":
+    "這是一段確定性的瀏覽器端重播，內容來自一次真實代理執行的錄製（使用 mock provider）：每位訪客各自播放自己的副本，核准暫停會等「你」親手按下核准，全程不會寄出任何真實訊息。",
   "RUNNING": "執行中", "READY": "就緒", "QUEUED": "排隊中", "IDLE": "閒置", "COMPLETED": "已完成", "FAILED": "失敗", "RETRYING": "重試中",
   // leads
   "Lead": "潛客", "Score": "分數", "Intent": "意圖", "Status": "狀態", "Source": "來源", "Last Research": "最近研究", "of": "／",
