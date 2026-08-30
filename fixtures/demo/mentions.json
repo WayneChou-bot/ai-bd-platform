@@ -1,0 +1,47 @@
+{
+  "comment": "Demo mention pool (Spec v0.3). Hand-written public-web documents the FixtureMentionAdapter returns in DEMO mode; signals are computed live by the real mention engine, never stored here.",
+  "documents": [
+    {
+      "url": "https://devtools-weekly.example.com/roundup/knowledge-tooling-2026",
+      "title": "Knowledge tooling roundup: what dev teams are trying in 2026",
+      "content": "Several teams we spoke to are evaluating LLM Wiki Agent (github.com/WayneChou-bot/LLM-Wiki-Agent-Workflow-Demo) for internal documentation. The multi-agent approach turns raw Markdown into interconnected role-specific pages, which fits teams drowning in scattered docs.",
+      "source_type": "blog",
+      "published_at": "2026-08-18T09:00:00.000Z"
+    },
+    {
+      "url": "https://github.com/orgs/community/discussions/98123",
+      "title": "Best way to auto-generate a team wiki from Markdown?",
+      "content": "Repositories worth looking at include WayneChou-bot/LLM-Wiki-Agent-Workflow-Demo — LLM Wiki Agent builds a linked wiki out of your existing Markdown knowledge base. How do people handle role-specific views?",
+      "source_type": "forum",
+      "published_at": "2026-08-22T14:30:00.000Z"
+    },
+    {
+      "url": "https://tech-blog.example.jp/entry/2026/08/25/wiki-automation",
+      "title": "社内ドキュメント自動整備ツールの検討",
+      "content": "社内ドキュメントの自動整備に LLM Wiki Agent（github.com/WayneChou-bot/LLM-Wiki-Agent-Workflow-Demo）を検討しています。Markdown から wiki を自動生成する仕組みが、私たちのナレッジ運用に合いそうです。",
+      "source_type": "blog",
+      "published_at": "2026-08-25T02:00:00.000Z"
+    },
+    {
+      "url": "https://blog.example.tw/posts/knowledge-base-tools",
+      "title": "值得參考的知識庫自動化工具",
+      "content": "最近整理知識庫工具，其中 LLM Wiki Agent（github.com/WayneChou-bot/LLM-Wiki-Agent-Workflow-Demo）值得參考：它用多代理流程把 Markdown 文件自動變成互相連結的 wiki 頁面，還能依角色產生不同視角。",
+      "source_type": "blog",
+      "published_at": "2026-08-27T11:00:00.000Z"
+    },
+    {
+      "url": "https://maps-atlas.example.com/world-atlas-2026",
+      "title": "World Atlas 2026 — new maps released",
+      "content": "The new atlas edition covers every country with updated topographic maps and city indexes.",
+      "source_type": "news",
+      "published_at": "2026-08-10T08:00:00.000Z"
+    },
+    {
+      "url": "https://engineering.example.io/posts/wiki-generators-compared",
+      "title": "We compared three wiki generators for our monorepo",
+      "content": "We tried LLM Wiki Agent (github.com/WayneChou-bot/LLM-Wiki-Agent-Workflow-Demo) but it did not support our monorepo layout yet, so we stayed with our in-house scripts for documentation. The agent pipeline itself looked solid.",
+      "source_type": "blog",
+      "published_at": "2026-08-28T16:00:00.000Z"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Visual direction (Spec §32): dark navy base, layered glass cards,
+   agent colours: blue=Discovery, purple=Research, cyan=Qualification,
+   green=Engage/Positive, teal=Reply, orange=Learning/Warning. */
+:root {
+  --bg: #070b16;
+  --bg-elev: #0c1224;
+  --card: rgba(17, 24, 45, 0.72);
+  --card-border: rgba(148, 163, 184, 0.12);
+  --fg: #e6eaf2;
+  --muted: #8b95ad;
+  --accent: #5b8cff;
+
+  --c-discover: #4f8cff;
+  --c-research: #a78bfa;
+  --c-qualify: #22d3ee;
+  --c-engage: #34d399;
+  --c-reply: #2dd4bf;
+  --c-learn: #fb923c;
+  --c-danger: #f87171;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-discover: var(--c-discover);
+  --color-research: var(--c-research);
+  --color-qualify: var(--c-qualify);
+  --color-engage: var(--c-engage);
+  --color-reply: var(--c-reply);
+  --color-learn: var(--c-learn);
+  --color-danger: var(--c-danger);
+  --font-sans: var(--font-geist-sans), "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html { color-scheme: dark; }
+
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(79, 140, 255, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 0% 100%, rgba(167, 139, 250, 0.08), transparent 60%),
+    var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+}
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Interactive surfaces: subtle lift + brighter edge on hover (no motion for reduced-motion users). */
+.glass.lift { transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
+.glass.lift:hover { transform: translateY(-2px); border-color: rgba(148, 163, 184, 0.28); box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 14px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(91,140,255,0.15); }
+@media (prefers-reduced-motion: reduce) { .glass.lift, .glass.lift:hover { transition: none; transform: none; } .pulse { animation: none; } }
+
+/* Page enter */
+@keyframes fade-up { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fade-up { animation: fade-up 260ms ease-out both; }
+.fade-up-2 { animation: fade-up 260ms ease-out 60ms both; }
+.fade-up-3 { animation: fade-up 260ms ease-out 120ms both; }
+
+@keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.8); } }
+.pulse { animation: pulse-dot 1.6s ease-in-out infinite; }

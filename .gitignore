@@ -1,0 +1,23 @@
+# dependencies / build
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+
+# environment (never commit keys)
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# local-only material (reference images, recordings, notes, scratch)
+private/
+scratch/
+*.local.*
+docs/internal/
