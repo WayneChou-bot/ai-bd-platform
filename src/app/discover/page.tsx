@@ -66,7 +66,7 @@ export default async function Discover({ searchParams }: { searchParams: Promise
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-engage/30 bg-engage/10 px-3 py-2 text-sm text-engage">
           <span>{sp.msg}</span>
           {/* Fresh candidates are only DISCOVERED — the qualified view would be empty (field test). */}
-          <Link href={`/leads?project=${project.id}`} className="font-medium underline decoration-dotted hover:decoration-solid">{t("View all leads")} →</Link>
+          {view === "prospects" && <Link href={`/leads?project=${project.id}`} className="font-medium underline decoration-dotted hover:decoration-solid">{t("View all leads")} →</Link>}
         </div>
       )}
       {view === "prospects" && !icp && <div className="mb-4 rounded-lg border border-learn/30 bg-learn/10 px-3 py-2 text-sm text-learn">{t("This project has no ICP yet.")} <Link href={`/projects/${project.id}?tab=icp`} className="underline">{t("Define or generate one")}</Link> {t("before discovery.")}</div>}

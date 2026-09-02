@@ -39,7 +39,7 @@ export default async function Agents({ searchParams }: { searchParams: Promise<{
             {recent.map((x) => (
               <TR key={x.id}>
                 <TD className="tabular text-xs text-muted">{x.id}</TD>
-                <TD className="capitalize">{t(x.agent.replace("_", " "))}</TD>
+                <TD className="capitalize">{t(x.agent === "icp_suggest" ? "ICP Suggest" : x.agent.replace("_", " "))}</TD>
                 <TD>{x.lead_id ? <Link href={`/leads/${x.lead_id}`} className="hover:text-accent">{name.get(x.lead_id)}</Link> : "—"}</TD>
                 <TD><Badge tone={runTone[x.status]}>{t(x.status)}</Badge></TD>
                 <TD className="tabular">{x.latency_ms != null ? `${x.latency_ms} ms` : "—"}</TD>

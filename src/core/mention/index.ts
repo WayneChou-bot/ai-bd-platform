@@ -16,8 +16,31 @@ export const MENTION_POINTS = {
   canonical_name: 25,
   alias: 15,
   context_topic: 25, // any tracked keyword appears near the name — name + topic (50) reaches Review, never higher (v0.3 amendment, field test)
-  domain_match: 25, // document served from the entity's own canonical domain
+  domain_match: 25, // a THIRD-PARTY document links to / cites the entity's own domain (v0.3 amendment: self-published pages are not mentions)
 } as const;
+
+/** Hosts shared by many unrelated entities — a page there is never "the entity's own site". */
+const SHARED_HOSTS = ["github.com", "gitlab.com", "bitbucket.org", "medium.com", "substack.com", "notion.site", "wordpress.com", "blogspot.com"];
+
+/** The entity's own domain, or null when its canonical URL sits on a shared host. */
+export function entityOwnDomain(entity: TrackedEntity): string | null {
+  const d = entity.canonical_url ? domainOf(entity.canonical_url) : null;
+  if (!d) return null;
+  return SHARED_HOSTS.some((h) => d === h || d.endsWith(`.${h}`)) ? null : d;
+}
+
+/**
+ * Self-published: the document lives on the entity's own site (or, for a
+ * shared-host entity such as a GitHub repo, under its own canonical URL).
+ * A vendor talking about itself is not a public mention (field test: AWS's
+ * marketing and certification pages filled the signal list at 75).
+ */
+export function isSelfPublished(doc: Pick<SourceDocument, "url">, entity: TrackedEntity): boolean {
+  const own = entityOwnDomain(entity);
+  const docDomain = domainOf(doc.url);
+  if (own && docDomain && (docDomain === own || docDomain.endsWith(`.${own}`))) return true;
+  return !!entity.canonical_url && !own && doc.url.toLowerCase().startsWith(entity.canonical_url.toLowerCase());
+}
 
 export type MentionBand = "confirmed" | "likely" | "review" | "ignore";
 export function mentionBand(score: number): MentionBand {
@@ -44,9 +67,8 @@ export function mentionConfidence(doc: Pick<SourceDocument, "url" | "title" | "c
   if (text.includes(norm(entity.canonical_name))) matched.push("canonical_name");
   if (entity.aliases.some((a) => a && text.includes(norm(a)))) matched.push("alias");
   if (entity.keywords.some((k) => k && text.includes(norm(k)))) matched.push("context_topic");
-  const entityDomain = entity.canonical_url ? domainOf(entity.canonical_url) : null;
-  const docDomain = domainOf(doc.url);
-  if (entityDomain && docDomain && (docDomain === entityDomain || docDomain.endsWith(`.${entityDomain}`))) matched.push("domain_match");
+  const own = entityOwnDomain(entity);
+  if (own && !isSelfPublished(doc, entity) && text.includes(own)) matched.push("domain_match");
 
   const score = Math.min(100, matched.reduce((sum, k) => sum + MENTION_POINTS[k], 0));
   return { score, band: mentionBand(score), matched };

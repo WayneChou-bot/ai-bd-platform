@@ -272,7 +272,7 @@ export default async function ProjectDetail({ params, searchParams }: { params: 
               <ul className="divide-y divide-white/5 text-sm">
                 {projectRuns.map((x) => (
                   <li key={x.id} className="flex items-center justify-between py-2">
-                    <div><span className="capitalize">{x.agent.replace("_", " ")}</span><div className="text-xs text-muted">{x.output_summary || x.error || x.input_summary}</div></div>
+                    <div><span className="capitalize">{t(x.agent === "icp_suggest" ? "ICP Suggest" : x.agent.replace("_", " "))}</span><div className="text-xs text-muted">{x.output_summary || x.error || x.input_summary}</div></div>
                     <div className="text-right"><Badge tone={x.status === "COMPLETED" ? "engage" : x.status === "FAILED" ? "danger" : "learn"}>{x.status}</Badge><div className="tabular text-xs text-muted">{x.latency_ms != null ? `${x.latency_ms} ms` : ""} · {x.model ?? ""}</div></div>
                   </li>
                 ))}

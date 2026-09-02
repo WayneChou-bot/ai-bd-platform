@@ -5,7 +5,7 @@
  */
 import type { Evidence, EvidenceType, Lead, Signal, SourceDocument, TrackedEntity } from "@/core/schemas";
 import { Lead as LeadSchema, Signal as SignalSchema, TrackedEntity as TrackedEntitySchema } from "@/core/schemas";
-import { businessRelevance, classifyMentionContext, mentionConfidence, signalTypeFor, snippetAround } from "@/core/mention";
+import { businessRelevance, classifyMentionContext, mentionConfidence, signalTypeFor, snippetAround, isSelfPublished } from "@/core/mention";
 import { createMentionAdapters } from "@/adapters/mentions";
 import { newId } from "@/core/orchestrator/run";
 import { getConfig } from "@/lib/config";
@@ -51,6 +51,8 @@ export interface MentionScanResult {
   created: number;
   skippedExisting: number;
   belowThreshold: number;
+  /** pages on the entity's own site — a vendor talking about itself is not a mention */
+  selfPublished: number;
 }
 
 export async function scanMentions(repo: Repository, projectId: string): Promise<MentionScanResult> {
@@ -69,7 +71,7 @@ export async function scanMentions(repo: Repository, projectId: string): Promise
     output_summary: "", created_at: startedAt,
   });
 
-  const result: MentionScanResult = { queries, documents: 0, created: 0, skippedExisting: 0, belowThreshold: 0 };
+  const result: MentionScanResult = { queries, documents: 0, created: 0, skippedExisting: 0, belowThreshold: 0, selfPublished: 0 };
   try {
     const existing = await repo.signals(projectId);
     const seen = new Set(existing.map((s) => `${s.entity_id}|${s.source_url}`));
@@ -84,6 +86,7 @@ export async function scanMentions(repo: Repository, projectId: string): Promise
     result.documents = docsByUrl.size;
 
     for (const { doc, query } of docsByUrl.values()) {
+      if (entities.some((e) => isSelfPublished(doc, e))) { result.selfPublished++; continue; }
       // best-matching entity wins (§22 basic entity resolution)
       let best: { entity: TrackedEntity; score: number } | null = null;
       for (const e of entities) {
@@ -116,7 +119,7 @@ export async function scanMentions(repo: Repository, projectId: string): Promise
       started_at: startedAt, completed_at: done.toISOString(), latency_ms: done.getTime() - new Date(startedAt).getTime(),
       model: null, token_usage: null, retry_count: 0, error: null,
       input_summary: `mention scan · ${queries.length} queries via ${adapters.map((a) => a.name).join("+")}`,
-      output_summary: `${result.created} signals (${result.skippedExisting} existing, ${result.belowThreshold} below threshold)`,
+      output_summary: `${result.created} signals (${result.skippedExisting} existing, ${result.belowThreshold} below threshold, ${result.selfPublished} self-published skipped)`,
       created_at: startedAt,
     });
     await repo.addAuditEvent({ id: newId("aud"), project_id: projectId, lead_id: null, actor: "agent", action: "mentions.scanned", detail: `${result.created} new signals from ${result.documents} documents`, created_at: new Date().toISOString() });

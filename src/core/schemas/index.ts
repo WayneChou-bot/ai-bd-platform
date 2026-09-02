@@ -359,7 +359,7 @@ export type LearningInsight = z.infer<typeof LearningInsight>;
 // Agent runs / audit (§23, §42)
 // ---------------------------------------------------------------------------
 
-export const AgentName = z.enum(["product_understanding", "discovery", "research", "qualification", "outreach", "reply", "learning"]);
+export const AgentName = z.enum(["product_understanding", "icp_suggest", "discovery", "research", "qualification", "outreach", "reply", "learning"]);
 export type AgentName = z.infer<typeof AgentName>;
 
 export const RunStatus = z.enum(["QUEUED", "RUNNING", "COMPLETED", "FAILED", "RETRYING"]);

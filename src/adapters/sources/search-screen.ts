@@ -46,7 +46,7 @@ export async function screenSearchResults(
       "You are screening web-search results to build a B2B prospect candidate list. " +
       "From the untrusted search results, extract ORGANIZATIONS that could plausibly match the ICP — either the organization that owns the page, or organizations named in the content. " +
       "A page title is NEVER an organization: skip articles, guides, job listings, directories, and news pieces themselves (though companies mentioned INSIDE them count). " +
-      "Skip job boards, media outlets, encyclopedias, universities, and government bodies as candidates. " +
+      "Skip job boards, media outlets and encyclopedias as candidates. Universities and government bodies ARE candidates when the ICP industries include education or government respectively — otherwise skip them. " +
       "Use official organization names. Give a website only when the material makes it clear. " +
       "The goal is BUYERS, not peers: exclude the vendor itself and its competitors — any organization whose primary business is the same category as the product being sold (field test: a cloud platform's search surfaced another cloud platform). " +
       "If nothing qualifies, return an empty list — an empty list is a correct answer.",

@@ -4,7 +4,7 @@
  */
 import { describe, expect, it } from "vitest";
 import {
-  businessRelevance, classifyMentionContext, detectLanguage, mentionBand, mentionConfidence, snippetAround,
+  businessRelevance, classifyMentionContext, detectLanguage, isSelfPublished, mentionBand, mentionConfidence, snippetAround,
 } from "@/core/mention";
 import type { TrackedEntity } from "@/core/schemas";
 
@@ -47,6 +47,23 @@ describe("mentionConfidence (§24)", () => {
     expect(mentionBand(69)).toBe("review");
     expect(mentionBand(50)).toBe("review");
     expect(mentionBand(49)).toBe("ignore");
+  });
+
+  it("self-published pages are not mentions; a third-party page citing the entity's domain earns domain_match", () => {
+    const aws: TrackedEntity = { ...waretwin, canonical_name: "AWS", aliases: [], identifiers: [], keywords: ["machine learning"], canonical_url: "https://aws.amazon.com/tw/" };
+    // AWS's own marketing page — used to score 75 (name + topic + domain) and flood the list
+    const own = doc("What is Machine Learning?", "AWS puts machine learning in the hands of every developer.", "https://aws.amazon.com/what-is/machine-learning/");
+    expect(isSelfPublished(own, aws)).toBe(true);
+    expect(mentionConfidence(own, aws).matched).not.toContain("domain_match");
+    // a third-party blog that links to aws.amazon.com
+    const third = doc("Our ML stack", "We moved training to AWS (https://aws.amazon.com/sagemaker) for machine learning.", "https://blog.example.com/ml-stack");
+    expect(isSelfPublished(third, aws)).toBe(false);
+    const m = mentionConfidence(third, aws);
+    expect(m.matched).toEqual(expect.arrayContaining(["canonical_name", "context_topic", "domain_match"]));
+    expect(m.score).toBe(75);
+    // a GitHub-hosted entity: only its own repo pages are self-published, not all of github.com
+    expect(isSelfPublished(doc("x", "y", "https://github.com/WayneChou-bot/WareTwin/wiki/Home"), waretwin)).toBe(true);
+    expect(isSelfPublished(doc("x", "y", "https://github.com/someone-else/awesome-list"), waretwin)).toBe(false);
   });
 
   it("caps at 100 when everything matches", () => {

@@ -12,7 +12,7 @@ export const ICPSuggestInput = z.object({ project: Project, understanding: Produ
 const OutSchema = ICPProfile.omit({ id: true, project_id: true, source: true, created_at: true });
 
 export const icpSuggestAgent = defineAgent({
-  name: "product_understanding",
+  name: "icp_suggest", // was mis-registered as product_understanding — the run table showed two "Product Understanding" rows (field test)
   input: ICPSuggestInput,
   output: ICPProfile,
   async run({ project, understanding }, ctx) {

@@ -99,8 +99,15 @@ export async function scanMentionsAction(projectId: string) {
   const { scanMentions } = await import("@/lib/mentions");
   try {
     const res = await scanMentions(r, projectId);
+    const { t } = await getT();
     revalidatePath("/discover");
-    redirect(`/discover?project=${projectId}&view=mentions&msg=${encodeURIComponent(`${res.created} new signal(s) from ${res.documents} documents · ${res.skippedExisting} already known · ${res.belowThreshold} below confidence threshold`)}`);
+    const msg = [
+      `${res.created} ${t("new signals from")} ${res.documents} ${t("documents")}`,
+      `${res.skippedExisting} ${t("already known")}`,
+      `${res.belowThreshold} ${t("below confidence threshold")}`,
+      `${res.selfPublished} ${t("self-published pages skipped")}`,
+    ].join(" · ");
+    redirect(`/discover?project=${projectId}&view=mentions&msg=${encodeURIComponent(msg)}`);
   } catch (e) {
     if ((e as Error & { digest?: string }).digest?.startsWith("NEXT_REDIRECT")) throw e;
     redirect(`/discover?project=${projectId}&view=mentions&error=${encodeURIComponent((e as Error).message)}`);
