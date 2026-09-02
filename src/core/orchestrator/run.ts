@@ -6,6 +6,7 @@ import { randomUUID } from "node:crypto";
 import type { z } from "zod";
 import type { Agent, AgentContext } from "./agent";
 import type { AgentRun } from "@/core/schemas";
+import type { LLMProvider } from "@/adapters/llm/types";
 import type { Repository } from "@/lib/repository";
 
 export const newId = (prefix: string) => `${prefix}_${randomUUID().slice(0, 8)}`;
@@ -37,13 +38,28 @@ export async function runAgent<I extends z.ZodTypeAny, O extends z.ZodTypeAny>(
   run.started_at = startedAt.toISOString();
   await repo.updateAgentRun({ ...run });
 
+  // Cost visibility (field test: every LIVE run showed "—" for tokens). Every
+  // LLM call the agent makes is metered here and summed onto the run row.
+  const usage = { input: 0, output: 0 };
+  let calls = 0;
+  const metered: LLMProvider = {
+    name: ctx.llm.name,
+    async generateStructured(req) {
+      const r = await ctx.llm.generateStructured(req);
+      usage.input += r.usage.input; usage.output += r.usage.output; calls++;
+      return r;
+    },
+  };
+  const tokenUsage = () => (calls && usage.input + usage.output > 0 ? { ...usage } : null);
+
   try {
-    const output = await agent.run(input, ctx);
+    const output = await agent.run(input, { ...ctx, llm: metered });
     const done = ctx.now();
     run.status = "COMPLETED";
     run.completed_at = done.toISOString();
     run.latency_ms = Math.max(0, done.getTime() - startedAt.getTime());
     run.output_summary = meta.summarize ? meta.summarize(output) : "";
+    run.token_usage = tokenUsage();
     await repo.updateAgentRun({ ...run });
     return { output, run };
   } catch (e) {
@@ -52,6 +68,7 @@ export async function runAgent<I extends z.ZodTypeAny, O extends z.ZodTypeAny>(
     run.completed_at = done.toISOString();
     run.latency_ms = Math.max(0, done.getTime() - startedAt.getTime());
     run.error = (e as Error).message.slice(0, 500);
+    run.token_usage = tokenUsage();
     await repo.updateAgentRun({ ...run });
     throw e;
   }

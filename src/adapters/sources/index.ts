@@ -6,7 +6,7 @@
 import type { DiscoveryResult, ICPProfile } from "@/core/schemas";
 import type { AppConfig } from "@/lib/config";
 import type { LLMProvider } from "@/adapters/llm/types";
-import type { RawSearchResult } from "./search-screen";
+import type { ProductContext, RawSearchResult } from "./search-screen";
 
 export interface DiscoveryQuery {
   icp: ICPProfile;
@@ -15,6 +15,8 @@ export interface DiscoveryQuery {
   exclude?: Set<string>;
   /** The project's own domains — a product must never discover itself. */
   selfDomains?: string[];
+  /** What is being sold — screening excludes the vendor and its competitors. */
+  product?: ProductContext;
 }
 
 export const hostOf = (u: string): string | null => {
@@ -90,16 +92,25 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
   readonly source = "search" as const;
   constructor(private readonly apiKey: string, private readonly llm?: LLMProvider) {}
 
-  buildQueries(icp: ICPProfile): string[] {
-    const ind = icp.industries[0] ?? "";
+  /** Search-hit counts of the last discover() call — surfaced in the run summary. */
+  lastStats: { rawHits: number; screened: number } | null = null;
+
+  buildQueries(icp: ICPProfile, product?: ProductContext): string[] {
+    // Queries must target BUYER industries. If the ICP lists the vendor's own
+    // category first ("Cloud Computing" for a cloud platform), searching
+    // "Cloud Computing company hiring…" returns competitors — skip it.
+    const own = product?.category?.toLowerCase() ?? "";
+    const isOwnCategory = (i: string) => !!own && (own.includes(i.toLowerCase()) || i.toLowerCase().includes(own));
+    const ind = icp.industries.find((i) => !isOwnCategory(i)) ?? "";
     const qs = icp.positive_signals.slice(0, 4).map((s) => `${ind} company ${s}`.trim());
     if (icp.technologies.length) qs.push(`${ind} companies using ${icp.technologies.slice(0, 2).join(" ")}`);
     return qs;
   }
 
-  private async rawResults(icp: ICPProfile, selfDomains: string[]): Promise<RawSearchResult[]> {
+  private async rawResults(icp: ICPProfile, selfDomains: string[], product?: ProductContext): Promise<RawSearchResult[]> {
     const raw: RawSearchResult[] = [];
-    for (const query of this.buildQueries(icp)) {
+    const seenUrl = new Set<string>(); // the same page often answers several queries — send it to the screen once
+    for (const query of this.buildQueries(icp, product)) {
       const res = await fetch("https://api.tavily.com/search", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.apiKey}` },
@@ -110,6 +121,8 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
       for (const r of json.results ?? []) {
         const host = hostOf(r.url);
         if (!host || hostMatches(host, AGGREGATOR_DOMAINS) || hostMatches(host, selfDomains)) continue;
+        if (seenUrl.has(r.url)) continue;
+        seenUrl.add(r.url);
         raw.push({ title: r.title, url: r.url, content: r.content, query });
       }
     }
@@ -118,13 +131,15 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
 
   async discover(q: DiscoveryQuery, ctx: { now: () => Date }): Promise<DiscoveryResult[]> {
     const selfDomains = q.selfDomains ?? [];
-    const raw = await this.rawResults(q.icp, selfDomains);
+    const raw = await this.rawResults(q.icp, selfDomains, q.product);
     const seen = new Set<string>(q.exclude ?? []);
     const out: DiscoveryResult[] = [];
+    this.lastStats = { rawHits: raw.length, screened: 0 };
 
     if (this.llm) {
       const { screenSearchResults } = await import("./search-screen");
-      const screened = await screenSearchResults(this.llm, q.icp, raw, q.limit);
+      const screened = await screenSearchResults(this.llm, q.icp, raw, q.limit, q.product);
+      this.lastStats.screened = screened.length;
       for (const c of screened) {
         if (hostMatches(c.website ? hostOf(c.website) : null, selfDomains)) continue;
         const key = keyOf({ website: c.website, company_name: c.company_name });
@@ -145,6 +160,7 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
     }
 
     // Fallback without an LLM: the old title heuristic, honestly labelled.
+    this.lastStats.screened = raw.length;
     for (const r of raw) {
       const host = hostOf(r.url)!;
       const website = `https://${host}`;

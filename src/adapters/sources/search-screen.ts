@@ -29,11 +29,15 @@ export type ScreenedCompany = z.infer<typeof ScreenedCompany>;
 
 const ScreenOutput = z.object({ companies: z.array(ScreenedCompany).max(40) });
 
+/** What is being sold — so the screen can tell buyers from peers. */
+export interface ProductContext { name: string; category?: string }
+
 export async function screenSearchResults(
   llm: LLMProvider,
   icp: ICPProfile,
   results: RawSearchResult[],
   limit: number,
+  product?: ProductContext,
 ): Promise<ScreenedCompany[]> {
   if (!results.length) return [];
   const { data } = await llm.generateStructured({
@@ -44,8 +48,10 @@ export async function screenSearchResults(
       "A page title is NEVER an organization: skip articles, guides, job listings, directories, and news pieces themselves (though companies mentioned INSIDE them count). " +
       "Skip job boards, media outlets, encyclopedias, universities, and government bodies as candidates. " +
       "Use official organization names. Give a website only when the material makes it clear. " +
+      "The goal is BUYERS, not peers: exclude the vendor itself and its competitors — any organization whose primary business is the same category as the product being sold (field test: a cloud platform's search surfaced another cloud platform). " +
       "If nothing qualifies, return an empty list — an empty list is a correct answer.",
     prompt: JSON.stringify({
+      product_being_sold: product ? { name: product.name, category: product.category ?? null } : null,
       icp: {
         industries: icp.industries,
         technologies: icp.technologies,

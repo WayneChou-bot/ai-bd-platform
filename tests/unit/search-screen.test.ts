@@ -69,6 +69,25 @@ describe("Tavily discovery screening", () => {
     expect(out).toEqual([]);
   });
 
+  it("tells the screen what is being sold, so competitors and the vendor are excluded, and reports hit counts", async () => {
+    stubFetch();
+    let promptSeen = "";
+    const llm = new MockLLMProvider().register("discovery.screen_search", ({ prompt }) => { promptSeen = prompt; return { companies: [] }; });
+    const adapter = new TavilySearchAdapter("key", llm);
+    await adapter.discover({ icp, limit: 10, selfDomains: ["amazon.com"], product: { name: "AWS", category: "Cloud Computing" } }, ctx);
+    expect(promptSeen).toContain('"product_being_sold"');
+    expect(promptSeen).toContain("AWS");
+    expect(adapter.lastStats).toEqual({ rawHits: 1, screened: 0 }); // ziprecruiter + own domain filtered before the screen
+  });
+
+  it("builds queries from BUYER industries — never the vendor's own category", () => {
+    const adapter = new TavilySearchAdapter("key");
+    const cloudIcp = { ...icp, industries: ["Cloud Computing", "Financial Services"], positive_signals: ["Hiring cloud specialists"], technologies: [] };
+    expect(adapter.buildQueries(cloudIcp, { name: "AWS", category: "Cloud Computing" })[0]).toBe("Financial Services company Hiring cloud specialists");
+    // without product context the first industry is used as before
+    expect(adapter.buildQueries(cloudIcp)[0]).toBe("Cloud Computing company Hiring cloud specialists");
+  });
+
   it("falls back to the title heuristic without an LLM, honestly labelled as unscreened", async () => {
     stubFetch();
     const adapter = new TavilySearchAdapter("key");

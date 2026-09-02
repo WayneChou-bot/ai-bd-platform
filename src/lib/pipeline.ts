@@ -8,7 +8,7 @@
 import { createDiscoveryAgent } from "@/agents/discovery";
 import { researchAgent } from "@/agents/research";
 import { qualificationAgent } from "@/agents/qualification";
-import { createSourceAdapters, hostOf, keyOf } from "@/adapters/sources";
+import { createSourceAdapters, hostOf, keyOf, TavilySearchAdapter } from "@/adapters/sources";
 import { fetchPublicPage, type FetchedPage } from "@/adapters/sources/fetch";
 import type { AgentContext } from "@/core/orchestrator/agent";
 import { runAgent, newId } from "@/core/orchestrator/run";
@@ -40,18 +40,27 @@ export async function discoverLeads(repo: Repository, projectId: string, opts: {
     .filter((u): u is string => !!u)
     .map((u) => hostOf(u))
     .filter((h): h is string => !!h && h !== "github.com" && h !== "gitlab.com");
+  const product = { name: project.name, category: project.category ?? undefined };
   const sources = await createSourceAdapters(cfg, ctx.llm);
   const agent = createDiscoveryAgent(sources.map((s) => ({
     source: s.source,
-    discover: (q: { icp: ICPProfile; limit: number }, c: { now: () => Date }) => s.discover({ ...q, exclude, selfDomains }, c),
+    discover: (q: { icp: ICPProfile; limit: number }, c: { now: () => Date }) => s.discover({ ...q, exclude, selfDomains, product }, c),
   })));
   const limit = opts.limit ?? cfg.pipelineBatch;
 
-  const { output } = await runAgent(repo, agent, { icp, limit }, ctx, {
+  const { output, run } = await runAgent(repo, agent, { icp, limit }, ctx, {
     project_id: projectId,
     input_summary: `ICP ${icp.id} via ${sources.map((s) => s.source).join("+")}`,
     summarize: (o) => `${o.length} new candidates`,
   });
+  // Observability (field test: "1 candidate" with no way to tell whether the
+  // search returned nothing or the screen dropped everything).
+  const search = sources.find((s): s is TavilySearchAdapter => s instanceof TavilySearchAdapter);
+  if (search?.lastStats) {
+    const note = `search: ${search.lastStats.rawHits} hits → ${search.lastStats.screened} organizations`;
+    await repo.updateAgentRun({ ...run, output_summary: `${run.output_summary} (${note})` });
+    await audit(repo, projectId, null, "agent", "discovery.search_stats", note);
+  }
 
   const created: Lead[] = [];
   for (const d of output) {
