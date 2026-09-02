@@ -41,6 +41,7 @@ export default async function Leads({ searchParams }: { searchParams: Promise<{ 
     updated: (a, b) => b.updated_at.localeCompare(a.updated_at),
   };
   const rows = leads.filter((l) => (filters[view] ?? filters.all)(l.status)).filter(matches).sort(sorters[sort] ?? sorters.score);
+  const unresearched = leads.filter((l) => l.status === "DISCOVERED" || l.status === "RESEARCHING").length;
   const link = (over: Record<string, string | undefined>) => {
     const p = new URLSearchParams(); const all = { view, project, q, sort, ...over };
     for (const [k, v] of Object.entries(all)) if (v) p.set(k, v);
@@ -93,7 +94,16 @@ export default async function Leads({ searchParams }: { searchParams: Promise<{ 
                 </TR>
               );
             })}
-            {rows.length === 0 && <TR><TD colSpan={6} className="py-8 text-center text-muted">{t("No leads match.")}</TD></TR>}
+            {rows.length === 0 && (
+              <TR><TD colSpan={6} className="py-8 text-center text-muted">
+                {view === "qualified" && unresearched > 0 ? (
+                  <>
+                    {unresearched} {t("candidates are discovered but not researched yet — nothing can be qualified until they are.")}{" "}
+                    <Link href={`/discover${project ? `?project=${project}` : ""}`} className="text-accent underline decoration-dotted hover:decoration-solid">{t("Research them on Discover, or run the full pipeline")} →</Link>
+                  </>
+                ) : t("No leads match.")}
+              </TD></TR>
+            )}
           </TBody>
         </Table>
       </Card>

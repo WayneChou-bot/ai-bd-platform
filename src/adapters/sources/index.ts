@@ -101,9 +101,12 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
     // "Cloud Computing company hiring…" returns competitors — skip it.
     const own = product?.category?.toLowerCase() ?? "";
     const isOwnCategory = (i: string) => !!own && (own.includes(i.toLowerCase()) || i.toLowerCase().includes(own));
-    const ind = icp.industries.find((i) => !isOwnCategory(i)) ?? "";
-    const qs = icp.positive_signals.slice(0, 4).map((s) => `${ind} company ${s}`.trim());
-    if (icp.technologies.length) qs.push(`${ind} companies using ${icp.technologies.slice(0, 2).join(" ")}`);
+    // Rotate through the buyer industries so one round covers several of them
+    // (field test: only industries[0] was used — 8 of 8 candidates were finance).
+    const inds = icp.industries.filter((i) => !isOwnCategory(i));
+    const indAt = (n: number) => (inds.length ? inds[n % inds.length] : "");
+    const qs = icp.positive_signals.slice(0, 4).map((s, n) => `${indAt(n)} company ${s}`.trim());
+    if (icp.technologies.length) qs.push(`${indAt(qs.length)} companies using ${icp.technologies.slice(0, 2).join(" ")}`);
     return qs;
   }
 

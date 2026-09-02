@@ -154,7 +154,28 @@ export default async function ProjectDetail({ params, searchParams }: { params: 
               <form action={suggest}><SubmitButton disabled={!understanding} title={understanding ? "" : t("Run Product Understanding first")}><Wand2 size={14} /> {t("AI suggest")}</SubmitButton></form>
             </CardHeader>
             <CardContent>
-              <form action={saveICP} className="space-y-4">
+              {/* Guided empty state (field test: step 2 lit up, the tab opened on a blank form,
+                  and the real next action — suggest from the understanding — was easy to miss). */}
+              {!icp && (
+                <div className="mb-4 rounded-xl border border-accent/30 bg-accent/10 p-5">
+                  <div className="text-sm font-semibold">{t("Step 2 — define who to look for")}</div>
+                  {understanding ? (
+                    <>
+                      <p className="mt-1 text-xs text-muted">{t("The product is understood. Let the ICP Suggestion Agent derive buyer industries, roles and observable buying signals from it — every field can be edited before you save.")}</p>
+                      <form action={suggest} className="mt-3"><SubmitButton variant="primary"><Wand2 size={14} /> {t("Suggest ICP from product understanding")}</SubmitButton></form>
+                      <p className="mt-2 text-xs text-muted">{t("Or expand the form below, fill it in by hand and save it as a manual ICP.")}</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="mt-1 text-xs text-muted">{t("Run Product Understanding first (step 1) — the suggestion is derived from it. You can still fill in the form by hand.")}</p>
+                      <Link href={`/projects/${id}?tab=understanding`} className="mt-3 inline-block"><Button>{t("Go to Product Understanding")}</Button></Link>
+                    </>
+                  )}
+                </div>
+              )}
+              <details open={!!icp} className="group">
+                <summary className={`cursor-pointer text-xs text-muted hover:text-fg ${icp ? "hidden" : ""}`}>{t("Fill in manually")}</summary>
+              <form action={saveICP} className="space-y-4 pt-2">
                 <div className="grid gap-4 sm:grid-cols-3">
                   <Field label={t("Target entity")}>
                     <Select name="target_entity" defaultValue={icp?.target_entity ?? "company"}>
@@ -178,6 +199,7 @@ export default async function ProjectDetail({ params, searchParams }: { params: 
                   <Button type="submit" variant="primary">{t("Save as manual ICP")}</Button>
                 </div>
               </form>
+              </details>
             </CardContent>
           </Card>
           <Card className="lg:col-span-2">

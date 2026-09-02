@@ -88,6 +88,16 @@ describe("Tavily discovery screening", () => {
     expect(adapter.buildQueries(cloudIcp)[0]).toBe("Cloud Computing company Hiring cloud specialists");
   });
 
+  it("rotates through buyer industries across the queries of one round", () => {
+    const adapter = new TavilySearchAdapter("key");
+    const multi = { ...icp, industries: ["Financial Services", "Healthcare", "Retail"], positive_signals: ["s1", "s2", "s3", "s4"], technologies: ["cloud"] };
+    const qs = adapter.buildQueries(multi);
+    expect(qs).toEqual([
+      "Financial Services company s1", "Healthcare company s2", "Retail company s3", "Financial Services company s4",
+      "Healthcare companies using cloud",
+    ]);
+  });
+
   it("falls back to the title heuristic without an LLM, honestly labelled as unscreened", async () => {
     stubFetch();
     const adapter = new TavilySearchAdapter("key");
