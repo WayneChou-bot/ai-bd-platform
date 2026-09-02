@@ -79,7 +79,7 @@ user-facing agents:
 
 | Agent | Responsibility | Notable guarantees |
 |---|---|---|
-| 🔭 **Discovery** | Find prospect candidates (Tavily search + GitHub + CSV + manual) and public mentions of tracked entities | Controlled sources only; dedupe against existing leads; every query recorded |
+| 🔭 **Discovery** | Find prospect candidates (Tavily search + GitHub + CSV + manual) and public mentions of tracked entities | Controlled sources only; search hits are LLM-screened into real organizations — a page title is never a company; dedupe against existing leads; every query recorded |
 | 🔬 **Research** | Fetch a lead's real public pages and produce structured evidence | URL-validated, size/time-capped fetches; content fenced as untrusted before any prompt |
 | ⚖️ **Qualification** | Score 5 weighted dimensions from evidence | Deterministic formula; withheld when evidence is insufficient; LLM writes rationale only |
 | ✉️ **Outreach** | Draft grounded outreach | Drafts may cite only existing positive evidence; AI-disclosure footer on every send |
@@ -139,8 +139,8 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 
 ## 🧪 Testing
 
-**91 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
-mention engine, strict-schema conversion, demo-recording integrity, mail adapters), agent behaviour (reply
+**94 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
+mention engine, strict-schema conversion, search-result screening, demo-recording integrity, mail adapters), agent behaviour (reply
 classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, demo
 playback with an *asserted* human-approval pause), and evaluation — fixtures are regenerated
 from raw rows and compared exactly. Failure visibility is itself under test: a FAILED run

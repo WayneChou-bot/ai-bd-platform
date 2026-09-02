@@ -8,7 +8,7 @@
 import { createDiscoveryAgent } from "@/agents/discovery";
 import { researchAgent } from "@/agents/research";
 import { qualificationAgent } from "@/agents/qualification";
-import { createSourceAdapters, keyOf } from "@/adapters/sources";
+import { createSourceAdapters, hostOf, keyOf } from "@/adapters/sources";
 import { fetchPublicPage, type FetchedPage } from "@/adapters/sources/fetch";
 import type { AgentContext } from "@/core/orchestrator/agent";
 import { runAgent, newId } from "@/core/orchestrator/run";
@@ -32,10 +32,18 @@ export async function discoverLeads(repo: Repository, projectId: string, opts: {
   if (!icp) throw new Error("Define or generate an ICP before running discovery");
   const existing = await repo.leads(projectId);
   const exclude = new Set(existing.map((l) => keyOf(l)));
-  const sources = await createSourceAdapters(cfg);
+  // A product must never discover itself (field test: aws.amazon.com showed
+  // up as a candidate for an Amazon project). Shared code hosts are skipped —
+  // a GitHub-hosted project page must not exclude all GitHub candidates.
+  const project = await repo.project(projectId);
+  const selfDomains = [project.website]
+    .filter((u): u is string => !!u)
+    .map((u) => hostOf(u))
+    .filter((h): h is string => !!h && h !== "github.com" && h !== "gitlab.com");
+  const sources = await createSourceAdapters(cfg, ctx.llm);
   const agent = createDiscoveryAgent(sources.map((s) => ({
     source: s.source,
-    discover: (q: { icp: ICPProfile; limit: number }, c: { now: () => Date }) => s.discover({ ...q, exclude }, c),
+    discover: (q: { icp: ICPProfile; limit: number }, c: { now: () => Date }) => s.discover({ ...q, exclude, selfDomains }, c),
   })));
   const limit = opts.limit ?? cfg.pipelineBatch;
 
