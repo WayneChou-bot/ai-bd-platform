@@ -2,7 +2,7 @@
  * Qualification Agent (Spec §14). Deterministic score + LLM rationale.
  */
 import { z } from "zod";
-import { defineAgent } from "@/core/orchestrator/agent";
+import { defineAgent, proseLanguage } from "@/core/orchestrator/agent";
 import { Evidence, ICPProfile, Lead, QualificationResult } from "@/core/schemas";
 import { scoreLead } from "@/core/scoring";
 
@@ -31,7 +31,7 @@ export const qualificationAgent = defineAgent({
       task: "qualification.rationale",
       system:
         "You explain a lead qualification score to a business developer. The score is already computed and must not be changed. " +
-        "Write 1–2 sentences referencing only the evidence provided. Then list risks: missing signals, negative evidence, or low confidence.",
+        "Write 1–2 sentences referencing only the evidence provided. Then list risks: missing signals, negative evidence, or low confidence." + proseLanguage(ctx),
       prompt: JSON.stringify({
         lead: { name: lead.company_name, entity_type: lead.entity_type, industry: lead.industry },
         icp: { target_roles: icp.target_roles, positive_signals: icp.positive_signals, negative_signals: icp.negative_signals },

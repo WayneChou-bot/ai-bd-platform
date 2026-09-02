@@ -3,7 +3,8 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { repo } from "@/lib/data";
-import { getT } from "@/lib/i18n.server";
+import { getLocale, getT } from "@/lib/i18n.server";
+import { agentContext, languageOf } from "@/lib/context";
 import { discoverLeads, ignoreLead, qualifyLead, researchLead, runPipeline } from "@/lib/pipeline";
 import { Lead } from "@/core/schemas";
 import { newId } from "@/core/orchestrator/run";
@@ -26,11 +27,11 @@ export async function discoverAction(projectId: string) {
 
 export async function runPipelineAction(projectId: string) {
   const r = await repo();
-  const { t } = await getT();
+  const { t, locale } = await getT();
   try {
-    const s = await runPipeline(r, projectId);
+    const s = await runPipeline(r, projectId, agentContext({ language: languageOf(locale) }));
     revalidatePath("/discover"); revalidatePath("/leads"); revalidatePath("/");
-    back(projectId, `${t("Discovered")} ${s.discovered} · ${t("Researched")} ${s.researched} · ${t("Qualified")} ${s.qualified} · ${t("Rejected")} ${s.rejected}${s.failed ? ` · ${t("Failed")} ${s.failed}` : ""}`);
+    back(projectId, `${t("Discovered")} ${s.discovered} · ${t("Researched")} ${s.researched} · ${t("Qualified")} ${s.qualified} · ${t("Rejected")} ${s.rejected}${s.withheld ? ` · ${t("Withheld")} ${s.withheld}` : ""}${s.failed ? ` · ${t("Failed")} ${s.failed}` : ""}`);
   } catch (e) {
     if ((e as Error & { digest?: string }).digest?.startsWith("NEXT_REDIRECT")) throw e;
     back(projectId, undefined, (e as Error).message);
@@ -65,9 +66,10 @@ export async function addLeadAction(projectId: string, formData: FormData) {
 export async function researchLeadAction(leadId: string, returnTo: string) {
   const r = await repo();
   let error: string | undefined;
+  const ctx = agentContext({ language: languageOf(await getLocale()) });
   try {
-    await researchLead(r, leadId);
-    await qualifyLead(r, leadId);
+    await researchLead(r, leadId, ctx);
+    await qualifyLead(r, leadId, ctx);
   } catch (e) { error = (e as Error).message; }
   revalidatePath("/discover"); revalidatePath("/leads"); revalidatePath(`/leads/${leadId}`);
   redirect(error ? `${returnTo}${returnTo.includes("?") ? "&" : "?"}error=${encodeURIComponent(error)}` : returnTo);
@@ -76,7 +78,7 @@ export async function researchLeadAction(leadId: string, returnTo: string) {
 export async function qualifyLeadAction(leadId: string, returnTo: string) {
   const r = await repo();
   let error: string | undefined;
-  try { await qualifyLead(r, leadId); } catch (e) { error = (e as Error).message; }
+  try { await qualifyLead(r, leadId, agentContext({ language: languageOf(await getLocale()) })); } catch (e) { error = (e as Error).message; }
   revalidatePath("/leads"); revalidatePath(`/leads/${leadId}`);
   redirect(error ? `${returnTo}${returnTo.includes("?") ? "&" : "?"}error=${encodeURIComponent(error)}` : returnTo);
 }

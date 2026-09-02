@@ -27,6 +27,7 @@ const zh: Record<string, string> = {
   "DISCOVER": "探索", "RESEARCH": "研究", "QUALIFY": "評估", "ENGAGE": "接觸", "REPLY": "回覆", "LEARN": "學習",
   "Input": "輸入", "Completed": "完成", "Failed": "失敗", "Remaining": "剩餘", "Current": "目前", "Last": "最近", "Elapsed": "耗時",
   "Learn ↺ Discover — outcomes feed the next targeting round": "學習 ↺ 探索 — 結果回饋到下一輪目標選擇",
+  "Repository must be a GitHub repository URL (https://github.com/owner/repo) — or leave it empty": "GitHub 儲存庫必須是 GitHub 網址（https://github.com/owner/repo），或留空",
   "Activity stream": "活動紀錄", "Demo playback": "示範播放",
   "Recorded demo playing": "錄製示範播放中",
   "Recorded replay — isolated from dashboard data": "錄製重播 — 獨立於儀表板資料",
@@ -40,7 +41,7 @@ const zh: Record<string, string> = {
   // leads
   "Lead": "潛客", "Score": "分數", "Intent": "意圖", "Status": "狀態", "Source": "來源", "Last Research": "最近研究", "of": "／",
   "all": "全部", "qualified": "合格", "reviewing": "審核中", "approved": "已核准", "rejected": "已排除", "All projects": "全部專案",
-  "High": "高", "Medium": "中", "Low": "低", "withheld": "暫不評分", "individual": "個人",
+  "High": "高", "Medium": "中", "Low": "低", "withheld": "暫不評分", "Withheld": "暫不評分", "individual": "個人",
   "overview": "總覽", "research": "研究", "evidence": "證據", "messages": "訊息", "activity": "活動",
   "Fit Score": "契合分數", "Why this lead?": "為什麼是這個潛客？", "RISKS": "風險", "View Evidence": "查看證據", "Generate Outreach": "產生觸及信", "Open Messages": "開啟訊息", "Reject": "排除",
   "Research": "研究", "Re-research": "重新研究", "Re-qualify": "重新評估", "Ignore": "忽略",

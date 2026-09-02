@@ -14,7 +14,14 @@ export interface AgentContext {
   now: () => Date;
   /** Deterministic id generator (fixtures) or crypto ids (live). */
   newId: (prefix: string) => string;
+  /** Language for user-facing free text (rationale, risks, evidence claims);
+   *  structured fields and search queries stay English. Default: English. */
+  language?: string;
 }
+
+/** Prompt fragment for agents that write prose a human will read. */
+export const proseLanguage = (ctx: AgentContext) =>
+  ctx.language && ctx.language !== "English" ? ` Write all free-text fields in ${ctx.language}; keep identifiers, URLs and enum values unchanged.` : "";
 
 export interface Agent<I extends z.ZodTypeAny, O extends z.ZodTypeAny> {
   name: AgentName;

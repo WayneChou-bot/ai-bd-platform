@@ -104,7 +104,7 @@ and insight from raw evidence and asserts exact equality.
 Track entities (product, repo, person, technology) per project. Mention Discovery searches
 the public web for their names, aliases and identifiers, then applies a **deterministic
 confidence table** (exact URL +40, repo +40, canonical name +25, alias +15, context topic
-+20, domain +25) so a product named "Atlas" doesn't drown in atlases. Context, sentiment and
++25, domain +25) so a product named "Atlas" doesn't drown in atlases. Context, sentiment and
 intent are classified separately — *"looks great"* is positive sentiment with **no** intent;
 *"we are evaluating it"* is neutral sentiment with **high** intent. A mention is never a lead
 by itself: a human converts it, and Research folds the signal in as intent evidence — in its
@@ -139,7 +139,7 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 
 ## 🧪 Testing
 
-**94 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
+**95 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
 mention engine, strict-schema conversion, search-result screening, demo-recording integrity, mail adapters), agent behaviour (reply
 classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, demo
 playback with an *asserted* human-approval pause), and evaluation — fixtures are regenerated

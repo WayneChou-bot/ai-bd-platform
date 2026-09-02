@@ -58,7 +58,9 @@ describe("pipeline (demo)", () => {
     expect(after.length).toBe(before + s.discovered);
     expect(new Set(after.map((l) => l.company_name)).size).toBe(after.length); // no duplicates
     expect(s.failed).toBe(0);
-    expect(after.filter((l) => l.status === "DISCOVERED" || l.status === "RESEARCHED").length).toBe(0);
+    expect(after.filter((l) => l.status === "DISCOVERED").length).toBe(0);
+    // Only withheld leads may remain at RESEARCHED — and each is counted as withheld, not rejected.
+    expect(after.filter((l) => l.status === "RESEARCHED").length).toBe(s.withheld);
     const runs = await repo.agentRuns();
     expect(runs.filter((r) => r.project_id === project.id && r.agent === "research").every((r) => r.status === "COMPLETED")).toBe(true);
   });
@@ -68,6 +70,19 @@ describe("pipeline (demo)", () => {
     await researchLead(repo, lead.id, ctx);
     const q = await qualifyLead(repo, lead.id, ctx);
     expect(q.withheld).toBe(true);
-    expect((await repo.lead(lead.id))!.status).toBe("REJECTED");
+    // Withheld ≠ rejected (field test): insufficient evidence is a verdict about
+    // the data, so the lead stays RESEARCHED for a human to re-research or ignore.
+    expect((await repo.lead(lead.id))!.status).toBe("RESEARCHED");
+    const audit = (await repo.auditEvents(lead.id)).map((a) => a.action);
+    expect(audit).toContain("lead.score_withheld");
+    expect(audit).not.toContain("lead.rejected");
+  });
+
+  it("re-qualifying a previously rejected lead with too little evidence moves it back to RESEARCHED, never leaves it REJECTED", async () => {
+    const lead = (await repo.lead("lead_unknown"))!;
+    await repo.updateLead({ ...lead, status: "REJECTED" });
+    const q = await qualifyLead(repo, lead.id, ctx);
+    expect(q.withheld).toBe(true);
+    expect((await repo.lead(lead.id))!.status).toBe("RESEARCHED");
   });
 });

@@ -79,7 +79,11 @@ export default async function Leads({ searchParams }: { searchParams: Promise<{ 
                 <TR key={l.id}>
                   <TD>
                     <Link href={`/leads/${l.id}`} className="font-medium hover:text-accent">{l.entity_type === "individual" ? l.display_name : l.company_name}</Link>
-                    <div className="text-xs text-muted">{l.entity_type === "individual" ? l.headline : l.industry ?? l.website} · {l.location ?? pname.get(l.project_id)}</div>
+                    {/* industry · location — the project name is a separate chip (shown in the all-projects view), never a stand-in for a missing location */}
+                    <div className="text-xs text-muted">
+                      {[l.entity_type === "individual" ? l.headline : l.industry ?? l.website, l.location].filter(Boolean).join(" · ") || "—"}
+                      {!project && projects.length > 1 && <span className="ml-1.5 rounded bg-white/5 px-1 text-[10px]">{pname.get(l.project_id)}</span>}
+                    </div>
                   </TD>
                   <TD className="tabular font-semibold">{s?.withheld ? <span className="text-learn text-xs">{t("withheld")}</span> : s?.total_score ?? "—"}</TD>
                   <TD>{s && !s.withheld ? t(intentLabel(s.breakdown.intent_signal)) : "—"}</TD>

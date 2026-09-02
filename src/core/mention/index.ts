@@ -15,7 +15,7 @@ export const MENTION_POINTS = {
   exact_identifier: 40, // e.g. the repo "WayneChou-bot/WareTwin"
   canonical_name: 25,
   alias: 15,
-  context_topic: 20, // any tracked keyword appears near the name
+  context_topic: 25, // any tracked keyword appears near the name — name + topic (50) reaches Review, never higher (v0.3 amendment, field test)
   domain_match: 25, // document served from the entity's own canonical domain
 } as const;
 

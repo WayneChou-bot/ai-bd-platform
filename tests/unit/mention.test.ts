@@ -33,11 +33,11 @@ describe("mentionConfidence (§24)", () => {
     expect(m.band).toBe("ignore");
   });
 
-  it("a common name + topic alone (45) still stays below the review line — a stronger anchor (URL/repo/domain) is required", () => {
+  it("name + topic (50) lands exactly on the review line — a human looks, nothing is auto-promoted; a stronger anchor (URL/repo/domain) is still required for Likely", () => {
     const atlas: TrackedEntity = { ...waretwin, canonical_name: "Atlas", aliases: [], identifiers: [], keywords: ["warehouse simulation"], canonical_url: undefined };
     const m = mentionConfidence(doc("Atlas for warehouse simulation", "Atlas is a warehouse simulation product."), atlas);
-    expect(m.score).toBe(45);
-    expect(m.band).toBe("ignore");
+    expect(m.score).toBe(50);
+    expect(m.band).toBe("review");
   });
 
   it("bands follow the documented thresholds", () => {

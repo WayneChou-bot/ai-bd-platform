@@ -17,7 +17,9 @@ const ProjectForm = z.object({
   category: z.string().trim().optional().transform((v) => v || undefined),
   description: z.string().trim().default(""),
   website: optionalUrl,
-  repository: optionalUrl,
+  // The repository field feeds tracked-entity identifiers (owner/repo) and the
+  // GitHub adapter — a non-GitHub URL here silently degrades both (field test).
+  repository: optionalUrl.refine((v) => !v || /^https?:\/\/(www\.)?github\.com\/[^/\s]+\/[^/\s#?]+/.test(v), { message: "Repository must be a GitHub repository URL (https://github.com/owner/repo) — or leave it empty" }),
 });
 
 async function audit(projectId: string, action: string, detail = "", actor: "user" | "agent" | "system" = "user") {

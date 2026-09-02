@@ -147,12 +147,21 @@ export async function qualifyLead(repo: Repository, leadId: string, ctx: AgentCo
     summarize: (o) => (o.withheld ? "score withheld" : `${o.total_score} ${o.classification}`),
   });
   await repo.saveQualification(output);
+  if (output.withheld) {
+    // Withheld ≠ rejected (field test caught "score withheld" leads shown as
+    // REJECTED). Insufficient evidence is a verdict about the DATA, not the
+    // lead: it stays at RESEARCHED so a human can re-research or ignore it.
+    const status = lead.status === "QUALIFIED" || lead.status === "REJECTED" ? "RESEARCHED" : lead.status;
+    await repo.updateLead({ ...lead, status, updated_at: ctx.now().toISOString() });
+    await audit(repo, lead.project_id, lead.id, "agent", "lead.score_withheld", "Insufficient evidence — score withheld; needs more evidence before a verdict");
+    return output;
+  }
   const rejected = output.classification === "REJECT" || output.classification === "LOW_FIT";
   const from = lead.status === "RESEARCHED" ? "RESEARCHED" : lead.status;
   const next = rejected ? "REJECTED" : "QUALIFIED";
   const status = from === "QUALIFIED" || from === "REJECTED" ? next : transition(from, next);
   await repo.updateLead({ ...lead, status, updated_at: ctx.now().toISOString() });
-  await audit(repo, lead.project_id, lead.id, "agent", rejected ? "lead.rejected" : "lead.qualified", output.withheld ? "Insufficient evidence — score withheld" : `${output.total_score} ${output.classification}`);
+  await audit(repo, lead.project_id, lead.id, "agent", rejected ? "lead.rejected" : "lead.qualified", `${output.total_score} ${output.classification}`);
   return output;
 }
 
@@ -166,11 +175,11 @@ export async function ignoreLead(repo: Repository, leadId: string) {
 // ---------------------------------------------------------------------------
 // Full run: discover new leads, then research + qualify everything pending.
 // ---------------------------------------------------------------------------
-export interface PipelineSummary { discovered: number; researched: number; qualified: number; rejected: number; failed: number }
+export interface PipelineSummary { discovered: number; researched: number; qualified: number; rejected: number; withheld: number; failed: number }
 
 export async function runPipeline(repo: Repository, projectId: string, ctx: AgentContext = agentContext()): Promise<PipelineSummary> {
   const cfg = getConfig();
-  const s: PipelineSummary = { discovered: 0, researched: 0, qualified: 0, rejected: 0, failed: 0 };
+  const s: PipelineSummary = { discovered: 0, researched: 0, qualified: 0, rejected: 0, withheld: 0, failed: 0 };
   s.discovered = (await discoverLeads(repo, projectId, { ctx })).length;
 
   const pending = (await repo.leads(projectId)).filter((l) => l.status === "DISCOVERED" || l.status === "RESEARCHED").slice(0, cfg.pipelineBatch);
@@ -178,7 +187,9 @@ export async function runPipeline(repo: Repository, projectId: string, ctx: Agen
     try {
       if (lead.status === "DISCOVERED") { await researchLead(repo, lead.id, ctx); s.researched++; }
       const q = await qualifyLead(repo, lead.id, ctx);
-      if (q.classification === "REJECT" || q.classification === "LOW_FIT") s.rejected++; else s.qualified++;
+      if (q.withheld) s.withheld++;
+      else if (q.classification === "REJECT" || q.classification === "LOW_FIT") s.rejected++;
+      else s.qualified++;
     } catch {
       s.failed++;
     }
