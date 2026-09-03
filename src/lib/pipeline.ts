@@ -124,7 +124,12 @@ async function gatherSources(lead: Lead): Promise<FetchedPage[]> {
 export async function researchLead(repo: Repository, leadId: string, ctx: AgentContext = agentContext()): Promise<Evidence[]> {
   const lead = await repo.lead(leadId);
   if (!lead) throw new Error("lead not found");
-  const researching = { ...lead, status: transition(lead.status === "RESEARCHED" ? "RESEARCHING" : lead.status, "RESEARCHING"), updated_at: ctx.now().toISOString() };
+  // A second click while research is running (10–20s) used to surface
+  // "Invalid lead transition RESEARCHING → RESEARCHING" (field test). Already
+  // RESEARCHING is a valid entry: the run proceeds and also un-sticks a lead
+  // left mid-research by a crashed process.
+  const startFrom = lead.status === "RESEARCHING" ? "RESEARCHING" as const : transition(lead.status === "RESEARCHED" ? "RESEARCHING" : lead.status, "RESEARCHING");
+  const researching = { ...lead, status: startFrom, updated_at: ctx.now().toISOString() };
   await repo.updateLead(researching);
 
   try {

@@ -112,7 +112,7 @@ export default async function LeadDetail({ params, searchParams }: { params: Pro
                 <>
                   <div className="mt-4 mb-1 text-xs font-semibold uppercase tracking-wide text-muted">{t("RISKS")}</div>
                   <ul className="space-y-1.5 text-sm">
-                    {q.risks.map((rk) => <li key={rk} className="flex items-start gap-2"><AlertTriangle size={16} className="mt-0.5 shrink-0 text-learn" />{rk}</li>)}
+                    {q.risks.map((rk) => <li key={rk} className="flex items-start gap-2"><AlertTriangle size={16} className="mt-0.5 shrink-0 text-learn" />{t(rk)}</li>)}
                   </ul>
                 </>
               )}

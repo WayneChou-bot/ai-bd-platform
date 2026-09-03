@@ -78,6 +78,13 @@ describe("pipeline (demo)", () => {
     expect(audit).not.toContain("lead.rejected");
   });
 
+  it("a lead stuck at RESEARCHING can be researched again — no RESEARCHING → RESEARCHING error", async () => {
+    const lead = (await repo.lead("lead_unknown"))!;
+    await repo.updateLead({ ...lead, status: "RESEARCHING" }); // double-click / crashed run
+    await researchLead(repo, lead.id, ctx);
+    expect((await repo.lead(lead.id))!.status).toBe("RESEARCHED");
+  });
+
   it("re-qualifying a previously rejected lead with too little evidence moves it back to RESEARCHED, never leaves it REJECTED", async () => {
     const lead = (await repo.lead("lead_unknown"))!;
     await repo.updateLead({ ...lead, status: "REJECTED" });

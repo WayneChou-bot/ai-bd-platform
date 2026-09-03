@@ -26,16 +26,22 @@ export const qualificationAgent = defineAgent({
     const positives = evidence.filter((e) => e.polarity === "positive");
     const negatives = evidence.filter((e) => e.polarity === "negative");
 
-    // The LLM only explains. It receives the computed numbers and cannot change them.
+    // The LLM only explains. It receives the computed numbers and cannot change
+    // them. A withheld score is NOT a REJECT: the internal placeholder must
+    // never reach the prompt, or the rationale claims a verdict that was never
+    // made (field test: "整體評分為 REJECT" on a withheld lead).
     const explain = await ctx.llm.generateStructured({
       task: "qualification.rationale",
       system:
-        "You explain a lead qualification score to a business developer. The score is already computed and must not be changed. " +
+        "You explain a lead qualification result to a business developer. The result is already computed and must not be changed. " +
+        "If the score was WITHHELD, explain only that the evidence volume is insufficient for a verdict — do not judge fit either way. " +
         "Write 1–2 sentences referencing only the evidence provided. Then list risks: missing signals, negative evidence, or low confidence." + proseLanguage(ctx),
       prompt: JSON.stringify({
         lead: { name: lead.company_name, entity_type: lead.entity_type, industry: lead.industry },
         icp: { target_roles: icp.target_roles, positive_signals: icp.positive_signals, negative_signals: icp.negative_signals },
-        score: s,
+        score: s.withheld
+          ? { withheld: true, verdict: "WITHHELD — insufficient evidence, no classification was made", evidence_count: evidence.length, minimum_required: 2 }
+          : s,
         evidence: evidence.map((e) => ({ id: e.id, claim: e.claim, polarity: e.polarity, confidence: e.confidence })),
       }),
       schema: RationaleSchema,
