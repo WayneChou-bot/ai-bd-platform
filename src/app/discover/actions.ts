@@ -12,16 +12,21 @@ import { newId } from "@/core/orchestrator/run";
 const back = (projectId: string, msg?: string, error?: string) =>
   redirect(`/discover?project=${projectId}${msg ? `&msg=${encodeURIComponent(msg)}` : ""}${error ? `&error=${encodeURIComponent(error)}` : ""}`);
 
+/** "⚠ a source failed: …" suffix from the latest discovery run — a partial
+ *  failure is not an error for the round, but it must be seen (§23). */
+async function sourceFailureWarning(projectId: string, t: (k: string) => string): Promise<string> {
+  const r = await repo();
+  const last = (await r.agentRuns()).filter((x) => x.project_id === projectId && x.agent === "discovery").sort((a, b) => b.created_at.localeCompare(a.created_at))[0];
+  return last?.status === "COMPLETED" && last.error ? ` · ⚠ ${t("a source failed")}: ${last.error}` : "";
+}
+
 export async function discoverAction(projectId: string) {
   const r = await repo();
   const { t } = await getT();
   try {
     const found = await discoverLeads(r, projectId);
     revalidatePath("/discover"); revalidatePath("/leads");
-    // A source that failed mid-round is not an error for the round, but it must be seen.
-    const last = (await r.agentRuns()).filter((x) => x.project_id === projectId && x.agent === "discovery").sort((a, b) => b.created_at.localeCompare(a.created_at))[0];
-    const warn = last?.status === "COMPLETED" && last.error ? ` · ⚠ ${t("a source failed")}: ${last.error}` : "";
-    back(projectId, `${found.length} ${t("new candidates — existing leads excluded")}${warn}`);
+    back(projectId, `${found.length} ${t("new candidates — existing leads excluded")}${await sourceFailureWarning(projectId, t)}`);
   } catch (e) {
     if ((e as Error & { digest?: string }).digest?.startsWith("NEXT_REDIRECT")) throw e;
     back(projectId, undefined, (e as Error).message);
@@ -34,7 +39,7 @@ export async function runPipelineAction(projectId: string) {
   try {
     const s = await runPipeline(r, projectId, agentContext({ language: languageOf(locale) }));
     revalidatePath("/discover"); revalidatePath("/leads"); revalidatePath("/");
-    back(projectId, `${t("Discovered")} ${s.discovered} · ${t("Researched")} ${s.researched} · ${t("Qualified")} ${s.qualified} · ${t("Rejected")} ${s.rejected}${s.withheld ? ` · ${t("Withheld")} ${s.withheld}` : ""}${s.failed ? ` · ${t("Failed")} ${s.failed}` : ""}`);
+    back(projectId, `${t("Discovered")} ${s.discovered} · ${t("Researched")} ${s.researched} · ${t("Qualified")} ${s.qualified} · ${t("Rejected")} ${s.rejected}${s.withheld ? ` · ${t("Withheld")} ${s.withheld}` : ""}${s.failed ? ` · ${t("Failed")} ${s.failed}` : ""}${await sourceFailureWarning(projectId, t)}`);
   } catch (e) {
     if ((e as Error & { digest?: string }).digest?.startsWith("NEXT_REDIRECT")) throw e;
     back(projectId, undefined, (e as Error).message);
