@@ -4,6 +4,7 @@
  * is not a data acquisition layer. All adapters return the uniform
  * SourceDocument; downstream code never knows how a page was fetched (§12).
  */
+import { fetchJson } from "@/adapters/http/fetch-json";
 import { SourceDocument } from "@/core/schemas";
 import { detectLanguage } from "@/core/mention";
 import type { AppConfig } from "@/lib/config";
@@ -32,13 +33,11 @@ export class TavilyMentionAdapter implements MentionSourceAdapter {
   readonly name = "tavily";
   constructor(private readonly apiKey: string) {}
   async search(query: string, ctx: { now: () => Date }): Promise<SourceDocument[]> {
-    const res = await fetch("https://api.tavily.com/search", {
+    const json = await fetchJson<{ results?: Array<{ title: string; url: string; content: string }> }>("Tavily search", "https://api.tavily.com/search", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.apiKey}` },
       body: JSON.stringify({ query, max_results: 8, search_depth: "basic" }),
     });
-    if (!res.ok) throw new Error(`Tavily ${res.status}: ${await res.text()}`);
-    const json = (await res.json()) as { results?: Array<{ title: string; url: string; content: string }> };
     const out: SourceDocument[] = [];
     for (const r of json.results ?? []) {
       let host: string;

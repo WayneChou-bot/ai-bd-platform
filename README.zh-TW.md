@@ -135,7 +135,7 @@ Gmail LIVE：在 Google Cloud 建立 OAuth **電腦版**用戶端，把 ID／sec
 
 ## 🧪 測試
 
-[`tests/`](tests) 內含 **101 個測試**，分四層 — 單元（評分、schema、狀態機、提及引擎、
+[`tests/`](tests) 內含 **105 個測試**，分四層 — 單元（評分、schema、狀態機、提及引擎、
 嚴格 schema 轉換、搜尋結果篩選、示範錄製完整性、郵件 adapter）、代理行為（回覆分類、prompt injection 圍欄）、
 端到端流程（管線、觸及、含**斷言人工核准暫停**的示範播放）與評估 — fixture 從原始
 資料列重新產生並精確比對。失敗可見性本身也在測試範圍：重試成功後，FAILED 的那一列

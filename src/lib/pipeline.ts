@@ -5,7 +5,7 @@
  * each lead moves through the lead state machine. Failures are recorded and
  * the pipeline continues with the next lead — it never hides a failure.
  */
-import { createDiscoveryAgent } from "@/agents/discovery";
+import { createDiscoveryAgent, type SourceFailure } from "@/agents/discovery";
 import { researchAgent } from "@/agents/research";
 import { qualificationAgent } from "@/agents/qualification";
 import { createSourceAdapters, hostOf, keyOf, TavilySearchAdapter } from "@/adapters/sources";
@@ -42,10 +42,11 @@ export async function discoverLeads(repo: Repository, projectId: string, opts: {
     .filter((h): h is string => !!h && h !== "github.com" && h !== "gitlab.com");
   const product = { name: project.name, category: project.category ?? undefined };
   const sources = await createSourceAdapters(cfg, ctx.llm);
+  const sourceFailures: SourceFailure[] = [];
   const agent = createDiscoveryAgent(sources.map((s) => ({
     source: s.source,
     discover: (q: { icp: ICPProfile; limit: number }, c: { now: () => Date }) => s.discover({ ...q, exclude, selfDomains, product }, c),
-  })));
+  })), (f) => sourceFailures.push(f));
   const limit = opts.limit ?? cfg.pipelineBatch;
 
   const { output, run } = await runAgent(repo, agent, { icp, limit }, ctx, {
@@ -56,11 +57,19 @@ export async function discoverLeads(repo: Repository, projectId: string, opts: {
   // Observability (field test: "1 candidate" with no way to tell whether the
   // search returned nothing or the screen dropped everything).
   const search = sources.find((s): s is TavilySearchAdapter => s instanceof TavilySearchAdapter);
+  const notes: string[] = [];
   if (search?.lastStats) {
     const note = `search: ${search.lastStats.rawHits} hits → ${search.lastStats.screened} organizations`;
-    await repo.updateAgentRun({ ...run, output_summary: `${run.output_summary} (${note})` });
+    notes.push(note);
     await audit(repo, projectId, null, "agent", "discovery.search_stats", note);
   }
+  // A source that failed stays visible on the run row and in the audit trail
+  // even though the round completed with the other sources' candidates.
+  for (const f of sourceFailures) {
+    notes.push(`${f.source} FAILED: ${f.error}`);
+    await audit(repo, projectId, null, "system", "discovery.source_failed", `${f.source}: ${f.error}`);
+  }
+  if (notes.length) await repo.updateAgentRun({ ...run, output_summary: `${run.output_summary} (${notes.join(" · ")})`, error: sourceFailures.length ? sourceFailures.map((f) => `${f.source}: ${f.error}`).join(" | ") : run.error });
 
   const created: Lead[] = [];
   for (const d of output) {

@@ -7,6 +7,7 @@ import type { DiscoveryResult, ICPProfile } from "@/core/schemas";
 import type { AppConfig } from "@/lib/config";
 import type { LLMProvider } from "@/adapters/llm/types";
 import type { ProductContext, RawSearchResult } from "./search-screen";
+import { fetchJson } from "@/adapters/http/fetch-json";
 
 export interface DiscoveryQuery {
   icp: ICPProfile;
@@ -114,13 +115,11 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
     const raw: RawSearchResult[] = [];
     const seenUrl = new Set<string>(); // the same page often answers several queries — send it to the screen once
     for (const query of this.buildQueries(icp, product)) {
-      const res = await fetch("https://api.tavily.com/search", {
+      const json = await fetchJson<{ results?: Array<{ title: string; url: string; content: string }> }>("Tavily search", "https://api.tavily.com/search", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.apiKey}` },
         body: JSON.stringify({ query, max_results: 8, search_depth: "basic" }),
       });
-      if (!res.ok) throw new Error(`Tavily ${res.status}: ${await res.text()}`);
-      const json = (await res.json()) as { results?: Array<{ title: string; url: string; content: string }> };
       for (const r of json.results ?? []) {
         const host = hostOf(r.url);
         if (!host || hostMatches(host, AGGREGATOR_DOMAINS) || hostMatches(host, selfDomains)) continue;
@@ -195,9 +194,7 @@ export class GitHubAdapter implements LeadSourceAdapter {
     const terms = [...q.icp.technologies, ...q.icp.business_problems].slice(0, 3).join(" ");
     if (!terms) return [];
     const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(terms)}+stars:>50&sort=updated&per_page=${Math.min(30, q.limit * 2)}`;
-    const res = await fetch(url, { headers: { Accept: "application/vnd.github+json", "User-Agent": "ai-bd-platform", ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}) } });
-    if (!res.ok) throw new Error(`GitHub ${res.status}: ${await res.text()}`);
-    const json = (await res.json()) as { items?: Array<{ full_name: string; html_url: string; description: string | null; homepage: string | null; stargazers_count: number; owner: { login: string; type: string; html_url: string } }> };
+    const json = await fetchJson<{ items?: Array<{ full_name: string; html_url: string; description: string | null; homepage: string | null; stargazers_count: number; owner: { login: string; type: string; html_url: string } }> }>("GitHub search", url, { headers: { Accept: "application/vnd.github+json", "User-Agent": "ai-bd-platform", ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}) } });
     const seen = new Set<string>(q.exclude ?? []);
     const out: DiscoveryResult[] = [];
     for (const it of json.items ?? []) {

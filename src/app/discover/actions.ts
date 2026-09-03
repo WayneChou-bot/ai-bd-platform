@@ -18,7 +18,10 @@ export async function discoverAction(projectId: string) {
   try {
     const found = await discoverLeads(r, projectId);
     revalidatePath("/discover"); revalidatePath("/leads");
-    back(projectId, `${found.length} ${t("new candidates — existing leads excluded")}`);
+    // A source that failed mid-round is not an error for the round, but it must be seen.
+    const last = (await r.agentRuns()).filter((x) => x.project_id === projectId && x.agent === "discovery").sort((a, b) => b.created_at.localeCompare(a.created_at))[0];
+    const warn = last?.status === "COMPLETED" && last.error ? ` · ⚠ ${t("a source failed")}: ${last.error}` : "";
+    back(projectId, `${found.length} ${t("new candidates — existing leads excluded")}${warn}`);
   } catch (e) {
     if ((e as Error & { digest?: string }).digest?.startsWith("NEXT_REDIRECT")) throw e;
     back(projectId, undefined, (e as Error).message);
