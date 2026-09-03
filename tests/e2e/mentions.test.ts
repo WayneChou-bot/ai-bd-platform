@@ -11,6 +11,19 @@ import dataset from "../../fixtures/demo/dataset.json";
 
 process.env.APP_MODE = "demo";
 
+describe("tracked-entity derivation", () => {
+  it("derived keywords are unique even when the ICP and category overlap (React key crash, field test)", async () => {
+    const repo = InMemoryRepository.fromDataset(dataset);
+    const pid = (await repo.projects())[0].id;
+    const icp = await repo.icp(pid);
+    await repo.saveICP({ ...icp!, technologies: ["IoT", "Digital Twin"] });
+    await repo.updateProject({ ...(await repo.project(pid)), category: "IoT / Digital Twin" });
+    const [entity] = await ensureTrackedEntities(repo, pid);
+    const lower = entity.keywords.map((k) => k.toLowerCase());
+    expect(new Set(lower).size).toBe(lower.length);
+  });
+});
+
 describe("mention scan (demo pool)", () => {
   let repo: InMemoryRepository;
   let projectId: string;

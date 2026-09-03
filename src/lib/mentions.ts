@@ -30,11 +30,14 @@ export async function ensureTrackedEntities(repo: Repository, projectId: string)
   const [project, icp] = await Promise.all([repo.project(projectId), repo.icp(projectId)]);
   const name = project.name.replace(/\s*\(demo[^)]*\)\s*$/i, "").trim();
   const repoPath = project.repository?.match(/github\.com\/([^/]+\/[^/#?]+)/)?.[1];
+  // Case-insensitive dedupe — "IoT" arrives from both the ICP technologies and
+  // the category split, and duplicate keywords crashed React keys (field test).
+  const seenKw = new Set<string>();
   const keywords = [
     ...(icp?.technologies ?? []),
     ...(project.category?.split(/[\/,·]/).map((s) => s.trim()) ?? []),
     "documentation",
-  ].filter(Boolean).slice(0, 6);
+  ].filter((k) => { const key = k.toLowerCase(); if (!k || seenKw.has(key)) return false; seenKw.add(key); return true; }).slice(0, 6);
   const entity = TrackedEntitySchema.parse({
     id: newId("ent"), project_id: projectId, canonical_name: name, entity_type: "product",
     aliases: [], canonical_url: project.repository ?? project.website,

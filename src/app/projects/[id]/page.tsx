@@ -15,7 +15,7 @@ import { addTrackedEntityAction, deleteTrackedEntityAction, runProductUnderstand
 
 const TABS = ["product", "understanding", "icp", "entities", "activity"] as const;
 const Tags = ({ items, tone }: { items: string[]; tone?: "engage" | "danger" | "research" | "neutral" }) => (
-  <div className="flex flex-wrap gap-1">{items.length ? items.map((i) => <Badge key={i} tone={tone}>{i}</Badge>) : <span className="text-xs text-muted">—</span>}</div>
+  <div className="flex flex-wrap gap-1">{items.length ? items.map((i, n) => <Badge key={`${i}-${n}`} tone={tone}>{i}</Badge>) : <span className="text-xs text-muted">—</span>}</div>
 );
 const Row = ({ k, v }: { k: string; v: React.ReactNode }) => (
   <div className="grid grid-cols-[150px_1fr] gap-2 py-2 text-sm"><span className="text-muted">{k}</span><span>{v}</span></div>
@@ -237,7 +237,7 @@ export default async function ProjectDetail({ params, searchParams }: { params: 
                       <div className="flex items-center gap-2"><span className="font-medium">{e.canonical_name}</span><Badge tone="research">{t(e.entity_type)}</Badge></div>
                       {e.aliases.length > 0 && <div className="mt-1 text-xs text-muted">{t("Aliases")}: {e.aliases.join("、")}</div>}
                       {e.identifiers.length > 0 && <div className="mt-0.5 text-xs text-muted">{t("Identifiers")}: {e.identifiers.join("、")}</div>}
-                      {e.keywords.length > 0 && <div className="mt-1 flex flex-wrap gap-1">{e.keywords.map((k) => <Badge key={k}>{k}</Badge>)}</div>}
+                      {e.keywords.length > 0 && <div className="mt-1 flex flex-wrap gap-1">{e.keywords.map((k, n) => <Badge key={`${k}-${n}`}>{k}</Badge>)}</div>}
                       {e.canonical_url && <a href={e.canonical_url} target="_blank" rel="noreferrer" className="mt-0.5 block truncate text-xs text-muted hover:text-accent">{e.canonical_url}</a>}
                     </div>
                     <form action={deleteTrackedEntityAction.bind(null, id, e.id)}><Button type="submit" variant="ghost" className="px-2 py-1 text-xs">{t("Remove")}</Button></form>
