@@ -17,7 +17,8 @@ const back = (projectId: string, msg?: string, error?: string) =>
 async function sourceFailureWarning(projectId: string, t: (k: string) => string): Promise<string> {
   const r = await repo();
   const last = (await r.agentRuns()).filter((x) => x.project_id === projectId && x.agent === "discovery").sort((a, b) => b.created_at.localeCompare(a.created_at))[0];
-  return last?.status === "COMPLETED" && last.error ? ` · ⚠ ${t("a source failed")}: ${last.error}` : "";
+  const warn = last?.status === "COMPLETED" ? last.output_summary.match(/⚠ ([^·)]+)/)?.[1]?.trim() : undefined;
+  return warn ? ` · ⚠ ${t("a source failed")}: ${warn}` : "";
 }
 
 export async function discoverAction(projectId: string) {

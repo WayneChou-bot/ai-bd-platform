@@ -63,7 +63,7 @@ export default async function Discover({ searchParams }: { searchParams: Promise
       </div>
       <ErrorAlert message={sp.error} />
       {sp.msg && (
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-engage/30 bg-engage/10 px-3 py-2 text-sm text-engage">
+        <div className={`mb-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border px-3 py-2 text-sm ${sp.msg.includes("⚠") ? "border-learn/40 bg-learn/10 text-learn" : "border-engage/30 bg-engage/10 text-engage"}`}>
           <span>{sp.msg}</span>
           {/* Fresh candidates are only DISCOVERED — the qualified view would be empty (field test). */}
           {view === "prospects" && <Link href={`/leads?project=${project.id}`} className="font-medium underline decoration-dotted hover:decoration-solid">{t("View all leads")} →</Link>}
@@ -190,7 +190,7 @@ function MentionsView({ t, projectId, signals, entities }: { t: (k: string) => s
 
       <Card>
         <CardHeader>
-          <CardTitle>{t("Public mentions of your tracked entities")}</CardTitle>
+          <CardTitle>{t("Public mentions of your tracked entities")} <span className="ml-1.5 rounded bg-white/5 px-1.5 py-0.5 text-[11px] font-normal text-muted">{t("Tavily search only — no fallback source")}</span></CardTitle>
           <span className="text-xs text-muted">{t("Tracking")}: {entities.length ? entities.map((e) => e.canonical_name).join("、") : t("derived on first scan")} · <Link href={`/projects/${projectId}?tab=entities`} className="text-accent">{t("edit")}</Link></span>
         </CardHeader>
         <CardContent>

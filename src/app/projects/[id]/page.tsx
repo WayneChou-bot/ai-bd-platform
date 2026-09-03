@@ -117,7 +117,7 @@ export default async function ProjectDetail({ params, searchParams }: { params: 
             <CardHeader><CardTitle>{t("Run Product Understanding Agent")}</CardTitle></CardHeader>
             <CardContent>
               <form action={runPU} className="space-y-4">
-                <Field label="README" hint={t("optional; treated as untrusted data")}><Textarea name="readme" rows={6} placeholder="Paste your README.md here" /></Field>
+                <Field label="README" hint={t("optional — auto-fetched from the GitHub repository when empty; treated as untrusted data")}><Textarea name="readme" rows={6} placeholder="Paste your README.md here" /></Field>
                 <Field label={t("Manual notes")} hint={t("optional")}><Textarea name="notes" rows={3} placeholder={t("Anything the description does not say")} /></Field>
                 <div className="flex justify-end"><SubmitButton variant="primary"><Sparkles size={14} /> {understanding ? t("Re-run") : t("Understand product")}</SubmitButton></div>
               </form>

@@ -35,6 +35,40 @@ describe("discovery resilience", () => {
   });
 });
 
+describe("per-query resilience", () => {
+  const tavilyOk = { results: [{ title: "Warehouse ops at Acme", url: "https://acme-logistics.example/blog", content: "Acme Logistics is expanding" }] };
+
+  it("Tavily: one query timing out keeps the other queries' hits and counts the failure", async () => {
+    const { TavilySearchAdapter } = await import("@/adapters/sources");
+    let call = 0;
+    vi.stubGlobal("fetch", vi.fn(async () => {
+      call++;
+      // first query fails on both its attempt AND its retry; the second query succeeds
+      if (call <= 2) throw Object.assign(new TypeError("fetch failed"), { cause: { code: "UND_ERR_CONNECT_TIMEOUT" } });
+      return new Response(JSON.stringify(tavilyOk), { status: 200 });
+    }));
+    const adapter = new TavilySearchAdapter("key"); // no LLM → unscreened fallback path
+    const multiIcp = { ...icp, positive_signals: ["s1", "s2"], technologies: [] };
+    const out = await adapter.discover({ icp: multiIcp, limit: 10 }, ctx);
+    expect(out).toHaveLength(1);
+    expect(adapter.lastStats?.failedQueries).toBe(1); // first query (its retry also failed) is counted, not fatal
+  });
+
+  it("GitHub: builds one query per term and a silent zero is distinguishable from no-terms", async () => {
+    const { GitHubAdapter } = await import("@/adapters/sources");
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify({ items: [] }), { status: 200 })));
+    const gh = new GitHubAdapter();
+    const noTerms = await gh.discover({ icp: { ...icp, technologies: [], business_problems: [] }, limit: 10 }, ctx);
+    expect(noTerms).toEqual([]);
+    expect(gh.lastStats).toEqual({ queries: 0, rawRepos: 0, candidates: 0, failedQueries: 0 });
+    expect(fetch).not.toHaveBeenCalled(); // no-terms round never calls the API
+
+    await gh.discover({ icp: { ...icp, technologies: ["digital twin"], business_problems: ["warehouse efficiency"] }, limit: 10 }, ctx);
+    expect(gh.lastStats).toEqual({ queries: 2, rawRepos: 0, candidates: 0, failedQueries: 0 });
+    expect(fetch).toHaveBeenCalledTimes(2); // separate query per term — never ANDed together
+  });
+});
+
 describe("fetchJson", () => {
   it("names the service and the network cause instead of a bare 'fetch failed'", async () => {
     const err = Object.assign(new TypeError("fetch failed"), { cause: { code: "ECONNRESET", message: "socket hang up" } });

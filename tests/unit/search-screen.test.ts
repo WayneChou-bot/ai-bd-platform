@@ -77,7 +77,7 @@ describe("Tavily discovery screening", () => {
     await adapter.discover({ icp, limit: 10, selfDomains: ["amazon.com"], product: { name: "AWS", category: "Cloud Computing" } }, ctx);
     expect(promptSeen).toContain('"product_being_sold"');
     expect(promptSeen).toContain("AWS");
-    expect(adapter.lastStats).toEqual({ rawHits: 1, screened: 0 }); // ziprecruiter + own domain filtered before the screen
+    expect(adapter.lastStats).toEqual({ rawHits: 1, screened: 0, failedQueries: 0 }); // ziprecruiter + own domain filtered before the screen
   });
 
   it("builds queries from BUYER industries — never the vendor's own category", () => {

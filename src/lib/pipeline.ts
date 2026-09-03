@@ -8,7 +8,7 @@
 import { createDiscoveryAgent, type SourceFailure } from "@/agents/discovery";
 import { researchAgent } from "@/agents/research";
 import { qualificationAgent } from "@/agents/qualification";
-import { createSourceAdapters, hostOf, keyOf, TavilySearchAdapter } from "@/adapters/sources";
+import { createSourceAdapters, GitHubAdapter, hostOf, keyOf, TavilySearchAdapter } from "@/adapters/sources";
 import { fetchPublicPage, type FetchedPage } from "@/adapters/sources/fetch";
 import type { AgentContext } from "@/core/orchestrator/agent";
 import { runAgent, newId } from "@/core/orchestrator/run";
@@ -57,19 +57,30 @@ export async function discoverLeads(repo: Repository, projectId: string, opts: {
   // Observability (field test: "1 candidate" with no way to tell whether the
   // search returned nothing or the screen dropped everything).
   const search = sources.find((s): s is TavilySearchAdapter => s instanceof TavilySearchAdapter);
+  const gh = sources.find((s): s is GitHubAdapter => s instanceof GitHubAdapter);
   const notes: string[] = [];
   if (search?.lastStats) {
-    const note = `search: ${search.lastStats.rawHits} hits → ${search.lastStats.screened} organizations`;
+    const st = search.lastStats;
+    const note = `search: ${st.rawHits} hits → ${st.screened} organizations${st.failedQueries ? ` (${st.failedQueries} queries failed)` : ""}`;
     notes.push(note);
     await audit(repo, projectId, null, "agent", "discovery.search_stats", note);
   }
-  // A source that failed stays visible on the run row and in the audit trail
-  // even though the round completed with the other sources' candidates.
+  if (gh?.lastStats) {
+    const st = gh.lastStats;
+    const note = st.queries === 0
+      ? "github: no query terms — ICP technologies/business problems are empty"
+      : `github: ${st.queries} queries → ${st.rawRepos} repos → ${st.candidates} candidates${st.failedQueries ? ` (${st.failedQueries} queries failed)` : ""}`;
+    notes.push(note);
+    await audit(repo, projectId, null, "agent", "discovery.github_stats", note);
+  }
+  // A failed source stays visible in the summary and audit trail, but a
+  // COMPLETED run never carries an error — that contradictory state confused
+  // the Agents table (external review v5). Warnings are ⚠-prefixed instead.
   for (const f of sourceFailures) {
-    notes.push(`${f.source} FAILED: ${f.error}`);
+    notes.push(`⚠ ${f.source} FAILED: ${f.error}`);
     await audit(repo, projectId, null, "system", "discovery.source_failed", `${f.source}: ${f.error}`);
   }
-  if (notes.length) await repo.updateAgentRun({ ...run, output_summary: `${run.output_summary} (${notes.join(" · ")})`, error: sourceFailures.length ? sourceFailures.map((f) => `${f.source}: ${f.error}`).join(" | ") : run.error });
+  if (notes.length) await repo.updateAgentRun({ ...run, output_summary: `${run.output_summary} (${notes.join(" · ")})` });
 
   const created: Lead[] = [];
   for (const d of output) {

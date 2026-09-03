@@ -9,6 +9,8 @@ import { productUnderstandingAgent } from "@/agents/product-understanding";
 import { icpSuggestAgent } from "@/agents/icp";
 import { agentContext } from "@/lib/context";
 import { repo } from "@/lib/data";
+import { getConfig } from "@/lib/config";
+import { fetchPublicPage } from "@/adapters/sources/fetch";
 
 const optionalUrl = z.string().trim().url().optional().or(z.literal("").transform(() => undefined));
 
@@ -52,12 +54,25 @@ export async function updateProjectAction(id: string, formData: FormData) {
 export async function runProductUnderstandingAction(id: string, formData: FormData) {
   const r = await repo();
   const project = await r.project(id);
-  const readme = String(formData.get("readme") ?? "").trim() || undefined;
+  let readme = String(formData.get("readme") ?? "").trim() || undefined;
   const notes = String(formData.get("notes") ?? "").trim() || undefined;
+  // The repository URL used to be a dead field — filling it did NOT feed the
+  // README into understanding (external review v5). When nothing is pasted and
+  // the project has a GitHub repo, fetch its raw README through the same
+  // validated, size-capped fetcher; the content stays untrusted. LIVE only —
+  // demo makes no external calls. A failed fetch never blocks the run.
+  let readmeLabel = readme ? "README (pasted)" : undefined;
+  const repoPath = project.repository?.match(/github\.com\/([^/\s]+)\/([^/#?\s]+)/);
+  if (!readme && repoPath && getConfig().mode !== "demo") {
+    try {
+      const page = await fetchPublicPage(`https://raw.githubusercontent.com/${repoPath[1]}/${repoPath[2].replace(/\.git$/, "")}/HEAD/README.md`, "readme");
+      if (page.status >= 200 && page.status < 300 && page.content.trim()) { readme = page.content; readmeLabel = "README (auto-fetched from GitHub)"; }
+    } catch { /* page unreachable — understanding proceeds from the description alone */ }
+  }
   try {
     const { output } = await runAgent(r, productUnderstandingAgent, { project, readme, notes }, agentContext(), {
       project_id: id,
-      input_summary: [project.name, readme && "README", notes && "notes"].filter(Boolean).join(" + "),
+      input_summary: [project.name, readmeLabel, notes && "notes"].filter(Boolean).join(" + "),
       summarize: (o) => `category=${o.category}; ${o.problem.length} problems; ${o.target_roles.length} roles`,
     });
     await r.saveProductUnderstanding(output);

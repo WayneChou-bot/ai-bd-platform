@@ -94,7 +94,7 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
   constructor(private readonly apiKey: string, private readonly llm?: LLMProvider) {}
 
   /** Search-hit counts of the last discover() call — surfaced in the run summary. */
-  lastStats: { rawHits: number; screened: number } | null = null;
+  lastStats: { rawHits: number; screened: number; failedQueries: number } | null = null;
 
   buildQueries(icp: ICPProfile, product?: ProductContext): string[] {
     // Queries must target BUYER industries. If the ICP lists the vendor's own
@@ -111,15 +111,24 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
     return qs;
   }
 
-  private async rawResults(icp: ICPProfile, selfDomains: string[], product?: ProductContext): Promise<RawSearchResult[]> {
+  private async rawResults(icp: ICPProfile, selfDomains: string[], product?: ProductContext): Promise<{ raw: RawSearchResult[]; failedQueries: number; lastError?: Error }> {
     const raw: RawSearchResult[] = [];
     const seenUrl = new Set<string>(); // the same page often answers several queries — send it to the screen once
+    let failedQueries = 0;
+    let lastError: Error | undefined;
+    // Queries settle independently: one timeout must not discard what the
+    // other queries already found (external review v5).
     for (const query of this.buildQueries(icp, product)) {
-      const json = await fetchJson<{ results?: Array<{ title: string; url: string; content: string }> }>("Tavily search", "https://api.tavily.com/search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.apiKey}` },
-        body: JSON.stringify({ query, max_results: 8, search_depth: "basic" }),
-      });
+      let json: { results?: Array<{ title: string; url: string; content: string }> };
+      try {
+        json = await fetchJson<{ results?: Array<{ title: string; url: string; content: string }> }>("Tavily search", "https://api.tavily.com/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.apiKey}` },
+          body: JSON.stringify({ query, max_results: 8, search_depth: "basic" }),
+        });
+      } catch (e) {
+        failedQueries++; lastError = e as Error; continue;
+      }
       for (const r of json.results ?? []) {
         const host = hostOf(r.url);
         if (!host || hostMatches(host, AGGREGATOR_DOMAINS) || hostMatches(host, selfDomains)) continue;
@@ -128,15 +137,17 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
         raw.push({ title: r.title, url: r.url, content: r.content, query });
       }
     }
-    return raw;
+    return { raw, failedQueries, lastError };
   }
 
   async discover(q: DiscoveryQuery, ctx: { now: () => Date }): Promise<DiscoveryResult[]> {
     const selfDomains = q.selfDomains ?? [];
-    const raw = await this.rawResults(q.icp, selfDomains, q.product);
+    const { raw, failedQueries, lastError } = await this.rawResults(q.icp, selfDomains, q.product);
+    // All queries failing IS a source failure — surface it, don't return a silent zero.
+    if (failedQueries > 0 && raw.length === 0 && lastError) throw lastError;
     const seen = new Set<string>(q.exclude ?? []);
     const out: DiscoveryResult[] = [];
-    this.lastStats = { rawHits: raw.length, screened: 0 };
+    this.lastStats = { rawHits: raw.length, screened: 0, failedQueries };
 
     if (this.llm) {
       const { screenSearchResults } = await import("./search-screen");
@@ -186,35 +197,59 @@ export class TavilySearchAdapter implements LeadSourceAdapter {
 
 // ---------------------------------------------------------------------------
 /** GitHub public repository search (LIVE). Token optional but raises rate limits. */
+type GitHubRepo = { full_name: string; html_url: string; description: string | null; homepage: string | null; stargazers_count: number; owner: { login: string; type: string; html_url: string } };
+
 export class GitHubAdapter implements LeadSourceAdapter {
   readonly source = "github" as const;
   constructor(private readonly token?: string) {}
 
+  /** Per-round stats — a silent zero was indistinguishable from "no query" (external review v5). */
+  lastStats: { queries: number; rawRepos: number; candidates: number; failedQueries: number } | null = null;
+
+  /** One query per term — three terms ANDed together plus stars:>50 almost always found nothing. */
+  buildQueries(icp: ICPProfile): string[] {
+    return [...icp.technologies, ...icp.business_problems].slice(0, 3).filter(Boolean)
+      .map((term) => `${term} stars:>10`);
+  }
+
   async discover(q: DiscoveryQuery, ctx: { now: () => Date }): Promise<DiscoveryResult[]> {
-    const terms = [...q.icp.technologies, ...q.icp.business_problems].slice(0, 3).join(" ");
-    if (!terms) return [];
-    const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(terms)}+stars:>50&sort=updated&per_page=${Math.min(30, q.limit * 2)}`;
-    const json = await fetchJson<{ items?: Array<{ full_name: string; html_url: string; description: string | null; homepage: string | null; stargazers_count: number; owner: { login: string; type: string; html_url: string } }> }>("GitHub search", url, { headers: { Accept: "application/vnd.github+json", "User-Agent": "ai-bd-platform", ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}) } });
+    const queries = this.buildQueries(q.icp);
+    this.lastStats = { queries: queries.length, rawRepos: 0, candidates: 0, failedQueries: 0 };
+    if (!queries.length) return [];
     const seen = new Set<string>(q.exclude ?? []);
     const out: DiscoveryResult[] = [];
-    for (const it of json.items ?? []) {
-      const isOrg = it.owner.type === "Organization";
-      const website = it.homepage && /^https?:\/\//.test(it.homepage) ? it.homepage : it.owner.html_url;
-      const r: DiscoveryResult = {
-        company_name: it.owner.login,
-        entity_type: isOrg ? "company" : "individual",
-        website,
-        source: "github",
-        discovery_reason: `GitHub: ${it.full_name} (${it.stargazers_count}★) matches "${terms}"`,
-        initial_signals: [it.description ?? ""].filter(Boolean),
-        discovered_at: ctx.now().toISOString(),
-      };
-      const key = keyOf(r);
-      if (seen.has(key)) continue;
-      seen.add(key);
-      out.push(r);
-      if (out.length >= q.limit) break;
+    let lastError: Error | undefined;
+    for (const query of queries) {
+      let json: { items?: GitHubRepo[] };
+      try {
+        json = await fetchJson<{ items?: GitHubRepo[] }>("GitHub search",
+          `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=updated&per_page=${Math.min(15, q.limit * 2)}`,
+          { headers: { Accept: "application/vnd.github+json", "User-Agent": "ai-bd-platform", ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}) } });
+      } catch (e) {
+        this.lastStats.failedQueries++; lastError = e as Error; continue;
+      }
+      for (const it of json.items ?? []) {
+        this.lastStats.rawRepos++;
+        const isOrg = it.owner.type === "Organization";
+        const website = it.homepage && /^https?:\/\//.test(it.homepage) ? it.homepage : it.owner.html_url;
+        const r: DiscoveryResult = {
+          company_name: it.owner.login,
+          entity_type: isOrg ? "company" : "individual",
+          website,
+          source: "github",
+          discovery_reason: `GitHub: ${it.full_name} (${it.stargazers_count}★) matches "${query}"`,
+          initial_signals: [it.description ?? ""].filter(Boolean),
+          discovered_at: ctx.now().toISOString(),
+        };
+        const key = keyOf(r);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push(r);
+        this.lastStats.candidates++;
+        if (out.length >= q.limit) return out;
+      }
     }
+    if (this.lastStats.failedQueries === queries.length && lastError) throw lastError;
     return out;
   }
 }
