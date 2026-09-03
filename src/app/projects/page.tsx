@@ -21,7 +21,7 @@ export default async function Projects() {
   })));
   return (
     <>
-      <PageHeader title={t("Projects")} subtitle={t("Every BD campaign belongs to a project (§9).")} right={<Link href="/projects/new"><Button variant="primary"><Plus size={14} /> {t("New project")}</Button></Link>} />
+      <PageHeader title={t("Projects")} subtitle={t("Every BD campaign belongs to a project.")} right={<Link href="/projects/new"><Button variant="primary"><Plus size={14} /> {t("New project")}</Button></Link>} />
       <div className="grid gap-4 md:grid-cols-2">
         {rows.map(({ p, understanding, icp, leads, m }) => (
           <Link key={p.id} href={`/projects/${p.id}`}>

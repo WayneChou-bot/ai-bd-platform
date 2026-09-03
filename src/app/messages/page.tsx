@@ -25,7 +25,7 @@ export default async function Messages() {
   return (
     <>
       <AutoRefresh enabled={getConfig().mode === "live"} poke={getConfig().mailProvider === "gmail" ? "/api/inbound/poll" : undefined} />
-      <PageHeader title={t("Messages")} subtitle={t("Human-in-the-loop queue: nothing leaves without approval (§3.2, §19).")} right={getConfig().mode === "live" && getConfig().mailProvider === "gmail" ? <CheckInboxButton label={t("Check inbox now")} /> : undefined} />
+      <PageHeader title={t("Messages")} subtitle={t("Human-in-the-loop queue: nothing leaves without approval.")} right={getConfig().mode === "live" && getConfig().mailProvider === "gmail" ? <CheckInboxButton label={t("Check inbox now")} /> : undefined} />
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader><CardTitle>{t("Drafts awaiting review")}</CardTitle><Badge tone={awaiting.length ? "learn" : "neutral"}>{awaiting.length}</Badge></CardHeader>

@@ -37,7 +37,7 @@ export default async function Settings() {
   ];
   return (
     <>
-      <PageHeader title={t("Settings")} subtitle={t("Runtime status — read-only. Values come from environment variables (§43: keys never reach the browser).")} />
+      <PageHeader title={t("Settings")} subtitle={t("Runtime status — read-only. Values come from environment variables; keys never reach the browser.")} />
       <div className="grid gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader><CardTitle>{t("Application mode")}</CardTitle><Badge tone={cfg.mode === "demo" ? "learn" : "engage"}>{cfg.mode.toUpperCase()}</Badge></CardHeader>

@@ -50,7 +50,7 @@ export default async function ProjectDetail({ params, searchParams }: { params: 
       />
       <div className="mb-4 flex gap-1 border-b border-white/10">
         {TABS.map((tab_) => (
-          <Link key={tab_} href={`/projects/${id}?tab=${tab_}`} className={`px-3 py-2 text-sm capitalize ${tab === tab_ ? "border-b-2 border-accent text-fg" : "text-muted hover:text-fg"}`}>{tab_ === "icp" ? t("ICP") : tab_ === "activity" ? t("activity_tab") : tab_ === "entities" ? t("entities_tab") : t(tab_)}</Link>
+          <Link key={tab_} href={`/projects/${id}?tab=${tab_}`} className={`px-3 py-2 text-sm capitalize ${tab === tab_ ? "border-b-2 border-accent text-fg" : "text-muted hover:text-fg"}`}>{tab_ === "icp" ? t("ICP") : tab_ === "activity" ? t("Activity") : tab_ === "entities" ? t("Entities") : t(tab_)}</Link>
         ))}
       </div>
       <ErrorAlert message={error} />
@@ -104,7 +104,7 @@ export default async function ProjectDetail({ params, searchParams }: { params: 
                 <form action={runPipelineAction.bind(null, id)}><SubmitButton variant="primary" disabled={!icp}><Play size={14} /> {t("Run full pipeline")}</SubmitButton></form>
               </div>
               {!icp && <p className="mt-2 text-xs text-learn">{t("Run full pipeline unlocks after steps 1–2 — click the highlighted step to complete it.")}</p>}
-              <p className="mt-4 text-xs text-muted">{t("The platform must understand what is being promoted before it looks for anyone to promote it to (§10).")}</p>
+              <p className="mt-4 text-xs text-muted">{t("The platform must understand what is being promoted before it looks for anyone to promote it to.")}</p>
             </CardContent>
           </Card>
         </div>
@@ -138,7 +138,7 @@ export default async function ProjectDetail({ params, searchParams }: { params: 
                   </div>
                 </div>
               ) : (
-                <p className="py-8 text-center text-sm text-muted">{t("Not run yet. The agent returns structured JSON only (§10) — the UI never shows raw model text.")}</p>
+                <p className="py-8 text-center text-sm text-muted">{t("Not run yet. The agent returns structured JSON only — the UI never shows raw model text.")}</p>
               )}
             </CardContent>
           </Card>

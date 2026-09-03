@@ -24,7 +24,7 @@ export default async function Analytics({ searchParams }: { searchParams: Promis
     <>
       <PageHeader
         title={t("Analytics")}
-        subtitle={t("Every number is recomputed from rows — nothing is stored as a metric (§21, §47).")}
+        subtitle={t("Every number is recomputed from rows — nothing is stored as a metric.")}
         right={projects.length > 1 ? (
           <div className="flex gap-1">{projects.map((p) => <Link key={p.id} href={`/analytics?project=${p.id}`} className={`rounded-lg px-2.5 py-1.5 text-xs ${p.id === project.id ? "bg-accent/15 text-fg" : "text-muted hover:text-fg"}`}>{p.name}</Link>)}</div>
         ) : <Badge>{project.name}</Badge>}
@@ -91,7 +91,7 @@ export default async function Analytics({ searchParams }: { searchParams: Promis
           </Table>
         </Card>
         <Card>
-          <CardHeader><CardTitle>{t("Agent operations")}</CardTitle><span className="text-xs text-muted">{t("latency p50 · failure rate · tokens (§47)")}</span></CardHeader>
+          <CardHeader><CardTitle>{t("Agent operations")}</CardTitle><span className="text-xs text-muted">{t("latency p50 · failure rate · tokens")}</span></CardHeader>
           <Table>
             <THead><TR><TH>{t("Agent")}</TH><TH className="text-right">{t("Runs")}</TH><TH className="text-right">{t("Failed")}</TH><TH className="text-right">{t("Failure rate")}</TH><TH className="text-right">{t("p50 latency")}</TH><TH className="text-right">{t("Tokens")}</TH></TR></THead>
             <TBody>

@@ -30,15 +30,20 @@ export default async function Agents({ searchParams }: { searchParams: Promise<{
   };
   return (
     <>
-      <PageHeader title={t("Agents")} subtitle={t("Every run is a row: explicit state, latency, tokens, retries, errors. No chain-of-thought stored (§42).")} />
+      <PageHeader title={t("Agents")} subtitle={t("Every run is a row: explicit state, latency, tokens, retries, errors. No chain-of-thought stored.")} />
       <Orchestrator initial={status} projectId={project} canStartDemo={getConfig().mode === "demo"} locale={locale} />
       <Card className="mt-5">
         <Table>
-          <THead><TR><TH>{t("Run")}</TH><TH>{t("Agent")}</TH><TH>{t("Lead")}</TH><TH>{t("Status")}</TH><TH>{t("Latency")}</TH><TH>{t("Tokens")}</TH><TH>{t("Retries")}</TH><TH>{t("Output / Error")}</TH></TR></THead>
+          <THead><TR><TH>{t("Time")}</TH><TH>{t("Agent")}</TH><TH>{t("Lead")}</TH><TH>{t("Status")}</TH><TH>{t("Latency")}</TH><TH>{t("Tokens")}</TH><TH>{t("Retries")}</TH><TH>{t("Output / Error")}</TH></TR></THead>
           <TBody>
             {recent.map((x) => (
               <TR key={x.id}>
-                <TD className="tabular text-xs text-muted">{x.id}</TD>
+                {/* The raw run id read as noise (field test) — time is the useful
+                    coordinate; the id survives as a tooltip for audit cross-reference. */}
+                <TD className="tabular whitespace-nowrap text-xs text-muted" title={x.id}>
+                  <div className="text-fg/90">{(x.started_at ?? x.created_at).slice(11, 19)}</div>
+                  <div className="text-[10px]">{(x.started_at ?? x.created_at).slice(5, 10)}</div>
+                </TD>
                 <TD className="capitalize">{t(x.agent === "icp_suggest" ? "ICP Suggest" : x.agent.replace("_", " "))}</TD>
                 <TD>{x.lead_id ? <Link href={`/leads/${x.lead_id}`} className="hover:text-accent">{name.get(x.lead_id)}</Link> : "—"}</TD>
                 <TD><Badge tone={runTone[x.status]}>{t(x.status)}</Badge></TD>

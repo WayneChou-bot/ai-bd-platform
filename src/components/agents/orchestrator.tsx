@@ -220,7 +220,7 @@ export function Orchestrator({ initial, projectId, canStartDemo, compact = false
             {!canStartDemo ? (
               <p className="text-xs text-muted">{t("Demo playback is available in DEMO mode only — it creates a fresh simulated project, which stays separate from your real LIVE data. Set APP_MODE=demo in .env.local and restart to run it.")}</p>
             ) : demoLog.length === 0 ? (
-              <p className="text-xs text-muted">{t("Press Start Demo to watch Discover → Research → Qualify → Engage → Reply → Learn run end to end — including one injected source failure with retry (§41).")} {t("It is a deterministic browser-side replay of one real agent run (recorded with the mock provider): every visitor plays their own copy, the approval pause waits for YOUR click, and nothing external is ever sent.")}</p>
+              <p className="text-xs text-muted">{t("Press Start Demo to watch Discover → Research → Qualify → Engage → Reply → Learn run end to end — including one injected source failure with retry.")} {t("It is a deterministic browser-side replay of one real agent run (recorded with the mock provider): every visitor plays their own copy, the approval pause waits for YOUR click, and nothing external is ever sent.")}</p>
             ) : (
               <>
               {researchDone && (

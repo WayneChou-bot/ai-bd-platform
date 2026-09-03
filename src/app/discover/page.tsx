@@ -39,7 +39,7 @@ export default async function Discover({ searchParams }: { searchParams: Promise
     <>
       <PageHeader
         title={t("Discover")}
-        subtitle={`${t("Controlled sources only (§12)")}: ${cfg.mode === "demo" ? t("demo seed pool") : [cfg.searchApiKey && "Tavily search", "GitHub"].filter(Boolean).join(" + ")}`}
+        subtitle={`${t("Controlled sources only")}: ${cfg.mode === "demo" ? t("demo seed pool") : [cfg.searchApiKey && "Tavily search", "GitHub"].filter(Boolean).join(" + ")}`}
         right={
           <div className="flex items-center gap-2">
             {projects.length > 1 && (
