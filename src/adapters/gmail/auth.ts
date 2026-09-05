@@ -24,6 +24,7 @@ export class RefreshTokenProvider implements TokenProvider {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({ client_id: this.clientId, client_secret: this.clientSecret, refresh_token: this.refreshToken, grant_type: "refresh_token" }),
+      signal: AbortSignal.timeout(15_000), // a hung refresh must not wedge the poller (review v6)
     });
     if (!res.ok) throw new Error(`Gmail token refresh failed: ${res.status} ${await res.text()}`);
     const j = (await res.json()) as { access_token: string; expires_in: number };
@@ -50,6 +51,9 @@ export async function gmailFetch<T>(tp: TokenProvider, path: string, init: Reque
   const res = await fetch(`https://gmail.googleapis.com/gmail/v1/users/me/${path}`, {
     ...init,
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json", ...(init.headers ?? {}) },
+    // Bounded per request (review v6): the poller's `running` flag is released
+    // in a finally block, so one hung Gmail call must not block polling forever.
+    signal: init.signal ?? AbortSignal.timeout(20_000),
   });
   if (!res.ok) throw new Error(`Gmail API ${path}: ${res.status} ${await res.text()}`);
   return (await res.json()) as T;

@@ -234,14 +234,31 @@ export async function ignoreLead(repo: Repository, leadId: string) {
 // ---------------------------------------------------------------------------
 // Full run: discover new leads, then research + qualify everything pending.
 // ---------------------------------------------------------------------------
-export interface PipelineSummary { discovered: number; researched: number; qualified: number; rejected: number; withheld: number; failed: number }
+export interface PipelineSummary { discovered: number; researched: number; qualified: number; rejected: number; withheld: number; failed: number; discovery_error?: string }
+
+/** Batch fairness (review v6 secondary): never-attempted leads first (oldest
+ *  discovery first), then RESEARCHED leads least-recently-touched first. A
+ *  withheld qualification bumps updated_at, so leads stuck at RESEARCHED
+ *  rotate to the back instead of occupying the front of every batch and
+ *  starving newly discovered leads. Pure — unit-tested directly. */
+export function pickPipelineBatch(leads: Lead[], batch: number): Lead[] {
+  const discovered = leads.filter((l) => l.status === "DISCOVERED").sort((a, b) => a.created_at.localeCompare(b.created_at));
+  const researched = leads.filter((l) => l.status === "RESEARCHED").sort((a, b) => a.updated_at.localeCompare(b.updated_at));
+  return [...discovered, ...researched].slice(0, batch);
+}
 
 export async function runPipeline(repo: Repository, projectId: string, ctx: AgentContext = agentContext()): Promise<PipelineSummary> {
   const cfg = getConfig();
   const s: PipelineSummary = { discovered: 0, researched: 0, qualified: 0, rejected: 0, withheld: 0, failed: 0 };
-  s.discovered = (await discoverLeads(repo, projectId, { ctx })).length;
+  // Discovery failing outright (every source down) must not block the leads
+  // we already have (review v6 secondary): report it and keep processing.
+  try {
+    s.discovered = (await discoverLeads(repo, projectId, { ctx })).length;
+  } catch (e) {
+    s.discovery_error = (e as Error).message.slice(0, 300);
+  }
 
-  const pending = (await repo.leads(projectId)).filter((l) => l.status === "DISCOVERED" || l.status === "RESEARCHED").slice(0, cfg.pipelineBatch);
+  const pending = pickPipelineBatch(await repo.leads(projectId), cfg.pipelineBatch);
   for (const lead of pending) {
     try {
       if (lead.status === "DISCOVERED") { await researchLead(repo, lead.id, ctx); s.researched++; }

@@ -141,10 +141,11 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 
 ## 🧪 Testing
 
-**134 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
+**146 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
 mention engine, strict-schema conversion, search-result screening, demo-recording integrity, mail adapters), agent behaviour (reply
 classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, recovery,
-judgment — evidence dedupe, ICP-relative mapping, grounding — and demo
+judgment, inbox — from evidence dedupe and ICP-relative mapping to Gmail pagination,
+outcome ordering and the needs-human queue — and demo
 playback with an *asserted* human-approval pause), and evaluation — fixtures are regenerated
 from raw rows and compared exactly. Failure visibility is itself under test: a FAILED run
 must remain visible after its retry succeeds. All of it runs in CI on every push.

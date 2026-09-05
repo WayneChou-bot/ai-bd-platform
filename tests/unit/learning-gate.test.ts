@@ -17,7 +17,7 @@ const qual = (i: number, score: number): QualificationResult => ({
 
 const outcome = (i: number, kind: Outcome["outcome"]): Outcome => ({
   id: `out_${String(i).padStart(3, "0")}`, lead_id: `lead_${String(i).padStart(3, "0")}`,
-  outcome: kind, notes: "", recorded_by: "user", event_id: null, recorded_at: "2026-08-02T00:00:00.000Z",
+  outcome: kind, notes: "", recorded_by: "user", event_id: null, occurred_at: null, recorded_at: "2026-08-02T00:00:00.000Z",
 });
 
 /** n leads split across the 80+ and 60–79 bands, each with a recorded outcome. */

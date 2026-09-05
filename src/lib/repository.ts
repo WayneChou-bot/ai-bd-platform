@@ -55,6 +55,7 @@ export interface Repository {
   saveInboundEvent(e: InboundEvent): Promise<void>;
   replyClassifications(): Promise<ReplyClassification[]>;
   addReplyClassification(c: ReplyClassification): Promise<void>;
+  updateReplyClassification(c: ReplyClassification): Promise<void>;
   outcomes(): Promise<Outcome[]>;
   addOutcome(o: Outcome): Promise<void>;
   insights(): Promise<LearningInsight[]>;
@@ -210,6 +211,10 @@ export class InMemoryRepository implements Repository {
   }
   async replyClassifications() { return this.s.reply_classifications; }
   async addReplyClassification(c: ReplyClassification) { this.s.reply_classifications.push(c); }
+  async updateReplyClassification(c: ReplyClassification) {
+    const i = this.s.reply_classifications.findIndex((x) => x.id === c.id);
+    if (i >= 0) this.s.reply_classifications[i] = c; else this.s.reply_classifications.push(c);
+  }
   async outcomes() { return this.s.outcomes; }
   async addOutcome(o: Outcome) { this.s.outcomes.push(o); }
   async insights() { return this.s.insights; }

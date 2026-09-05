@@ -25,11 +25,28 @@ export class GmailPollingSource {
    * body is fetched (§45). Self-sent mail is NOT excluded here: when
    * DEMO_RECIPIENT_OVERRIDE is your own mailbox, replies also come "from you";
    * the poller instead skips the exact message ids we sent (receipts).
+   *
+   * Pagination + watermark (review v6 F13): every page is followed via
+   * nextPageToken — the 26th reply in a busy inbox used to be invisible
+   * forever. With a watermark (epoch seconds of the newest already-imported
+   * message, minus an overlap the caller chooses) the query becomes
+   * `after:<ts>`, which also covers ARCHIVED mail — a reply the user filed
+   * away is still a reply; the first ever poll falls back to newer_than.
+   * Re-listing already-imported ids is harmless: the poller dedupes by
+   * raw_ref.
    */
-  async listCandidates(): Promise<Array<{ id: string; threadId: string }>> {
-    const q = encodeURIComponent(`in:inbox newer_than:${this.newerThan}`);
-    const r = await gmailFetch<{ messages?: Array<{ id: string; threadId: string }> }>(this.tp, `messages?q=${q}&maxResults=25`);
-    return r.messages ?? [];
+  async listCandidates(afterEpochSeconds?: number): Promise<Array<{ id: string; threadId: string }>> {
+    const q = encodeURIComponent(afterEpochSeconds ? `after:${afterEpochSeconds}` : `newer_than:${this.newerThan}`);
+    const out: Array<{ id: string; threadId: string }> = [];
+    let pageToken: string | undefined;
+    for (let page = 0; page < 10; page++) { // safety cap: 10 × 100 messages per poll
+      const r = await gmailFetch<{ messages?: Array<{ id: string; threadId: string }>; nextPageToken?: string }>(
+        this.tp, `messages?q=${q}&maxResults=100${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ""}`);
+      out.push(...(r.messages ?? []));
+      pageToken = r.nextPageToken;
+      if (!pageToken) break;
+    }
+    return out;
   }
 
   async fetchMessage(id: string): Promise<GmailMessage> {

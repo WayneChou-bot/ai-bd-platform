@@ -97,6 +97,7 @@ export class SupabaseRepository implements Repository {
   async saveInboundEvent(e: InboundEvent) { await this.upsert("inbound_events", e); }
   async replyClassifications() { return this.rows("reply_classifications", ReplyClassification); }
   async addReplyClassification(c: ReplyClassification) { await this.upsert("reply_classifications", c); }
+  async updateReplyClassification(c: ReplyClassification) { await this.upsert("reply_classifications", c); }
   async outcomes() { return this.rows("outcomes", Outcome, {}, "recorded_at"); }
   async addOutcome(o: Outcome) { await this.upsert("outcomes", o); }
   async insights() { return this.rows("learning_insights", LearningInsight); }

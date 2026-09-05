@@ -33,7 +33,16 @@ export async function pollGmailOnce(): Promise<PollResult> {
     const ourThreads = new Set(gmailReceipts.filter((x) => x.provider_thread_id).map((x) => x.provider_thread_id as string));
     // The exact messages we sent (so a self-addressed send is not mistaken for a reply).
     const ourMessageIds = new Set(gmailReceipts.map((x) => x.message_id));
-    for (const c of await src.listCandidates()) {
+    // Watermark (review v6 F13): the newest gmail event we already imported is
+    // durable state — survives restarts without a settings table. Query a day
+    // behind it (`after:` also matches archived mail) so late or re-filed
+    // replies are re-listed; raw_ref dedupe below makes the overlap free.
+    // First ever poll: no watermark → the source falls back to newer_than:7d.
+    const newest = (await r.inboundEvents())
+      .filter((e) => e.source === "gmail")
+      .reduce<string | null>((max, e) => (!max || e.received_at > max ? e.received_at : max), null);
+    const after = newest ? Math.floor(new Date(newest).getTime() / 1000) - 86_400 : undefined;
+    for (const c of await src.listCandidates(after)) {
       result.checked++;
       if (ourMessageIds.has(c.id)) continue; // our own outgoing message landing in the inbox
       if (!ourThreads.has(c.threadId)) {

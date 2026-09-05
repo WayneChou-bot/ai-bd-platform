@@ -110,6 +110,8 @@ const zh: Record<string, string> = {
   "Human-in-the-loop queue: nothing leaves without approval.": "人工審核佇列：未經核准不會寄出任何訊息。",
   "Drafts awaiting review": "待審核草稿", "Nothing waiting. Generate drafts from a qualified lead.": "沒有待審項目。請從合格潛客產生草稿。",
   "Replies needing a human": "需要人工判斷的回信", "All inbound replies were classified with confidence.": "所有來信都已高信心分類。", "Unmatched inbound": "無法比對的來信", "no lead": "無潛客", "Recent inbound": "最近來信",
+  "handled": "已處理", "record the outcome": "記錄結果", "Dismiss": "略過", "Assign to a contacted lead…": "指派給已接觸的潛客…", "Assign": "指派",
+  "discovery failed, existing leads still processed": "探索失敗，既有潛客仍已處理",
   // analytics
   "Every number is recomputed from rows — nothing is stored as a metric.": "每個數字都由資料列即時計算 — 不儲存任何指標。",
   "Discovered": "已探索", "Researched": "已研究", "Approved": "已核准", "Contacted": "已聯繫", "Reply Rate": "回覆率", "replies": "則回覆", "Qualified → Positive": "合格 → 正向",

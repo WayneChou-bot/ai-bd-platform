@@ -179,7 +179,7 @@ export async function handleInbound(repo: Repository, event: InboundEvent, ctx: 
 
   if (cls.outcome !== "auto_reply" && cls.outcome !== "unclassified" && !cls.needs_human) {
     const already = (await repo.outcomes()).some((o) => o.event_id === stored.id);
-    if (!already) await recordOutcome(repo, lead.id, cls.outcome, cls.rationale, { recorded_by: "reply_agent", event_id: stored.id, ctx });
+    if (!already) await recordOutcome(repo, lead.id, cls.outcome, cls.rationale, { recorded_by: "reply_agent", event_id: stored.id, occurred_at: stored.received_at, ctx });
   } else {
     await audit(repo, lead, "agent", "reply.needs_review", `${cls.outcome} · ${cls.rationale}`);
   }
@@ -204,17 +204,62 @@ export async function simulateReply(repo: Repository, leadId: string, subject: s
 // ---------------------------------------------------------------------------
 export async function recordOutcome(
   repo: Repository, leadId: string, outcome: OutcomeKind, notes = "",
-  opts: { recorded_by?: Outcome["recorded_by"]; event_id?: string | null; ctx?: AgentContext } = {},
+  opts: { recorded_by?: Outcome["recorded_by"]; event_id?: string | null; occurred_at?: string | null; ctx?: AgentContext } = {},
 ): Promise<Outcome> {
   const ctx = opts.ctx ?? agentContext();
   const lead = await getLead(repo, leadId);
   if (!["CONTACTED", "REPLIED", "OUTCOME_RECORDED"].includes(lead.status)) throw new Error(`Cannot record an outcome for status ${lead.status}`);
-  const row: Outcome = { id: ctx.newId("out"), lead_id: leadId, outcome, notes, recorded_by: opts.recorded_by ?? "user", event_id: opts.event_id ?? null, recorded_at: ctx.now().toISOString() };
+  const recordedAt = ctx.now().toISOString();
+  const row: Outcome = {
+    id: ctx.newId("out"), lead_id: leadId, outcome, notes, recorded_by: opts.recorded_by ?? "user",
+    event_id: opts.event_id ?? null,
+    // The business event's own time (review v6 F14): a reply's received time,
+    // or "now" for a manual decision made in the moment.
+    occurred_at: opts.occurred_at ?? recordedAt,
+    recorded_at: recordedAt,
+  };
   await repo.addOutcome(row); // never overwrites: overrides are additional rows (audit)
   if (lead.status !== "OUTCOME_RECORDED") await repo.updateLead({ ...lead, status: transition(lead.status, "OUTCOME_RECORDED"), updated_at: row.recorded_at });
   await audit(repo, lead, row.recorded_by === "user" ? "user" : "agent", "outcome.recorded", outcome);
+  // A human outcome closes the human work-ticket(s) it answers (review v6
+  // F15): the one for this event, or — recorded from the lead screen without
+  // an event — every ticket still pending on this lead. The model's original
+  // classification (needs_human, confidence) is never rewritten.
+  if (row.recorded_by === "user") {
+    const pending = (await repo.replyClassifications()).filter((c) =>
+      c.lead_id === leadId && c.needs_human && c.review_status === "pending" && (!opts.event_id || c.event_id === opts.event_id));
+    for (const c of pending) {
+      await repo.updateReplyClassification({ ...c, review_status: "resolved", resolved_at: recordedAt });
+      await audit(repo, lead, "user", "reply.review_resolved", `${c.outcome} → ${outcome}`);
+    }
+  }
   await refreshInsights(repo, lead.project_id, ctx);
   return row;
+}
+
+/** Close a needs-human ticket WITHOUT recording an outcome (review v6 F15):
+ *  the human looked and decided nothing needs recording. The model's original
+ *  classification stays untouched for audit. */
+export async function dismissReview(repo: Repository, classificationId: string): Promise<void> {
+  const c = (await repo.replyClassifications()).find((x) => x.id === classificationId);
+  if (!c) throw new Error("classification not found");
+  if (c.review_status !== "pending") throw new Error(`Ticket already ${c.review_status}`);
+  await repo.updateReplyClassification({ ...c, review_status: "dismissed", resolved_at: new Date().toISOString() });
+  const lead = await repo.lead(c.lead_id);
+  if (lead) await audit(repo, lead, "user", "reply.review_dismissed", c.outcome);
+}
+
+/** Assign an unmatched inbound event to a lead (review v6 F15) and run the
+ *  normal classification path on it. Only leads we actually contacted can
+ *  receive a reply. */
+export async function assignInbound(repo: Repository, eventId: string, leadId: string, ctx: AgentContext = agentContext()): Promise<ReplyClassification | null> {
+  const event = (await repo.inboundEvents()).find((e) => e.id === eventId);
+  if (!event) throw new Error("inbound event not found");
+  if (event.lead_id) throw new Error("event is already matched to a lead");
+  const lead = await getLead(repo, leadId);
+  if (!["CONTACTED", "REPLIED", "OUTCOME_RECORDED"].includes(lead.status)) throw new Error(`Cannot assign a reply to a lead that was never contacted (is ${lead.status})`);
+  await audit(repo, lead, "user", "inbound.assigned", `${event.from_address} · ${event.subject}`);
+  return handleInbound(repo, { ...event, lead_id: lead.id }, ctx);
 }
 
 export async function refreshInsights(repo: Repository, projectId: string, ctx: AgentContext = agentContext()) {

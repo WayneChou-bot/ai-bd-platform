@@ -254,7 +254,7 @@ async function main() {
     event.processed_at = cls.created_at;
 
     if (cls.outcome !== "auto_reply" && cls.outcome !== "unclassified") {
-      outcomes.push({ id: newId("out"), lead_id: lead.id, outcome: cls.outcome, notes: cls.rationale, recorded_by: "reply_agent", event_id: event.id, recorded_at: cls.created_at });
+      outcomes.push({ id: newId("out"), lead_id: lead.id, outcome: cls.outcome, notes: cls.rationale, recorded_by: "reply_agent", event_id: event.id, occurred_at: event.received_at, recorded_at: cls.created_at });
       lead.status = "OUTCOME_RECORDED";
       audit(lead.id, "agent", "outcome.recorded", cls.outcome, cls.created_at);
     } else if (cls.needs_human) {
@@ -267,7 +267,7 @@ async function main() {
   for (const l of leads) {
     if (l.status === "CONTACTED") {
       const at = day(30);
-      outcomes.push({ id: newId("out"), lead_id: l.id, outcome: "no_response", notes: "No reply after 14 days", recorded_by: "user", event_id: null, recorded_at: at });
+      outcomes.push({ id: newId("out"), lead_id: l.id, outcome: "no_response", notes: "No reply after 14 days", recorded_by: "user", event_id: null, occurred_at: at, recorded_at: at });
       l.status = "OUTCOME_RECORDED";
       l.updated_at = at;
       audit(l.id, "user", "outcome.recorded", "no_response", at);

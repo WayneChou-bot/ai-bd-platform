@@ -40,7 +40,7 @@ export async function runPipelineAction(projectId: string) {
   try {
     const s = await runPipeline(r, projectId, agentContext({ language: languageOf(locale) }));
     revalidatePath("/discover"); revalidatePath("/leads"); revalidatePath("/");
-    back(projectId, `${t("Discovered")} ${s.discovered} · ${t("Researched")} ${s.researched} · ${t("Qualified")} ${s.qualified} · ${t("Rejected")} ${s.rejected}${s.withheld ? ` · ${t("Withheld")} ${s.withheld}` : ""}${s.failed ? ` · ${t("Failed")} ${s.failed}` : ""}${await sourceFailureWarning(projectId, t)}`);
+    back(projectId, `${t("Discovered")} ${s.discovered} · ${t("Researched")} ${s.researched} · ${t("Qualified")} ${s.qualified} · ${t("Rejected")} ${s.rejected}${s.withheld ? ` · ${t("Withheld")} ${s.withheld}` : ""}${s.failed ? ` · ${t("Failed")} ${s.failed}` : ""}${s.discovery_error ? ` · ⚠ ${t("discovery failed, existing leads still processed")}: ${s.discovery_error}` : ""}${await sourceFailureWarning(projectId, t)}`);
   } catch (e) {
     if ((e as Error & { digest?: string }).digest?.startsWith("NEXT_REDIRECT")) throw e;
     back(projectId, undefined, (e as Error).message);

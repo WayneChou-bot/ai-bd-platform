@@ -66,6 +66,8 @@ export const replyAgent = defineAgent({
       quoted_signal: result.quoted_signal.slice(0, 200),
       needs_human: result.confidence < NEEDS_HUMAN_THRESHOLD || result.outcome === "unclassified",
       agent_run_id: null,
+      review_status: "pending" as const,
+      resolved_at: null,
       created_at: ctx.now().toISOString(),
     };
   },

@@ -32,10 +32,24 @@ export function insightConfidence(n: number): InsightConfidence {
   return n < MIN_COMPARATIVE_SAMPLE ? "insufficient" : n < 30 ? "directional" : n < 100 ? "moderate" : "strong";
 }
 
-/** Latest outcome per lead wins (user overrides are later rows). */
+/**
+ * Effective outcome per lead (review v6 F14) — deterministic under ANY
+ * processing order. A human decision always beats agent rows; within the same
+ * tier the latest BUSINESS event wins (occurred_at, falling back to
+ * recorded_at for legacy rows), with recorded_at as the tiebreaker. Replaying
+ * a backlog of old mail can therefore never demote a newer result, and a
+ * batch processed newest-first ends in the same state as oldest-first.
+ */
 export function latestOutcomes(outcomes: Outcome[]): Map<string, Outcome> {
+  const when = (o: Outcome) => o.occurred_at ?? o.recorded_at;
+  const tier = (o: Outcome) => (o.recorded_by === "user" ? 1 : 0);
   const m = new Map<string, Outcome>();
-  for (const o of [...outcomes].sort((a, b) => a.recorded_at.localeCompare(b.recorded_at))) m.set(o.lead_id, o);
+  for (const o of outcomes) {
+    const cur = m.get(o.lead_id);
+    if (!cur) { m.set(o.lead_id, o); continue; }
+    if (tier(o) !== tier(cur)) { if (tier(o) > tier(cur)) m.set(o.lead_id, o); continue; }
+    if (when(o) > when(cur) || (when(o) === when(cur) && o.recorded_at > cur.recorded_at)) m.set(o.lead_id, o);
+  }
   return m;
 }
 

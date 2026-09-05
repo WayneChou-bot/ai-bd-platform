@@ -314,6 +314,11 @@ export const ReplyClassification = z.object({
   quoted_signal: z.string(),
   needs_human: z.boolean(),
   agent_run_id: Id.nullable().default(null),
+  /** Human work-ticket state (review v6 F15) — separate from the model's
+   *  confidence: needs_human stays as classified forever (auditable), while
+   *  review_status tracks whether a person handled it. */
+  review_status: z.enum(["pending", "resolved", "dismissed"]).default("pending"),
+  resolved_at: Timestamp.nullable().default(null),
   created_at: Timestamp,
 });
 export type ReplyClassification = z.infer<typeof ReplyClassification>;
@@ -345,6 +350,10 @@ export const Outcome = z.object({
   notes: z.string().default(""),
   recorded_by: z.enum(["user", "reply_agent"]),
   event_id: Id.nullable().default(null),
+  /** When the business event actually happened (the reply's received time) —
+   *  distinct from when this row was written (review v6 F14). Null on legacy
+   *  rows: treated as recorded_at. */
+  occurred_at: Timestamp.nullable().default(null),
   recorded_at: Timestamp,
 });
 export type Outcome = z.infer<typeof Outcome>;
