@@ -40,13 +40,15 @@ export async function POST(req: Request) {
   }
 
   const r = await repo();
-  if (parsed.event.raw_ref && (await r.inboundEventByRef("resend", parsed.event.raw_ref))) {
-    return NextResponse.json({ ok: true, duplicate: true });
-  }
-  await r.saveInboundEvent(parsed.event); // persisted before we answer
+  const existing = parsed.event.raw_ref ? await r.inboundEventByRef("resend", parsed.event.raw_ref) : undefined;
+  if (existing?.processed_at) return NextResponse.json({ ok: true, duplicate: true });
+  // New event, or one stored earlier whose classification failed (review v6
+  // F07): persist before acking, then (re)process out of band.
+  const event = existing ?? parsed.event;
+  if (!existing) await r.saveInboundEvent(parsed.event);
 
   after(async () => {
-    try { await handleInbound(r, parsed.event); } catch (e) { console.error("[inbound] reply agent failed", e); }
+    try { await handleInbound(r, event); } catch (e) { console.error("[inbound] reply agent failed", e); }
   });
-  return NextResponse.json({ ok: true, id: parsed.event.id });
+  return NextResponse.json({ ok: true, id: event.id, retried: !!existing });
 }

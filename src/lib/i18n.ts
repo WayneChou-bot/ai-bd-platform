@@ -60,6 +60,7 @@ const zh: Record<string, string> = {
   "View qualified leads": "查看合格潛客", "View all leads": "查看全部潛客",
   "new signals from": "個新訊號，來自", "documents": "份文件", "already known": "個已存在", "below confidence threshold": "個低於信心門檻", "self-published pages skipped": "頁自家內容已略過",
   "ICP Suggest": "ICP 建議", "a source failed": "有來源失敗",
+  "Retry send": "重試寄送", "Delivery failed — fix the cause (recipient, provider) and retry. Nothing was sent.": "寄送失敗 — 排除原因（收件人、供應商）後重試。沒有任何信被寄出。",
   "candidates are discovered but not researched yet — nothing can be qualified until they are.": "位候選已探索但尚未研究 — 研究完成前不會有合格潛客。",
   "Research them on Discover, or run the full pipeline": "到探索頁研究，或執行完整管線", "Rejected": "已排除", "added": "已新增",
   "ICP": "理想客戶 ICP", "next step": "下一步",

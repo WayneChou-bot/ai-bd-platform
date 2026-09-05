@@ -44,6 +44,10 @@ export interface Repository {
   draftsFor(leadId: string): Promise<OutreachDraft[]>;
   draft(id: string): Promise<OutreachDraft | undefined>;
   saveDraft(d: OutreachDraft): Promise<void>;
+  /** Atomic compare-and-set DRAFT|FAILED → APPROVED. Returns the claimed draft,
+   *  or null when another request already claimed it (review v6 F05: two
+   *  concurrent approvals must never both send). */
+  claimDraft(id: string, approvedAt: string): Promise<OutreachDraft | null>;
   receipts(): Promise<DeliveryReceipt[]>;
   addReceipt(r: DeliveryReceipt): Promise<void>;
   inboundEvents(): Promise<InboundEvent[]>;
@@ -184,6 +188,17 @@ export class InMemoryRepository implements Repository {
   async saveDraft(d: OutreachDraft) {
     const i = this.s.drafts.findIndex((x) => x.id === d.id);
     if (i >= 0) this.s.drafts[i] = d; else this.s.drafts.push(d);
+  }
+  async claimDraft(id: string, approvedAt: string) {
+    // Synchronous check-and-set — no await between read and write, so two
+    // concurrent approvals interleave at the outer awaits, not inside here.
+    const i = this.s.drafts.findIndex((x) => x.id === id);
+    if (i < 0) return null;
+    const d = this.s.drafts[i];
+    if (d.status !== "DRAFT" && d.status !== "FAILED") return null;
+    const claimed = { ...d, status: "APPROVED" as const, approved_at: approvedAt };
+    this.s.drafts[i] = claimed;
+    return claimed;
   }
   async receipts() { return this.s.receipts; }
   async addReceipt(r: DeliveryReceipt) { this.s.receipts.push(r); }

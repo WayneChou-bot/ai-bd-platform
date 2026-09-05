@@ -26,7 +26,7 @@ export class SupabaseRepository implements Repository {
     if (order) q = q.order(order);
     const { data, error } = await q;
     if (error) throw new Error(`${table}: ${error.message}`);
-    return z.array(schema).parse(data ?? []);
+    return z.array(schema).parse((data ?? []).map((r) => normalizeRow(schema, r as Record<string, unknown>)));
   }
   private async upsert(table: string, row: Record<string, unknown>, onConflict = "id") {
     const { error } = await this.sb.from(table).upsert(row, { onConflict });
@@ -80,6 +80,16 @@ export class SupabaseRepository implements Repository {
   async draftsFor(leadId: string) { return this.rows("outreach_drafts", OutreachDraft, { lead_id: leadId }); }
   async draft(id: string) { return (await this.rows("outreach_drafts", OutreachDraft, { id }))[0]; }
   async saveDraft(d: OutreachDraft) { await this.upsert("outreach_drafts", d); }
+  async claimDraft(id: string, approvedAt: string) {
+    // Conditional update — the WHERE clause makes the claim atomic in the DB,
+    // so only one of two concurrent approvals gets rows back (review v6 F05).
+    const { data, error } = await this.sb.from("outreach_drafts")
+      .update({ status: "APPROVED", approved_at: approvedAt })
+      .eq("id", id).in("status", ["DRAFT", "FAILED"]).select();
+    if (error) throw new Error(`outreach_drafts claim: ${error.message}`);
+    const row = (data ?? [])[0];
+    return row ? OutreachDraft.parse(normalizeRow(OutreachDraft, row as Record<string, unknown>)) : null;
+  }
   async receipts() { return this.rows("delivery_receipts", DeliveryReceipt); }
   async addReceipt(r: DeliveryReceipt) { await this.upsert("delivery_receipts", r); }
   async inboundEvents() { return this.rows("inbound_events", InboundEvent); }
@@ -141,4 +151,22 @@ const QualRow = z.object({
 function fromQualRow(r: z.infer<typeof QualRow>): QualificationResult {
   const { product_fit, problem_evidence, intent_signal, role_relevance, data_confidence, ...rest } = r;
   return { ...rest, breakdown: { product_fit, problem_evidence, intent_signal, role_relevance, data_confidence } };
+}
+
+/**
+ * SQL NULL → domain optional (review v6 F08). Postgres returns null for empty
+ * optional columns; z.string().optional() accepts undefined but not null, so a
+ * legally-sparse row failed to read back. Nulls are dropped ONLY where the
+ * field schema rejects null — deliberately nullable fields (thread_key,
+ * approved_at, token_usage, …) keep their null.
+ */
+export function normalizeRow<T extends z.ZodTypeAny>(schema: T, row: Record<string, unknown>): Record<string, unknown> {
+  const shape = (schema as unknown as { shape?: Record<string, z.ZodTypeAny> }).shape;
+  if (!shape) return row;
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(row)) {
+    if (v === null && shape[k] && !shape[k].safeParse(null).success) continue;
+    out[k] = v;
+  }
+  return out;
 }

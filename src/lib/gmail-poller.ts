@@ -41,7 +41,15 @@ export async function pollGmailOnce(): Promise<PollResult> {
         if (!skipped.has(c.id)) { skipped.add(c.id); result.unmatched++; }
         continue;
       }
-      if (await r.inboundEventByRef("gmail", c.id)) continue; // already imported
+      const existing = await r.inboundEventByRef("gmail", c.id);
+      if (existing?.processed_at) continue; // imported AND fully processed
+      if (existing) {
+        // Stored but never classified (an earlier LLM failure — review v6 F07):
+        // finish the job instead of skipping it forever.
+        try { if (await handleInbound(r, existing)) result.imported++; }
+        catch (e) { result.errors.push(`${c.id}: ${(e as Error).message.slice(0, 200)}`); }
+        continue;
+      }
       try {
         const m = await src.fetchMessage(c.id);
         const event = await src.toEvent(r, m, { now: () => new Date(), newId });

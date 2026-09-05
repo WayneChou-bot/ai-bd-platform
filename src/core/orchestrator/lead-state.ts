@@ -6,12 +6,16 @@ import type { LeadStatus } from "@/core/schemas";
 const TRANSITIONS: Record<LeadStatus, readonly LeadStatus[]> = {
   DISCOVERED: ["RESEARCHING"],
   RESEARCHING: ["RESEARCHED", "DISCOVERED"],
-  RESEARCHED: ["QUALIFIED", "REJECTED"],
-  QUALIFIED: ["REVIEW", "REJECTED"],
-  REJECTED: [],
+  // Re-research is a first-class edge (external review v6 F10): the UI offers
+  // it for RESEARCHED, QUALIFIED and REJECTED leads, so the machine must too.
+  RESEARCHED: ["QUALIFIED", "REJECTED", "RESEARCHING"],
+  QUALIFIED: ["REVIEW", "REJECTED", "RESEARCHING"],
+  REJECTED: ["RESEARCHING"],
   REVIEW: ["DRAFTED", "REJECTED"],
   DRAFTED: ["APPROVED", "REVIEW", "REJECTED"],
-  APPROVED: ["CONTACTED"],
+  // APPROVED → DRAFTED: a delivery failure hands the draft back for another
+  // attempt instead of stranding the lead (external review v6 F06).
+  APPROVED: ["CONTACTED", "DRAFTED"],
   CONTACTED: ["REPLIED", "OUTCOME_RECORDED"],
   REPLIED: ["OUTCOME_RECORDED"],
   OUTCOME_RECORDED: [],

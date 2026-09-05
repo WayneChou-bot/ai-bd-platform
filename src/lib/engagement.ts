@@ -89,27 +89,46 @@ export async function approveAndSend(repo: Repository, draftId: string, ctx: Age
   const cfg = getConfig();
   const d = await repo.draft(draftId);
   if (!d) throw new Error("draft not found");
-  if (d.status !== "DRAFT") throw new Error(`Only DRAFT can be approved (is ${d.status})`);
+  if (d.status !== "DRAFT" && d.status !== "FAILED") throw new Error(`Only DRAFT (or FAILED, to retry) can be approved (is ${d.status})`);
   const lead = await getLead(repo, d.lead_id);
   if (lead.status !== "DRAFTED") throw new Error(`Lead must be DRAFTED to send (is ${lead.status})`);
 
-  const approvedAt = ctx.now().toISOString();
-  const approved: OutreachDraft = { ...d, status: "APPROVED", approved_at: approvedAt };
-  await repo.saveDraft(approved);
-  await repo.updateLead({ ...lead, status: transition("DRAFTED", "APPROVED"), updated_at: approvedAt });
-  await audit(repo, lead, "user", "draft.approved", `v${d.version}`);
-
+  // Everything that can be validated up front happens BEFORE any state change
+  // (review v6 F06): a missing recipient or broken adapter must not strand the
+  // lead in APPROVED.
   const to = cfg.mode === "demo"
     ? { address: lead.contact_email ?? `hello@${(lead.website ?? "example.com").replace(/^https?:\/\//, "")}` }
     : { address: cfg.demoRecipientOverride ?? lead.contact_email ?? "" };
   if (!to.address) throw new Error("No recipient: set the lead's contact email or DEMO_RECIPIENT_OVERRIDE");
-
   const delivery = await createDeliveryAdapter(cfg);
-  const receipt = await delivery.send(approved, lead, to, { now: ctx.now, newId: ctx.newId });
+
+  // Atomic claim (review v6 F05): only one of two concurrent approvals gets
+  // the draft; the loser changes nothing and reports it.
+  const approvedAt = ctx.now().toISOString();
+  const approved = await repo.claimDraft(draftId, approvedAt);
+  if (!approved) throw new Error("This draft is already being sent by another request");
+  await repo.updateLead({ ...lead, status: transition("DRAFTED", "APPROVED"), updated_at: approvedAt });
+  await audit(repo, lead, "user", "draft.approved", `v${d.version}${d.status === "FAILED" ? " (retry)" : ""}`);
+
+  // A failed delivery hands everything back (review v6 F06): draft → FAILED,
+  // lead → DRAFTED, so the user can fix the cause and approve again — no DB
+  // surgery, no duplicate send.
+  const revert = async (reason: string) => {
+    await repo.saveDraft({ ...approved, status: "FAILED" });
+    await repo.updateLead({ ...lead, status: transition("APPROVED", "DRAFTED"), updated_at: ctx.now().toISOString() });
+    await audit(repo, lead, "system", "delivery.failed", reason);
+  };
+
+  let receipt;
+  try {
+    receipt = await delivery.send(approved, lead, to, { now: ctx.now, newId: ctx.newId });
+  } catch (e) {
+    await revert((e as Error).message.slice(0, 300));
+    throw new Error(`Delivery failed: ${(e as Error).message}`);
+  }
   await repo.addReceipt(receipt);
   if (receipt.error) {
-    await repo.saveDraft({ ...approved, status: "FAILED" });
-    await audit(repo, lead, "system", "delivery.failed", receipt.error);
+    await revert(receipt.error);
     throw new Error(`Delivery failed: ${receipt.error}`);
   }
   const sent: OutreachDraft = { ...approved, status: "SENT" };
@@ -143,19 +162,28 @@ export async function handleInbound(repo: Repository, event: InboundEvent, ctx: 
   }
   await audit(repo, lead, "system", "inbound.received", stored.subject);
 
-  const draft = await latestDraft(repo, lead.id);
-  const { output, run } = await runAgent(repo, replyAgent, { event: stored, lead, draft: draft ?? null }, ctx, {
-    project_id: lead.project_id, lead_id: lead.id, input_summary: stored.subject, summarize: (o) => `${o.outcome} (${o.confidence})`,
-  });
-  const cls: ReplyClassification = { ...output, agent_run_id: run.id };
-  await repo.addReplyClassification(cls);
-  await repo.saveInboundEvent({ ...stored, processed_at: cls.created_at });
+  // Retryable processing (review v6 F07): a failed classification leaves the
+  // event stored with processed_at=null, and the poller/webhook re-enters here
+  // for exactly such events. Each step is idempotent — an existing
+  // classification/outcome for this event is reused, never duplicated — and
+  // processed_at is written LAST, only after the outcome step completed.
+  let cls = (await repo.replyClassifications()).find((c) => c.event_id === stored.id);
+  if (!cls) {
+    const draft = await latestDraft(repo, lead.id);
+    const { output, run } = await runAgent(repo, replyAgent, { event: stored, lead, draft: draft ?? null }, ctx, {
+      project_id: lead.project_id, lead_id: lead.id, input_summary: stored.subject, summarize: (o) => `${o.outcome} (${o.confidence})`,
+    });
+    cls = { ...output, agent_run_id: run.id };
+    await repo.addReplyClassification(cls);
+  }
 
   if (cls.outcome !== "auto_reply" && cls.outcome !== "unclassified" && !cls.needs_human) {
-    await recordOutcome(repo, lead.id, cls.outcome, cls.rationale, { recorded_by: "reply_agent", event_id: stored.id, ctx });
+    const already = (await repo.outcomes()).some((o) => o.event_id === stored.id);
+    if (!already) await recordOutcome(repo, lead.id, cls.outcome, cls.rationale, { recorded_by: "reply_agent", event_id: stored.id, ctx });
   } else {
     await audit(repo, lead, "agent", "reply.needs_review", `${cls.outcome} · ${cls.rationale}`);
   }
+  await repo.saveInboundEvent({ ...stored, processed_at: cls.created_at });
   return cls;
 }
 

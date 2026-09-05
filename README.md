@@ -141,7 +141,7 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 
 ## 🧪 Testing
 
-**107 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
+**122 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
 mention engine, strict-schema conversion, search-result screening, demo-recording integrity, mail adapters), agent behaviour (reply
 classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, demo
 playback with an *asserted* human-approval pause), and evaluation — fixtures are regenerated

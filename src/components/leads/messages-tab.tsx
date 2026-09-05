@@ -87,6 +87,12 @@ export function MessagesTab({ lead, mode, mailProvider, drafts, evidence, receip
                 {receipt && (
                   <div className="mt-2 text-xs text-muted">{t("Delivered via")} <Badge tone={receipt.simulated ? "learn" : "engage"}>{receipt.simulated ? t("simulated") : receipt.provider}</Badge> {fmt(receipt.sent_at)} · {t("thread")} {receipt.thread_key}{receipt.error && <span className="text-danger"> · {receipt.error}</span>}</div>
                 )}
+                {d.status === "FAILED" && lead.status === "DRAFTED" && (
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    <form action={approveAndSendAction.bind(null, lead.id, d.id)}><SubmitButton variant="success"><Send size={14} /> {t("Retry send")}</SubmitButton></form>
+                    <span className="text-xs text-muted">{t("Delivery failed — fix the cause (recipient, provider) and retry. Nothing was sent.")}</span>
+                  </div>
+                )}
                 {d.status === "DRAFT" && !isEditing && (
                   <div className="mt-4 flex flex-wrap items-center gap-2">
                     <form action={rejectDraftAction.bind(null, lead.id, d.id)}><Button type="submit" variant="danger"><XCircle size={14} /> {t("Reject")}</Button></form>

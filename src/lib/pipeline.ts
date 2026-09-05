@@ -124,11 +124,13 @@ async function gatherSources(lead: Lead): Promise<FetchedPage[]> {
 export async function researchLead(repo: Repository, leadId: string, ctx: AgentContext = agentContext()): Promise<Evidence[]> {
   const lead = await repo.lead(leadId);
   if (!lead) throw new Error("lead not found");
-  // A second click while research is running (10–20s) used to surface
-  // "Invalid lead transition RESEARCHING → RESEARCHING" (field test). Already
-  // RESEARCHING is a valid entry: the run proceeds and also un-sticks a lead
+  // Re-research goes through the state machine (RESEARCHED/QUALIFIED/REJECTED
+  // all have a RESEARCHING edge — review v6 F10 caught the old pre-mapping
+  // hack calling transition(RESEARCHING, RESEARCHING) and failing for all
+  // three). Already-RESEARCHING re-enters directly: double-click, or a lead
   // left mid-research by a crashed process.
-  const startFrom = lead.status === "RESEARCHING" ? "RESEARCHING" as const : transition(lead.status === "RESEARCHED" ? "RESEARCHING" : lead.status, "RESEARCHING");
+  const original = lead.status;
+  const startFrom = lead.status === "RESEARCHING" ? "RESEARCHING" as const : transition(lead.status, "RESEARCHING");
   const researching = { ...lead, status: startFrom, updated_at: ctx.now().toISOString() };
   await repo.updateLead(researching);
 
@@ -158,8 +160,12 @@ export async function researchLead(repo: Repository, leadId: string, ctx: AgentC
     await audit(repo, lead.project_id, lead.id, "agent", "lead.researched", `${evidence.length} evidence records`);
     return evidence;
   } catch (e) {
-    // Roll back to DISCOVERED so the user can retry; the FAILED run stays visible.
-    await repo.updateLead({ ...researching, status: transition("RESEARCHING", "DISCOVERED"), updated_at: ctx.now().toISOString() });
+    // Restore the pre-research status so a failed RE-research never demotes a
+    // qualified/rejected lead (review v6 F10); a first research rolls back to
+    // DISCOVERED. Previous evidence is untouched — it is only replaced on
+    // success. The FAILED run stays visible either way.
+    const restore = original === "RESEARCHING" || original === "DISCOVERED" ? "DISCOVERED" : original;
+    await repo.updateLead({ ...researching, status: restore, updated_at: ctx.now().toISOString() });
     await audit(repo, lead.project_id, lead.id, "system", "lead.research_failed", (e as Error).message);
     throw e;
   }
