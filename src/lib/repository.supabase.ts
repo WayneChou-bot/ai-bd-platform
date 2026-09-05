@@ -4,7 +4,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import {
-  AgentRun, AuditEvent, DeliveryReceipt, Evidence, ICPProfile, InboundEvent, Lead, LearningInsight,
+  AgentRun, AuditEvent, DeliveryReceipt, Evidence, ICPProfile, InboundEvent, Lead, LearningInsight, StrategyAdoption,
   Outcome, OutreachDraft, ProductUnderstanding, Project, QualificationResult, ReplyClassification,
   Signal, TrackedEntity,
 } from "@/core/schemas";
@@ -101,6 +101,11 @@ export class SupabaseRepository implements Repository {
   async outcomes() { return this.rows("outcomes", Outcome, {}, "recorded_at"); }
   async addOutcome(o: Outcome) { await this.upsert("outcomes", o); }
   async insights() { return this.rows("learning_insights", LearningInsight); }
+  async strategyAdoptions(projectId?: string) {
+    const all = await this.rows("strategy_adoptions", StrategyAdoption);
+    return projectId ? all.filter((x) => x.project_id === projectId) : all;
+  }
+  async addStrategyAdoption(a: StrategyAdoption) { await this.upsert("strategy_adoptions", a); }
   async saveInsights(projectId: string, items: LearningInsight[]) {
     const { error } = await this.sb.from("learning_insights").delete().eq("project_id", projectId);
     if (error) throw new Error(`insights delete: ${error.message}`);

@@ -3,7 +3,7 @@
  * everything here is reproducible from the repository.
  */
 import { POSITIVE_OUTCOMES, type AgentName } from "@/core/schemas";
-import { evidenceCategoryStats, latestOutcomes, scoreBandStats, sourceStats } from "@/agents/learning";
+import { evidenceCategoryStats, latestOutcomes, scoreBandStats, sendCohort, sourceStats } from "@/agents/learning";
 import type { Repository } from "@/lib/repository";
 
 export async function projectAnalytics(repo: Repository, projectId: string) {
@@ -18,6 +18,9 @@ export async function projectAnalytics(repo: Repository, projectId: string) {
   const c = cls.filter((x) => ids.has(x.lead_id));
   const o = outcomes.filter((x) => ids.has(x.lead_id));
   const latest = latestOutcomes(o);
+
+  const now = new Date().toISOString();
+  const cohort = sendCohort(r, o, now);
 
   const discovered = leads.length;
   const researched = leads.filter((l) => !["DISCOVERED", "RESEARCHING"].includes(l.status)).length;
@@ -35,12 +38,15 @@ export async function projectAnalytics(repo: Repository, projectId: string) {
     { stage: "Replies", value: replies }, { stage: "Positive", value: positive },
   ].map((s) => ({ ...s, pct: pct(s.value, discovered) }));
 
-  const distribution = (["HIGH_FIT", "MEDIUM_FIT", "LOW_FIT", "REJECT"] as const).map((k) => ({ label: k.replace("_", " "), value: q.filter((x) => x.classification === k).length }));
+  // Withheld is a statement about DATA, not a verdict (review v6 secondary):
+  // its placeholder classification must never be counted as a REJECT.
+  const distribution = (["HIGH_FIT", "MEDIUM_FIT", "LOW_FIT", "REJECT"] as const).map((k) => ({ label: k.replace("_", " "), value: q.filter((x) => !x.withheld && x.classification === k).length }));
   const withheld = q.filter((x) => x.withheld).length;
 
-  const bands = scoreBandStats(q, o).map((b) => ({ label: b.band, value: b.rate, n: `${b.positive}/${b.contacted}` }));
+  const fmtN = (x: { positive: number; assessable: number; awaiting: number }) => `${x.positive}/${x.assessable}${x.awaiting ? ` +${x.awaiting}⏳` : ""}`;
+  const bands = scoreBandStats(q, o, r, now).map((b) => ({ label: b.band, value: b.rate, n: fmtN(b) }));
   const evidence = await repo.allEvidence();
-  const categories = evidenceCategoryStats(evidence.filter((x) => ids.has(x.lead_id)), o).slice(0, 6).map((x) => ({ label: x.category.replace("_", " "), value: x.rate, n: `${x.positive}/${x.contacted}` }));
+  const categories = evidenceCategoryStats(evidence.filter((x) => ids.has(x.lead_id)), o, r, now).slice(0, 6).map((x) => ({ label: x.category.replace("_", " "), value: x.rate, n: fmtN(x) }));
   const sources = sourceStats(leads, q, o);
 
   // Reply breakdown (latest classification per lead)
@@ -73,7 +79,9 @@ export async function projectAnalytics(repo: Repository, projectId: string) {
   });
 
   return {
-    metrics: { discovered, qualified, reviewed, approved, contacted, replies, positive, positiveRate: pct(positive, contacted), qualifiedToPositive: pct(positive, qualified), replyRate: pct(replies, contacted) },
+    // positiveRate now shares the stats' denominator (review v6 F11): positive
+    // outcomes over ASSESSABLE sends — recent sends are 'awaiting', not failures.
+    metrics: { discovered, qualified, reviewed, approved, contacted, replies, positive, awaiting: cohort.awaiting.size, assessable: cohort.assessable.size, positiveRate: pct(positive, cohort.assessable.size), qualifiedToPositive: pct(positive, qualified), replyRate: pct(replies, contacted) },
     funnel, distribution, withheld, bands, categories, sources, replyBreakdown, repliesOverTime, agents,
     sample: latest.size,
   };

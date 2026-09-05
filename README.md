@@ -84,7 +84,7 @@ user-facing agents:
 | ⚖️ **Qualification** | Score 5 weighted dimensions from evidence | LLM maps each evidence item onto the ICP (relevant? which dimension? what polarity?) — then a deterministic formula computes the number; duplicates deduped; withheld when evidence is insufficient |
 | ✉️ **Outreach** | Draft grounded outreach | Drafts may cite only existing positive evidence; AI-disclosure footer on every send |
 | ↩️ **Reply** | Classify inbound replies | Sentiment ≠ intent; low-confidence → `needs human`, never auto-recorded |
-| 📈 **Learning** | Recompute insights from outcome rows | Confidence-gated: comparative claims are not generated below a minimum sample, and small samples are labelled *directional* |
+| 📈 **Learning** | Recompute insights from outcome rows | Rates are computed over the **send cohort** (recent sends are *awaiting*, not failures); comparative claims need a minimum per group, not just in total; recommendations are adopted or dismissed by a **human**, recorded append-only — the agent never edits the ICP |
 
 ## 🧮 Deterministic scoring
 
@@ -141,7 +141,7 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 
 ## 🧪 Testing
 
-**146 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
+**153 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
 mention engine, strict-schema conversion, search-result screening, demo-recording integrity, mail adapters), agent behaviour (reply
 classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, recovery,
 judgment, inbox — from evidence dedupe and ICP-relative mapping to Gmail pagination,

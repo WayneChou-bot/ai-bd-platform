@@ -1776,6 +1776,7 @@
       ],
       "rationale": "Acme AI is high fit (89/100): hiring a knowledge engineer to structure internal technical documentation; published an engineering post on retrieval quality problems in their internal rag platform.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-02T13:00:00.000Z"
     },
     {
@@ -1816,6 +1817,7 @@
       ],
       "rationale": "Northwind Labs is high fit (83/100): public repository contains an llm agent toolkit with 2k+ stars; open role: technical writer / documentation engineer.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-02T13:00:00.000Z"
     },
     {
@@ -1856,6 +1858,7 @@
       ],
       "rationale": "Helios Platform is high fit (85/100): hiring three ai platform engineers with rag experience; announced launch of an internal retrieval-augmented knowledge assistant.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-02T13:00:00.000Z"
     },
     {
@@ -1896,6 +1899,7 @@
       ],
       "rationale": "Quantleaf Analytics is high fit (84/100): published a post titled 'our internal wiki is where knowledge goes to die'; hiring a developer relations engineer.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-02T13:00:00.000Z"
     },
     {
@@ -1936,6 +1940,7 @@
       ],
       "rationale": "Orbital DevTools is high fit (82/100): maintains multiple public llm-agent example repositories; hiring a developer educator / technical writer.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-02T13:00:00.000Z"
     },
     {
@@ -1976,6 +1981,7 @@
       ],
       "rationale": "Meridian Health AI is high fit (83/100): hiring a clinical knowledge engineer to structure protocol documentation; announced company-wide internal ai knowledge initiative.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-03T13:00:00.000Z"
     },
     {
@@ -2014,6 +2020,7 @@
       "risks": [],
       "rationale": "Tessera Robotics is high fit (83/100): hiring a knowledge management lead for the engineering org; engineering post: 'why our new hires take 3 months to find the right document'.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-03T13:00:00.000Z"
     },
     {
@@ -2054,6 +2061,7 @@
       ],
       "rationale": "Lumen Fintech is high fit (83/100): hiring an engineering productivity manager focused on documentation and onboarding; hiring two ai engineers for internal developer tooling.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-03T13:00:00.000Z"
     },
     {
@@ -2094,6 +2102,7 @@
       ],
       "rationale": "Sable Security is high fit (81/100): hiring a security knowledge engineer to maintain detection documentation; open-source detection-rule repository documented in markdown.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-03T13:00:00.000Z"
     },
     {
@@ -2131,6 +2140,7 @@
       ],
       "rationale": "Example Labs is medium fit (69/100): publishes research code with detailed markdown readmes; research post mentions difficulty organizing experimental notes.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-03T13:00:00.000Z"
     },
     {
@@ -2168,6 +2178,7 @@
       ],
       "rationale": "DataWorks is medium fit (64/100): post on maintaining data pipeline documentation across teams; hiring a developer advocate.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-04T13:00:00.000Z"
     },
     {
@@ -2205,6 +2216,7 @@
       ],
       "rationale": "BrightPath EdTech is medium fit (65/100): announced an ai tutoring initiative; post mentions scattered curriculum documentation across tools.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-04T13:00:00.000Z"
     },
     {
@@ -2242,6 +2254,7 @@
       ],
       "rationale": "Kestrel Logistics Tech is medium fit (66/100): hiring an ml engineer for internal tooling; engineering organisation of 150 people.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-04T13:00:00.000Z"
     },
     {
@@ -2281,6 +2294,7 @@
       ],
       "rationale": "Verdant Climate is medium fit (65/100): open-source climate data toolkit documented in markdown; post on keeping methodology docs synchronized with code.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-04T13:00:00.000Z"
     },
     {
@@ -2317,6 +2331,7 @@
       ],
       "rationale": "Harbor Commerce Cloud is medium fit (64/100): launched ai product-description generator; developer docs built from markdown.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-04T13:00:00.000Z"
     },
     {
@@ -2354,6 +2369,7 @@
       ],
       "rationale": "Maya Chen — Independent AI Consultant is medium fit (71/100): maintains a popular open-source guide to llm agent patterns (markdown); wrote about clients' fragmented technical documentation.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-05T13:00:00.000Z"
     },
     {
@@ -2393,6 +2409,7 @@
       ],
       "rationale": "Pinewood Games is medium fit (62/100): post on engine documentation being out of date; studio handbook is public and written in markdown.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-05T13:00:00.000Z"
     },
     {
@@ -2430,6 +2447,7 @@
       ],
       "rationale": "Atlas Biotech Informatics is medium fit (65/100): post on scientists unable to find prior experiment documentation; hiring an ai engineer, knowledge systems.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-05T13:00:00.000Z"
     },
     {
@@ -2460,6 +2478,7 @@
       ],
       "rationale": "TalentBridge Recruiting surfaced on keyword signals, but company is a recruitment agency; no internal engineering team, which contradicts the ICP.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-05T13:00:00.000Z"
     },
     {
@@ -2486,6 +2505,7 @@
       ],
       "rationale": "Summit Strategy Consulting surfaced on keyword signals, but consulting-only firm with no software product or engineering team, which contradicts the ICP.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-05T13:00:00.000Z"
     },
     {
@@ -2511,6 +2531,7 @@
       ],
       "rationale": "Cobalt Manufacturing surfaced on keyword signals, but no software engineering or documentation roles on careers page, which contradicts the ICP.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-06T13:00:00.000Z"
     },
     {
@@ -2536,6 +2557,7 @@
       ],
       "rationale": "Only 1 evidence item(s) found for Stealth Startup (unnamed); not enough to score responsibly.",
       "withheld": true,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-06T13:00:00.000Z"
     },
     {
@@ -2562,6 +2584,7 @@
       ],
       "rationale": "Greenfield Realty Group surfaced on keyword signals, but real estate brokerage with no technical team, which contradicts the ICP.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-06T13:00:00.000Z"
     },
     {
@@ -2588,6 +2611,7 @@
       ],
       "rationale": "Jordan Lee — Marketing Freelancer surfaced on keyword signals, but personal site offers marketing services only; no technical writing or engineering, which contradicts the ICP.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-06T13:00:00.000Z"
     },
     {
@@ -2614,6 +2638,7 @@
       ],
       "rationale": "Aurora AI Media surfaced on keyword signals, but no engineering team or technical documentation, which contradicts the ICP.",
       "withheld": false,
+      "icp_id": "icp_001",
       "scored_at": "2026-07-06T13:00:00.000Z"
     }
   ],
@@ -2633,6 +2658,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-04T11:00:00.000Z",
       "approved_at": "2026-07-04T15:00:00.000Z"
     },
@@ -2651,6 +2677,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-04T11:00:00.000Z",
       "approved_at": "2026-07-04T15:00:00.000Z"
     },
@@ -2669,6 +2696,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-04T11:00:00.000Z",
       "approved_at": "2026-07-04T15:00:00.000Z"
     },
@@ -2687,6 +2715,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-04T11:00:00.000Z",
       "approved_at": "2026-07-04T15:00:00.000Z"
     },
@@ -2705,6 +2734,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-04T11:00:00.000Z",
       "approved_at": "2026-07-04T15:00:00.000Z"
     },
@@ -2723,6 +2753,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-05T11:00:00.000Z",
       "approved_at": "2026-07-05T15:00:00.000Z"
     },
@@ -2741,6 +2772,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-05T11:00:00.000Z",
       "approved_at": "2026-07-05T15:00:00.000Z"
     },
@@ -2759,6 +2791,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-05T11:00:00.000Z",
       "approved_at": "2026-07-05T15:00:00.000Z"
     },
@@ -2777,6 +2810,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-05T11:00:00.000Z",
       "approved_at": "2026-07-05T15:00:00.000Z"
     },
@@ -2795,6 +2829,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-05T11:00:00.000Z",
       "approved_at": "2026-07-05T15:00:00.000Z"
     },
@@ -2813,6 +2848,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-06T11:00:00.000Z",
       "approved_at": "2026-07-06T15:00:00.000Z"
     },
@@ -2831,6 +2867,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-06T11:00:00.000Z",
       "approved_at": "2026-07-06T15:00:00.000Z"
     },
@@ -2849,6 +2886,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-06T11:00:00.000Z",
       "approved_at": "2026-07-06T15:00:00.000Z"
     },
@@ -2867,6 +2905,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-06T11:00:00.000Z",
       "approved_at": "2026-07-06T15:00:00.000Z"
     },
@@ -2885,6 +2924,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-06T11:00:00.000Z",
       "approved_at": "2026-07-06T15:00:00.000Z"
     },
@@ -2903,6 +2943,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-07T11:00:00.000Z",
       "approved_at": "2026-07-07T15:00:00.000Z"
     },
@@ -2921,6 +2962,7 @@
       "confidence": 0.9,
       "status": "DRAFT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-07T11:00:00.000Z",
       "approved_at": null
     },
@@ -2939,6 +2981,7 @@
       "confidence": 0.9,
       "status": "SENT",
       "version": 1,
+      "human_edited": false,
       "created_at": "2026-07-07T11:00:00.000Z",
       "approved_at": "2026-07-07T15:00:00.000Z"
     }
@@ -3357,6 +3400,8 @@
       "quoted_signal": " Could you send a short overview and we can set up 20 minutes next week?",
       "needs_human": false,
       "agent_run_id": "run_006",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-06T18:06:00.000Z"
     },
     {
@@ -3369,6 +3414,8 @@
       "quoted_signal": "Subject: Re: Documentation engineering at Northwind\n\nInteresting. We are indeed ",
       "needs_human": false,
       "agent_run_id": "run_010",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-07T18:06:00.000Z"
     },
     {
@@ -3381,6 +3428,8 @@
       "quoted_signal": " Can you do a demo on Thursday? Adding my colleague from the platform team.",
       "needs_human": false,
       "agent_run_id": "run_014",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-05T18:06:00.000Z"
     },
     {
@@ -3393,6 +3442,8 @@
       "quoted_signal": " I'm interested in how role-specific pages work.",
       "needs_human": false,
       "agent_run_id": "run_018",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-08T18:06:00.000Z"
     },
     {
@@ -3405,6 +3456,8 @@
       "quoted_signal": " Would love to be a design partner if pricing works for a 20-person team.",
       "needs_human": false,
       "agent_run_id": "run_022",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-06T18:06:00.000Z"
     },
     {
@@ -3417,6 +3470,8 @@
       "quoted_signal": "Automatic reply: Out of office",
       "needs_human": false,
       "agent_run_id": "run_026",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-05T18:06:00.000Z"
     },
     {
@@ -3429,6 +3484,8 @@
       "quoted_signal": "Subject: Re: Onboarding documentation at Tessera\n\nNot the right time for us — we just committed to another vendor for this.",
       "needs_human": false,
       "agent_run_id": "run_030",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-10T18:06:00.000Z"
     },
     {
@@ -3441,6 +3498,8 @@
       "quoted_signal": " Please send over available slots for a 30-min intro, our platform lead will join.",
       "needs_human": false,
       "agent_run_id": "run_035",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-08T18:06:00.000Z"
     },
     {
@@ -3453,6 +3512,8 @@
       "quoted_signal": " Not a priority this quarter, but keep me posted on the open-source side.",
       "needs_human": false,
       "agent_run_id": "run_042",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-11T18:06:00.000Z"
     },
     {
@@ -3465,6 +3526,8 @@
       "quoted_signal": " Could you share a demo video?",
       "needs_human": false,
       "agent_run_id": "run_046",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-10T18:06:00.000Z"
     },
     {
@@ -3477,6 +3540,8 @@
       "quoted_signal": "Subject: Re: Curriculum documentation\n\nPlease remove me from your list.",
       "needs_human": false,
       "agent_run_id": "run_050",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-08T18:06:00.000Z"
     },
     {
@@ -3489,6 +3554,8 @@
       "quoted_signal": " Forwarding to them; they'll reach out if interested.",
       "needs_human": false,
       "agent_run_id": "run_054",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-11T18:06:00.000Z"
     },
     {
@@ -3501,6 +3568,8 @@
       "quoted_signal": " Can we schedule a call for next week?",
       "needs_human": false,
       "agent_run_id": "run_061",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-09T18:06:00.000Z"
     },
     {
@@ -3513,6 +3582,8 @@
       "quoted_signal": " Very interested — happy to try it on a client project and give feedback.",
       "needs_human": false,
       "agent_run_id": "run_065",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-08T18:06:00.000Z"
     },
     {
@@ -3525,6 +3596,8 @@
       "quoted_signal": " We're evaluating options.",
       "needs_human": false,
       "agent_run_id": "run_072",
+      "review_status": "pending",
+      "resolved_at": null,
       "created_at": "2026-07-11T18:06:00.000Z"
     }
   ],
@@ -3536,6 +3609,7 @@
       "notes": "Prospect proposes a meeting or asks for time slots.",
       "recorded_by": "reply_agent",
       "event_id": "inb_001",
+      "occurred_at": "2026-07-06T18:00:00.000Z",
       "recorded_at": "2026-07-06T18:06:00.000Z"
     },
     {
@@ -3545,6 +3619,7 @@
       "notes": "Prospect expresses interest or asks for materials.",
       "recorded_by": "reply_agent",
       "event_id": "inb_002",
+      "occurred_at": "2026-07-07T18:00:00.000Z",
       "recorded_at": "2026-07-07T18:06:00.000Z"
     },
     {
@@ -3554,6 +3629,7 @@
       "notes": "Prospect proposes a meeting or asks for time slots.",
       "recorded_by": "reply_agent",
       "event_id": "inb_003",
+      "occurred_at": "2026-07-05T18:00:00.000Z",
       "recorded_at": "2026-07-05T18:06:00.000Z"
     },
     {
@@ -3563,6 +3639,7 @@
       "notes": "Prospect expresses interest or asks for materials.",
       "recorded_by": "reply_agent",
       "event_id": "inb_004",
+      "occurred_at": "2026-07-08T18:00:00.000Z",
       "recorded_at": "2026-07-08T18:06:00.000Z"
     },
     {
@@ -3572,6 +3649,7 @@
       "notes": "Prospect expresses interest or asks for materials.",
       "recorded_by": "reply_agent",
       "event_id": "inb_005",
+      "occurred_at": "2026-07-06T18:00:00.000Z",
       "recorded_at": "2026-07-06T18:06:00.000Z"
     },
     {
@@ -3581,6 +3659,7 @@
       "notes": "Prospect declines for now.",
       "recorded_by": "reply_agent",
       "event_id": "inb_007",
+      "occurred_at": "2026-07-10T18:00:00.000Z",
       "recorded_at": "2026-07-10T18:06:00.000Z"
     },
     {
@@ -3590,6 +3669,7 @@
       "notes": "Prospect proposes a meeting or asks for time slots.",
       "recorded_by": "reply_agent",
       "event_id": "inb_008",
+      "occurred_at": "2026-07-08T18:00:00.000Z",
       "recorded_at": "2026-07-08T18:06:00.000Z"
     },
     {
@@ -3599,6 +3679,7 @@
       "notes": "Prospect declines for now.",
       "recorded_by": "reply_agent",
       "event_id": "inb_009",
+      "occurred_at": "2026-07-11T18:00:00.000Z",
       "recorded_at": "2026-07-11T18:06:00.000Z"
     },
     {
@@ -3608,6 +3689,7 @@
       "notes": "Prospect expresses interest or asks for materials.",
       "recorded_by": "reply_agent",
       "event_id": "inb_010",
+      "occurred_at": "2026-07-10T18:00:00.000Z",
       "recorded_at": "2026-07-10T18:06:00.000Z"
     },
     {
@@ -3617,6 +3699,7 @@
       "notes": "Explicit opt-out or refusal.",
       "recorded_by": "reply_agent",
       "event_id": "inb_011",
+      "occurred_at": "2026-07-08T18:00:00.000Z",
       "recorded_at": "2026-07-08T18:06:00.000Z"
     },
     {
@@ -3626,6 +3709,7 @@
       "notes": "Prospect expresses interest or asks for materials.",
       "recorded_by": "reply_agent",
       "event_id": "inb_012",
+      "occurred_at": "2026-07-11T18:00:00.000Z",
       "recorded_at": "2026-07-11T18:06:00.000Z"
     },
     {
@@ -3635,6 +3719,7 @@
       "notes": "Prospect proposes a meeting or asks for time slots.",
       "recorded_by": "reply_agent",
       "event_id": "inb_013",
+      "occurred_at": "2026-07-09T18:00:00.000Z",
       "recorded_at": "2026-07-09T18:06:00.000Z"
     },
     {
@@ -3644,6 +3729,7 @@
       "notes": "Prospect expresses interest or asks for materials.",
       "recorded_by": "reply_agent",
       "event_id": "inb_014",
+      "occurred_at": "2026-07-08T18:00:00.000Z",
       "recorded_at": "2026-07-08T18:06:00.000Z"
     },
     {
@@ -3653,6 +3739,7 @@
       "notes": "Prospect expresses interest or asks for materials.",
       "recorded_by": "reply_agent",
       "event_id": "inb_015",
+      "occurred_at": "2026-07-11T18:00:00.000Z",
       "recorded_at": "2026-07-11T18:06:00.000Z"
     },
     {
@@ -3662,6 +3749,7 @@
       "notes": "No reply after 14 days",
       "recorded_by": "user",
       "event_id": null,
+      "occurred_at": "2026-07-31T09:00:00.000Z",
       "recorded_at": "2026-07-31T09:00:00.000Z"
     },
     {
@@ -3671,6 +3759,7 @@
       "notes": "No reply after 14 days",
       "recorded_by": "user",
       "event_id": null,
+      "occurred_at": "2026-07-31T09:00:00.000Z",
       "recorded_at": "2026-07-31T09:00:00.000Z"
     }
   ],
@@ -3680,30 +3769,37 @@
       "project_id": "proj_001",
       "kind": "score_band_response",
       "title": "Positive response by score band",
-      "detail": "80+: 75% (6/8) · 60–79: 62.5% (5/8) · 40–59: 0% (0/0)",
+      "detail": "80+: 66.7% (6/9) · 60–79: 62.5% (5/8) · 40–59: 0% (0/0)",
       "data": {
         "bands": [
           {
             "band": "80+",
-            "contacted": 8,
+            "sent": 9,
+            "assessable": 9,
+            "awaiting": 0,
             "positive": 6,
-            "rate": 75
+            "rate": 66.7
           },
           {
             "band": "60–79",
-            "contacted": 8,
+            "sent": 8,
+            "assessable": 8,
+            "awaiting": 0,
             "positive": 5,
             "rate": 62.5
           },
           {
             "band": "40–59",
-            "contacted": 0,
+            "sent": 0,
+            "assessable": 0,
+            "awaiting": 0,
             "positive": 0,
             "rate": 0
           }
-        ]
+        ],
+        "window_days": 14
       },
-      "sample_size": 16,
+      "sample_size": 17,
       "generated_at": "2026-08-01T09:00:00.000Z"
     },
     {
@@ -3711,42 +3807,53 @@
       "project_id": "proj_001",
       "kind": "evidence_category_performance",
       "title": "Best-performing evidence categories",
-      "detail": "1. hiring (76.9%) · 2. technology (73.3%) · 3. content (66.7%)",
+      "detail": "1. hiring (71.4%) · 2. technology (68.8%) · 3. content (62.5%)",
       "data": {
         "categories": [
           {
             "category": "hiring",
-            "contacted": 13,
+            "sent": 14,
+            "assessable": 14,
+            "awaiting": 0,
             "positive": 10,
-            "rate": 76.9
+            "rate": 71.4
           },
           {
             "category": "technology",
-            "contacted": 15,
+            "sent": 16,
+            "assessable": 16,
+            "awaiting": 0,
             "positive": 11,
-            "rate": 73.3
+            "rate": 68.8
           },
           {
             "category": "content",
-            "contacted": 15,
+            "sent": 16,
+            "assessable": 16,
+            "awaiting": 0,
             "positive": 10,
-            "rate": 66.7
+            "rate": 62.5
           },
           {
             "category": "company_profile",
-            "contacted": 10,
+            "sent": 10,
+            "assessable": 10,
+            "awaiting": 0,
             "positive": 6,
             "rate": 60
           },
           {
             "category": "product_launch",
-            "contacted": 6,
+            "sent": 7,
+            "assessable": 7,
+            "awaiting": 0,
             "positive": 3,
-            "rate": 50
+            "rate": 42.9
           }
-        ]
+        ],
+        "window_days": 14
       },
-      "sample_size": 16,
+      "sample_size": 17,
       "generated_at": "2026-08-01T09:00:00.000Z"
     },
     {
@@ -3777,31 +3884,51 @@
           }
         ]
       },
-      "sample_size": 16,
+      "sample_size": 17,
       "generated_at": "2026-08-01T09:00:00.000Z"
     },
     {
       "id": "ins_004",
       "project_id": "proj_001",
       "kind": "headline",
-      "title": "Leads scored 80+ showed 1.2× higher positive-response rate than 60–79",
-      "detail": "75% vs 62.5% across 16 contacted leads.",
+      "title": "Leads scored 80+ showed 1.1× higher positive-response rate than 60–79",
+      "detail": "66.7% vs 62.5% across 17 assessable sends (14-day window). Sample size measures data volume, not statistical certainty.",
       "data": {
-        "lift": 1.2,
+        "lift": 1.1,
         "top": {
           "band": "80+",
-          "contacted": 8,
+          "sent": 9,
+          "assessable": 9,
+          "awaiting": 0,
           "positive": 6,
-          "rate": 75
+          "rate": 66.7
         },
         "mid": {
           "band": "60–79",
-          "contacted": 8,
+          "sent": 8,
+          "assessable": 8,
+          "awaiting": 0,
           "positive": 5,
           "rate": 62.5
-        }
+        },
+        "comparison_sample": 17
       },
-      "sample_size": 16,
+      "sample_size": 17,
+      "generated_at": "2026-08-01T09:00:00.000Z"
+    },
+    {
+      "id": "ins_005",
+      "project_id": "proj_001",
+      "kind": "recommendation",
+      "title": "Leads with \"hiring\" evidence convert best — consider reflecting it in your ICP's positive signals",
+      "detail": "71.4% positive (10/14) vs 64.7% overall. A suggestion for a human decision — the agent never edits the ICP itself.",
+      "data": {
+        "key": "prioritise_category:hiring",
+        "category": "hiring",
+        "rate": 71.4,
+        "overall": 64.7
+      },
+      "sample_size": 14,
       "generated_at": "2026-08-01T09:00:00.000Z"
     }
   ],
@@ -5537,7 +5664,7 @@
       "retry_count": 0,
       "error": null,
       "input_summary": "16 outcomes",
-      "output_summary": "4 insights",
+      "output_summary": "5 insights",
       "created_at": "2026-08-01T09:00:00.000Z"
     },
     {

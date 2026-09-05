@@ -263,13 +263,14 @@ export async function assignInbound(repo: Repository, eventId: string, leadId: s
 }
 
 export async function refreshInsights(repo: Repository, projectId: string, ctx: AgentContext = agentContext()) {
-  const [leads, qualifications, evidence, outcomes] = await Promise.all([repo.leads(projectId), repo.qualifications(), repo.allEvidence(), repo.outcomes()]);
+  const [leads, qualifications, evidence, outcomes, receipts] = await Promise.all([repo.leads(projectId), repo.qualifications(), repo.allEvidence(), repo.outcomes(), repo.receipts()]);
   const ids = new Set(leads.map((l) => l.id));
   const { output } = await runAgent(repo, learningAgent, {
     project_id: projectId, leads,
     qualifications: qualifications.filter((q) => ids.has(q.lead_id)),
     evidence: evidence.filter((e) => ids.has(e.lead_id)),
     outcomes: outcomes.filter((o) => ids.has(o.lead_id)),
+    receipts: receipts.filter((x) => ids.has(x.lead_id)),
   }, ctx, { project_id: projectId, input_summary: `${outcomes.length} outcomes`, summarize: (o) => `${o.length} insights` });
   await repo.saveInsights(projectId, output);
   return output;

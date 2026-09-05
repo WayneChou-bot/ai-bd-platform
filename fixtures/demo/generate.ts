@@ -276,7 +276,7 @@ async function main() {
 
   // One user override to demonstrate audit: DataWorks "interested" → keep, but add note
   const learningAt = day(31);
-  const insights = buildInsights({ project_id: project.id, leads, qualifications, evidence, outcomes }, learningAt, newId);
+  const insights = buildInsights({ project_id: project.id, leads, qualifications, evidence, outcomes, receipts }, learningAt, newId);
   run("learning", null, learningAt, { input: `${outcomes.length} outcomes`, output: `${insights.length} insights` });
 
   // Fill agent_runs to ~120 with a background research refresh batch

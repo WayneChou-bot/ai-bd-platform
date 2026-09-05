@@ -361,7 +361,7 @@ export type Outcome = z.infer<typeof Outcome>;
 export const LearningInsight = z.object({
   id: Id,
   project_id: Id,
-  kind: z.enum(["score_band_response", "evidence_category_performance", "source_performance", "headline"]),
+  kind: z.enum(["score_band_response", "evidence_category_performance", "source_performance", "headline", "recommendation"]),
   title: z.string(),
   detail: z.string(),
   data: z.record(z.string(), z.unknown()),
@@ -369,6 +369,25 @@ export const LearningInsight = z.object({
   generated_at: Timestamp,
 });
 export type LearningInsight = z.infer<typeof LearningInsight>;
+
+/**
+ * Human adoption of a Learning recommendation (review v6: the learning loop
+ * closes through a PERSON, never by the agent editing the ICP itself).
+ * Append-only: re-deciding writes a new row; the latest row per
+ * recommendation_key is the standing decision, older rows are the history.
+ */
+export const StrategyAdoption = z.object({
+  id: Id,
+  project_id: Id,
+  /** Stable fingerprint of the recommendation (insight ids change on every
+   *  refresh; the key does not). */
+  recommendation_key: z.string().min(1),
+  title: z.string(),
+  action: z.enum(["adopted", "dismissed"]),
+  note: z.string().default(""),
+  created_at: Timestamp,
+});
+export type StrategyAdoption = z.infer<typeof StrategyAdoption>;
 
 // ---------------------------------------------------------------------------
 // Agent runs / audit (§23, §42)

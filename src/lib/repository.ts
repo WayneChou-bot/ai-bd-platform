@@ -10,7 +10,7 @@
 import type {
   AgentRun, AuditEvent, DeliveryReceipt, DemoDataset, Evidence, ICPProfile, InboundEvent, Lead,
   LearningInsight, Outcome, OutreachDraft, ProductUnderstanding, Project, QualificationResult, ReplyClassification,
-  Signal, TrackedEntity,
+  Signal, StrategyAdoption, TrackedEntity,
 } from "@/core/schemas";
 import { DemoDataset as DemoDatasetSchema } from "@/core/schemas";
 import type { AppConfig } from "@/lib/config";
@@ -60,6 +60,8 @@ export interface Repository {
   addOutcome(o: Outcome): Promise<void>;
   insights(): Promise<LearningInsight[]>;
   saveInsights(projectId: string, items: LearningInsight[]): Promise<void>;
+  strategyAdoptions(projectId?: string): Promise<StrategyAdoption[]>;
+  addStrategyAdoption(a: StrategyAdoption): Promise<void>;
   leadByThreadKey(threadKey: string): Promise<Lead | undefined>;
 
   // observability (read + write)
@@ -95,6 +97,7 @@ interface Store {
   audit_events: AuditEvent[];
   tracked_entities: TrackedEntity[];
   signals: Signal[];
+  strategy_adoptions: StrategyAdoption[];
 }
 
 export class InMemoryRepository implements Repository {
@@ -110,7 +113,7 @@ export class InMemoryRepository implements Repository {
       leads: d.leads, evidence: d.evidence, qualifications: d.qualifications, drafts: d.drafts, receipts: d.receipts,
       inbound_events: d.inbound_events, reply_classifications: d.reply_classifications, outcomes: d.outcomes,
       insights: d.insights, agent_runs: d.agent_runs, audit_events: d.audit_events,
-      tracked_entities: [], signals: [],
+      tracked_entities: [], signals: [], strategy_adoptions: [],
     }));
   }
 
@@ -221,6 +224,10 @@ export class InMemoryRepository implements Repository {
   async saveInsights(projectId: string, items: LearningInsight[]) {
     this.s.insights = this.s.insights.filter((x) => x.project_id !== projectId).concat(items);
   }
+  async strategyAdoptions(projectId?: string) {
+    return projectId ? this.s.strategy_adoptions.filter((x) => x.project_id === projectId) : this.s.strategy_adoptions;
+  }
+  async addStrategyAdoption(a: StrategyAdoption) { this.s.strategy_adoptions.push(a); }
   async leadByThreadKey(threadKey: string) { return this.s.leads.find((l) => l.thread_key === threadKey); }
 
   async agentRuns() { return this.s.agent_runs; }

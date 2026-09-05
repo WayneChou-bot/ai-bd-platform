@@ -82,7 +82,7 @@ describe("demo dataset", () => {
 
   it("learning insights are recomputed exactly from the outcome rows", () => {
     const fresh = buildInsights(
-      { project_id: d.project.id, leads: d.leads, qualifications: d.qualifications, evidence: d.evidence, outcomes: d.outcomes },
+      { project_id: d.project.id, leads: d.leads, qualifications: d.qualifications, evidence: d.evidence, outcomes: d.outcomes, receipts: d.receipts },
       d.insights[0].generated_at,
       (() => { let n = 0; return () => `ins_${String(++n).padStart(3, "0")}`; })(),
     );

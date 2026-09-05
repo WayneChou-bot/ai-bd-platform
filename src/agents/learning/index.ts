@@ -4,7 +4,7 @@
  */
 import { z } from "zod";
 import { defineAgent } from "@/core/orchestrator/agent";
-import { Evidence, Lead, LearningInsight, Outcome, POSITIVE_OUTCOMES, QualificationResult } from "@/core/schemas";
+import { DeliveryReceipt, Evidence, Lead, LearningInsight, Outcome, POSITIVE_OUTCOMES, QualificationResult } from "@/core/schemas";
 
 export const LearningInput = z.object({
   project_id: z.string(),
@@ -12,10 +12,11 @@ export const LearningInput = z.object({
   qualifications: z.array(QualificationResult),
   evidence: z.array(Evidence),
   outcomes: z.array(Outcome),
+  receipts: z.array(DeliveryReceipt).default([]),
 });
 
-export interface BandStat { band: string; contacted: number; positive: number; rate: number }
-export interface CategoryStat { category: string; contacted: number; positive: number; rate: number }
+export interface BandStat { band: string; sent: number; assessable: number; awaiting: number; positive: number; rate: number }
+export interface CategoryStat { category: string; sent: number; assessable: number; awaiting: number; positive: number; rate: number }
 export interface SourceStat { source: string; discovered: number; qualified: number; positive: number }
 
 const pct = (n: number, d: number) => (d === 0 ? 0 : Math.round((n / d) * 1000) / 10);
@@ -40,6 +41,41 @@ export function insightConfidence(n: number): InsightConfidence {
  * a backlog of old mail can therefore never demote a newer result, and a
  * batch processed newest-first ends in the same state as oldest-first.
  */
+/**
+ * Send cohort (review v6 F11): the denominator of every response statistic is
+ * SENT leads whose observation is complete — an outcome was recorded, or the
+ * observation window elapsed with silence (a real non-response). A lead sent
+ * yesterday is neither a success nor a failure yet: it sits in `awaiting` and
+ * is excluded from every rate, but shown, never silently dropped.
+ */
+export const OBSERVATION_WINDOW_DAYS = 14;
+export interface SendCohort {
+  /** lead_id → earliest successful send */
+  sentAt: Map<string, string>;
+  /** sent AND (outcome recorded OR window elapsed) — rate denominators */
+  assessable: Set<string>;
+  /** sent, no outcome, window still open */
+  awaiting: Set<string>;
+  latest: Map<string, Outcome>;
+}
+export function sendCohort(receipts: DeliveryReceipt[], outcomes: Outcome[], nowIso: string): SendCohort {
+  const sentAt = new Map<string, string>();
+  for (const r of receipts) {
+    if (r.error) continue;
+    const cur = sentAt.get(r.lead_id);
+    if (!cur || r.sent_at < cur) sentAt.set(r.lead_id, r.sent_at);
+  }
+  const latest = latestOutcomes(outcomes);
+  const cutoff = new Date(new Date(nowIso).getTime() - OBSERVATION_WINDOW_DAYS * 86_400_000).toISOString();
+  const assessable = new Set<string>();
+  const awaiting = new Set<string>();
+  for (const [leadId, at] of sentAt) {
+    if (latest.has(leadId) || at <= cutoff) assessable.add(leadId);
+    else awaiting.add(leadId);
+  }
+  return { sentAt, assessable, awaiting, latest };
+}
+
 export function latestOutcomes(outcomes: Outcome[]): Map<string, Outcome> {
   const when = (o: Outcome) => o.occurred_at ?? o.recorded_at;
   const tier = (o: Outcome) => (o.recorded_by === "user" ? 1 : 0);
@@ -53,8 +89,11 @@ export function latestOutcomes(outcomes: Outcome[]): Map<string, Outcome> {
   return m;
 }
 
-export function scoreBandStats(qs: QualificationResult[], outcomes: Outcome[]): BandStat[] {
-  const latest = latestOutcomes(outcomes);
+/** Positive rate by score band over the SEND cohort (review v6 F11): the old
+ *  denominator was "leads with a recorded outcome", which silently excluded
+ *  sent-but-silent leads and could read 1/1 = 100% when 10 were sent. */
+export function scoreBandStats(qs: QualificationResult[], outcomes: Outcome[], receipts: DeliveryReceipt[], nowIso: string): BandStat[] {
+  const c = sendCohort(receipts, outcomes, nowIso);
   const bands: Array<[string, (s: number) => boolean]> = [
     ["80+", (s) => s >= 80],
     ["60–79", (s) => s >= 60 && s < 80],
@@ -62,14 +101,15 @@ export function scoreBandStats(qs: QualificationResult[], outcomes: Outcome[]): 
   ];
   return bands.map(([band, f]) => {
     const inBand = qs.filter((q) => !q.withheld && f(q.total_score));
-    const contacted = inBand.filter((q) => latest.has(q.lead_id));
-    const positive = contacted.filter((q) => POSITIVE_OUTCOMES.has(latest.get(q.lead_id)!.outcome));
-    return { band, contacted: contacted.length, positive: positive.length, rate: pct(positive.length, contacted.length) };
+    const sent = inBand.filter((q) => c.sentAt.has(q.lead_id));
+    const assessable = sent.filter((q) => c.assessable.has(q.lead_id));
+    const positive = assessable.filter((q) => c.latest.has(q.lead_id) && POSITIVE_OUTCOMES.has(c.latest.get(q.lead_id)!.outcome));
+    return { band, sent: sent.length, assessable: assessable.length, awaiting: sent.length - assessable.length, positive: positive.length, rate: pct(positive.length, assessable.length) };
   });
 }
 
-export function evidenceCategoryStats(evidence: Evidence[], outcomes: Outcome[]): CategoryStat[] {
-  const latest = latestOutcomes(outcomes);
+export function evidenceCategoryStats(evidence: Evidence[], outcomes: Outcome[], receipts: DeliveryReceipt[], nowIso: string): CategoryStat[] {
+  const c = sendCohort(receipts, outcomes, nowIso);
   const byCat = new Map<string, Set<string>>();
   for (const e of evidence) {
     if (e.polarity !== "positive") continue;
@@ -78,12 +118,13 @@ export function evidenceCategoryStats(evidence: Evidence[], outcomes: Outcome[])
   }
   return [...byCat.entries()]
     .map(([category, leadIds]) => {
-      const contacted = [...leadIds].filter((id) => latest.has(id));
-      const positive = contacted.filter((id) => POSITIVE_OUTCOMES.has(latest.get(id)!.outcome));
-      return { category, contacted: contacted.length, positive: positive.length, rate: pct(positive.length, contacted.length) };
+      const sent = [...leadIds].filter((id) => c.sentAt.has(id));
+      const assessable = sent.filter((id) => c.assessable.has(id));
+      const positive = assessable.filter((id) => c.latest.has(id) && POSITIVE_OUTCOMES.has(c.latest.get(id)!.outcome));
+      return { category, sent: sent.length, assessable: assessable.length, awaiting: sent.length - assessable.length, positive: positive.length, rate: pct(positive.length, assessable.length) };
     })
-    .filter((c) => c.contacted > 0)
-    .sort((a, b) => b.rate - a.rate || b.contacted - a.contacted);
+    .filter((x) => x.sent > 0)
+    .sort((a, b) => b.rate - a.rate || b.assessable - a.assessable);
 }
 
 export function sourceStats(leads: Lead[], qs: QualificationResult[], outcomes: Outcome[]): SourceStat[] {
@@ -101,24 +142,33 @@ export function sourceStats(leads: Lead[], qs: QualificationResult[], outcomes: 
   return [...m.values()];
 }
 
+/** Each side of a comparison needs its OWN minimum (review v6 F12): 0-vs-10
+ *  used to produce "0× higher". */
+export const MIN_GROUP_SAMPLE = 5;
+
 export function buildInsights(input: z.infer<typeof LearningInput>, now: string, newId: (p: string) => string): LearningInsight[] {
-  const bands = scoreBandStats(input.qualifications, input.outcomes);
-  const cats = evidenceCategoryStats(input.evidence, input.outcomes);
+  const receipts = input.receipts ?? [];
+  const bands = scoreBandStats(input.qualifications, input.outcomes, receipts, now);
+  const cats = evidenceCategoryStats(input.evidence, input.outcomes, receipts, now);
   const sources = sourceStats(input.leads, input.qualifications, input.outcomes);
-  const sample = latestOutcomes(input.outcomes).size;
+  const cohort = sendCohort(receipts, input.outcomes, now);
+  // The overview insights' sample is the assessable send cohort — NOT the
+  // count of recorded outcomes, and NOT the whole project (review v6 F11/F12).
+  const sample = cohort.assessable.size;
+  const fmt = (x: { positive: number; assessable: number; awaiting: number }) => `${x.positive}/${x.assessable}${x.awaiting ? ` (+${x.awaiting} awaiting)` : ""}`;
 
   const insights: LearningInsight[] = [
     {
       id: newId("ins"), project_id: input.project_id, kind: "score_band_response",
       title: "Positive response by score band",
-      detail: bands.map((b) => `${b.band}: ${b.rate}% (${b.positive}/${b.contacted})`).join(" · "),
-      data: { bands }, sample_size: sample, generated_at: now,
+      detail: bands.map((b) => `${b.band}: ${b.rate}% (${fmt(b)})`).join(" · "),
+      data: { bands, window_days: OBSERVATION_WINDOW_DAYS }, sample_size: sample, generated_at: now,
     },
     {
       id: newId("ins"), project_id: input.project_id, kind: "evidence_category_performance",
       title: "Best-performing evidence categories",
       detail: cats.slice(0, 3).map((c, i) => `${i + 1}. ${c.category} (${c.rate}%)`).join(" · "),
-      data: { categories: cats }, sample_size: sample, generated_at: now,
+      data: { categories: cats, window_days: OBSERVATION_WINDOW_DAYS }, sample_size: sample, generated_at: now,
     },
     {
       id: newId("ins"), project_id: input.project_id, kind: "source_performance",
@@ -128,16 +178,48 @@ export function buildInsights(input: z.infer<typeof LearningInput>, now: string,
     },
   ];
 
+  // Comparative headline (review v6 F12): each band must clear its own
+  // minimum — an empty or near-empty control group generates NOTHING — the
+  // wording follows the direction instead of always claiming "higher", and
+  // the stated sample is the comparison's own, so more data in OTHER bands
+  // cannot inflate this claim's confidence label.
   const top = bands[0], mid = bands[1];
-  // Comparative claims are gated on sample size: below MIN_COMPARATIVE_SAMPLE
-  // contacted leads across the two bands, no lift insight is generated at all.
-  if (top && mid && mid.rate > 0 && insightConfidence(top.contacted + mid.contacted) !== "insufficient") {
-    const lift = Math.round((top.rate / mid.rate) * 10) / 10;
+  if (top && mid && top.assessable >= MIN_GROUP_SAMPLE && mid.assessable >= MIN_GROUP_SAMPLE && (top.rate > 0 || mid.rate > 0)) {
+    const comparisonN = top.assessable + mid.assessable;
+    let title: string;
+    let lift: number | null = null;
+    if (mid.rate === 0) {
+      title = `Leads scored 80+ showed a ${top.rate}% positive-response rate while 60–79 showed none`;
+    } else if (top.rate === mid.rate) {
+      title = `Leads scored 80+ and 60–79 showed the same positive-response rate`;
+    } else if (top.rate > mid.rate) {
+      lift = Math.round((top.rate / mid.rate) * 10) / 10;
+      title = `Leads scored 80+ showed ${lift}× higher positive-response rate than 60–79`;
+    } else {
+      lift = Math.round((mid.rate / top.rate) * 10) / 10;
+      title = `Leads scored 80+ showed ${lift}× LOWER positive-response rate than 60–79`;
+    }
     insights.push({
       id: newId("ins"), project_id: input.project_id, kind: "headline",
-      title: `Leads scored 80+ showed ${lift}× higher positive-response rate than 60–79`,
-      detail: `${top.rate}% vs ${mid.rate}% across ${top.contacted + mid.contacted} contacted leads.`,
-      data: { lift, top, mid }, sample_size: sample, generated_at: now,
+      title,
+      detail: `${top.rate}% vs ${mid.rate}% across ${comparisonN} assessable sends (${OBSERVATION_WINDOW_DAYS}-day window). Sample size measures data volume, not statistical certainty.`,
+      data: { lift, top, mid, comparison_sample: comparisonN }, sample_size: comparisonN, generated_at: now,
+    });
+  }
+
+  // Recommendation (review v6: the learning loop closes through a human).
+  // Analysis only — the agent NEVER edits the ICP; a person adopts or
+  // dismisses this on the Analytics screen, and that decision is recorded.
+  const positives = [...cohort.assessable].filter((id) => cohort.latest.has(id) && POSITIVE_OUTCOMES.has(cohort.latest.get(id)!.outcome)).length;
+  const overallRate = pct(positives, cohort.assessable.size);
+  const bestCat = cats.find((x) => x.assessable >= MIN_COMPARATIVE_SAMPLE && x.rate > overallRate);
+  if (bestCat) {
+    insights.push({
+      id: newId("ins"), project_id: input.project_id, kind: "recommendation",
+      title: `Leads with "${bestCat.category}" evidence convert best — consider reflecting it in your ICP's positive signals`,
+      detail: `${bestCat.rate}% positive (${fmt(bestCat)}) vs ${overallRate}% overall. A suggestion for a human decision — the agent never edits the ICP itself.`,
+      data: { key: `prioritise_category:${bestCat.category}`, category: bestCat.category, rate: bestCat.rate, overall: overallRate },
+      sample_size: bestCat.assessable, generated_at: now,
     });
   }
   return insights;
