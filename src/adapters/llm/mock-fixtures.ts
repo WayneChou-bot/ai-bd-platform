@@ -145,6 +145,13 @@ export function researchHeuristic(p: { company: string; website?: string; now: s
 export function createDemoMockProvider(): MockLLMProvider {
   return new MockLLMProvider()
     .register("qualification.rationale", ({ prompt }) => qualificationRationaleHeuristic(JSON.parse(prompt) as QualPrompt))
+    // Identity mapping: the demo seed universe was authored against its own
+    // ICP, so every item stays relevant with its research-time judgement —
+    // fixture scores remain byte-identical (review v6 F01).
+    .register("qualification.map_evidence", ({ prompt }) => {
+      const p = JSON.parse(prompt) as { evidence: Array<{ id: string; suggested_supports: string; suggested_polarity: string }> };
+      return { items: p.evidence.map((e) => ({ evidence_id: e.id, relevant: true, supports: e.suggested_supports, polarity: e.suggested_polarity })) };
+    })
     .register("outreach.draft", ({ prompt }) => draftOutreachHeuristic(JSON.parse(prompt) as OutreachPrompt))
     .register("reply.classify", ({ untrusted }) => classifyReplyHeuristic(untrusted ?? ""))
     .register("product.understand", ({ prompt }) => productUnderstandingHeuristic(JSON.parse(prompt)))

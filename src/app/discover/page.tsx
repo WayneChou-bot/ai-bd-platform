@@ -217,8 +217,13 @@ function MentionsView({ t, projectId, signals, entities }: { t: (k: string) => s
                     </div>
                   </div>
                   <div className="flex shrink-0 gap-1.5">
+                    {/* The human names the buyer (review v6 F04) — the source platform is never the default. */}
                     {s.status === "NEW" && s.business_relevance !== "low" && (
-                      <form action={convertSignalAction.bind(null, projectId, s.id)}><SubmitButton variant="primary" className="px-2.5 py-1 text-xs">{t("Convert to Lead")}</SubmitButton></form>
+                      <form action={convertSignalAction.bind(null, projectId, s.id)} className="flex flex-wrap items-center gap-1">
+                        <input name="company_name" required placeholder={t("Organization mentioned")} className="w-36 rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs outline-none placeholder:text-muted focus:border-accent/60" />
+                        <input name="website" placeholder={t("Website (optional)")} className="w-32 rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs outline-none placeholder:text-muted focus:border-accent/60" />
+                        <SubmitButton variant="primary" className="px-2.5 py-1 text-xs">{t("Convert to Lead")}</SubmitButton>
+                      </form>
                     )}
                     {s.status === "NEW" && (
                       <form action={ignoreSignalAction.bind(null, projectId, s.id)}><Button type="submit" variant="ghost" className="px-2.5 py-1 text-xs">{t("Ignore")}</Button></form>

@@ -121,6 +121,15 @@ async function gatherSources(lead: Lead): Promise<FetchedPage[]> {
   return pages;
 }
 
+/** Grounding filter (review v6 F02): a claim may only cite a host that was
+ *  actually fetched this run. Pure — unit-tested directly. */
+export function filterGroundedEvidence(evidence: Evidence[], fetchedUrls: string[]): { grounded: Evidence[]; dropped: number } {
+  const norm = (u: string) => { try { return new URL(u).hostname.replace(/^www\./, "").toLowerCase(); } catch { return ""; } };
+  const fetchedHosts = new Set(fetchedUrls.map(norm).filter(Boolean));
+  const grounded = evidence.filter((e) => { const h = norm(e.source_url); return !!h && fetchedHosts.has(h); });
+  return { grounded, dropped: evidence.length - grounded.length };
+}
+
 export async function researchLead(repo: Repository, leadId: string, ctx: AgentContext = agentContext()): Promise<Evidence[]> {
   const lead = await repo.lead(leadId);
   if (!lead) throw new Error("lead not found");
@@ -142,7 +151,15 @@ export async function researchLead(repo: Repository, leadId: string, ctx: AgentC
       input_summary: sources.length ? `${sources.length} page(s)` : "demo sources",
       summarize: (o) => `${o.evidence.length} evidence records`,
     });
-    const evidence: Evidence[] = output.evidence.map((e) => ({ ...e, id: ctx.newId("ev"), lead_id: lead.id }));
+    let evidence: Evidence[] = output.evidence.map((e) => ({ ...e, id: ctx.newId("ev"), lead_id: lead.id }));
+    // Grounding (review v6 F02): every claim must cite a host we actually
+    // fetched. Applies whenever real pages were fetched; the demo's mock
+    // research answers from the seed universe with no fetched sources.
+    if (sources.length > 0) {
+      const { grounded, dropped } = filterGroundedEvidence(evidence, sources.map((p) => p.url));
+      if (dropped > 0) await audit(repo, lead.project_id, lead.id, "system", "research.ungrounded_dropped", `${dropped} claim(s) cited un-fetched sources and were discarded`);
+      evidence = grounded;
+    }
     // Signal → Evidence bridge (v0.3 §8, §29): converted mention signals become
     // intent evidence, in the original language, alongside researched evidence.
     const { signalsToEvidence } = await import("@/lib/mentions");
@@ -180,7 +197,9 @@ export async function qualifyLead(repo: Repository, leadId: string, ctx: AgentCo
   const icp = await repo.icp(lead.project_id);
   if (!icp) throw new Error("project has no ICP");
   const evidence = await repo.evidenceFor(lead.id);
-  const { output } = await runAgent(repo, qualificationAgent, { lead, icp, evidence }, ctx, {
+  const proj = await repo.project(lead.project_id);
+  const product = { name: proj.name, category: proj.category ?? undefined, description: proj.description || undefined };
+  const { output } = await runAgent(repo, qualificationAgent, { lead, icp, evidence, product }, ctx, {
     project_id: lead.project_id,
     lead_id: lead.id,
     input_summary: `${evidence.length} evidence`,

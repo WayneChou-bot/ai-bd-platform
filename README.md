@@ -81,7 +81,7 @@ user-facing agents:
 |---|---|---|
 | 🔭 **Discovery** | Find prospect candidates (Tavily search + GitHub + CSV + manual) and public mentions of tracked entities | Controlled sources only; search hits are LLM-screened into real organizations — a page title is never a company; dedupe against existing leads; every query recorded |
 | 🔬 **Research** | Fetch a lead's real public pages and produce structured evidence | URL-validated, size/time-capped fetches; content fenced as untrusted before any prompt |
-| ⚖️ **Qualification** | Score 5 weighted dimensions from evidence | Deterministic formula; withheld when evidence is insufficient; LLM writes rationale only |
+| ⚖️ **Qualification** | Score 5 weighted dimensions from evidence | LLM maps each evidence item onto the ICP (relevant? which dimension? what polarity?) — then a deterministic formula computes the number; duplicates deduped; withheld when evidence is insufficient |
 | ✉️ **Outreach** | Draft grounded outreach | Drafts may cite only existing positive evidence; AI-disclosure footer on every send |
 | ↩️ **Reply** | Classify inbound replies | Sentiment ≠ intent; low-confidence → `needs human`, never auto-recorded |
 | 📈 **Learning** | Recompute insights from outcome rows | Confidence-gated: comparative claims are not generated below a minimum sample, and small samples are labelled *directional* |
@@ -141,9 +141,10 @@ create a Google Cloud OAuth **desktop** client, put its ID/secret in `.env.local
 
 ## 🧪 Testing
 
-**122 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
+**134 tests** across four layers in [`tests/`](tests) — unit (scoring, schemas, state machine,
 mention engine, strict-schema conversion, search-result screening, demo-recording integrity, mail adapters), agent behaviour (reply
-classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, demo
+classification, prompt-injection fencing), end-to-end flows (pipeline, engagement, recovery,
+judgment — evidence dedupe, ICP-relative mapping, grounding — and demo
 playback with an *asserted* human-approval pause), and evaluation — fixtures are regenerated
 from raw rows and compared exactly. Failure visibility is itself under test: a FAILED run
 must remain visible after its retry succeeds. All of it runs in CI on every push.

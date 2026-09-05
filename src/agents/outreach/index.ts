@@ -20,11 +20,15 @@ const DraftSchema = z.object({
   confidence: z.number().min(0).max(1),
 });
 
-/** A draft is grounded only if every evidence id it cites exists (§39). */
+/** A draft is grounded only if every evidence id it cites exists AND is
+ *  positive — citing negative evidence in outreach copy misrepresents it
+ *  (review v6 F02: the guard used to accept negative ids). */
 export function assertGrounded(evidence_used: string[], available: Evidence[]): void {
-  const ids = new Set(available.map((e) => e.id));
-  const missing = evidence_used.filter((id) => !ids.has(id));
+  const byId = new Map(available.map((e) => [e.id, e]));
+  const missing = evidence_used.filter((id) => !byId.has(id));
   if (missing.length) throw new Error(`Ungrounded draft: unknown evidence ids ${missing.join(", ")}`);
+  const negative = evidence_used.filter((id) => byId.get(id)!.polarity === "negative");
+  if (negative.length) throw new Error(`Ungrounded draft: negative evidence cannot back outreach claims (${negative.join(", ")})`);
 }
 
 export const outreachAgent = defineAgent({

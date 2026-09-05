@@ -199,7 +199,10 @@ export const ResearchResult = z.object({
   recent_activity: z.array(z.string()).default([]),
   potential_pain_points: z.array(z.string()).default([]),
   /** Structured evidence, never prose-only. */
-  evidence: z.array(Evidence.omit({ id: true, lead_id: true })).min(1),
+  // Zero evidence is a VALID research result (review v6 F02): when no source
+  // yields verifiable claims the honest output is an empty list — the score
+  // is then withheld. Forcing min(1) made the model invent a row.
+  evidence: z.array(Evidence.omit({ id: true, lead_id: true })),
   researched_at: Timestamp,
 });
 export type ResearchResult = z.infer<typeof ResearchResult>;
@@ -228,6 +231,9 @@ export const QualificationResult = z.object({
   rationale: z.string(),
   /** true when evidence was insufficient and the score was withheld (§41). */
   withheld: z.boolean().default(false),
+  /** Which ICP the evidence was mapped against (review v6 F01) — a score is
+   *  only meaningful relative to a specific ICP version. */
+  icp_id: Id.optional(),
   scored_at: Timestamp,
 });
 export type QualificationResult = z.infer<typeof QualificationResult>;

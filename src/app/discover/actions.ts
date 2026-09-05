@@ -123,11 +123,14 @@ export async function scanMentionsAction(projectId: string) {
   }
 }
 
-export async function convertSignalAction(projectId: string, signalId: string) {
+export async function convertSignalAction(projectId: string, signalId: string, formData: FormData) {
   const r = await repo();
   const { convertSignalToLead } = await import("@/lib/mentions");
   try {
-    const lead = await convertSignalToLead(r, signalId);
+    const lead = await convertSignalToLead(r, signalId, {
+      company_name: String(formData.get("company_name") ?? "").trim() || undefined,
+      website: String(formData.get("website") ?? "").trim() || undefined,
+    });
     revalidatePath("/discover"); revalidatePath("/leads");
     redirect(`/leads/${lead.id}`);
   } catch (e) {

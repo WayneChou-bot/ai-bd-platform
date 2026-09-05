@@ -82,9 +82,29 @@ export interface ScoreOutcome {
   withheld: boolean;
 }
 
+/** Drop exact duplicates (same claim + source + dimension + polarity, after
+ *  normalisation). Splitting one citation into many rows must not raise a
+ *  score or satisfy the minimum-evidence threshold (review v6 F16). */
+export function dedupeEvidence(evidence: Evidence[]): Evidence[] {
+  const seen = new Set<string>();
+  const out: Evidence[] = [];
+  for (const e of evidence) {
+    const fp = [
+      e.claim.toLowerCase().replace(/\s+/g, " ").trim(),
+      e.source_url.toLowerCase().replace(/\/+$/, ""),
+      e.supports, e.polarity,
+    ].join("|");
+    if (seen.has(fp)) continue;
+    seen.add(fp);
+    out.push(e);
+  }
+  return out;
+}
+
 export function scoreLead(evidence: Evidence[]): ScoreOutcome {
-  const breakdown = breakdownFromEvidence(evidence);
-  if (evidence.length < MIN_EVIDENCE_FOR_SCORE) {
+  const effective = dedupeEvidence(evidence);
+  const breakdown = breakdownFromEvidence(effective);
+  if (effective.length < MIN_EVIDENCE_FOR_SCORE) {
     return { breakdown, total: 0, classification: "REJECT", withheld: true };
   }
   const total = computeTotal(breakdown);

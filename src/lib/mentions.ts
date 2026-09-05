@@ -148,15 +148,35 @@ export async function convertSignalToLead(repo: Repository, signalId: string, in
     const existing = await repo.lead(signal.lead_id);
     if (existing) return existing;
   }
+  // The buyer must be named by the human (review v6 F04): defaulting to the
+  // source host turned a Reddit post into a "reddit.com" company. The content
+  // platform is where the mention lives, never who the mention is about.
+  const name = input.company_name?.trim();
+  if (!name) throw new Error("Name the organization this mention is about — the source platform is not the buyer");
   let host: string | undefined;
   try { host = new URL(signal.source_url).hostname.replace(/^www\./, ""); } catch { /* keep undefined */ }
+  const PLATFORM_HOSTS = ["reddit.com", "github.com", "youtube.com", "news.ycombinator.com", "medium.com", "substack.com", "x.com", "twitter.com", "linkedin.com", "stackoverflow.com", "quora.com"];
+  const hostIsPlatform = !!host && PLATFORM_HOSTS.some((p) => host === p || host!.endsWith(`.${p}`));
+  const website = input.website?.trim() || (host && !hostIsPlatform ? `https://${host}` : undefined);
+
   const entities = await repo.trackedEntities(signal.project_id);
   const entityName = entities.find((e) => e.id === signal.entity_id)?.canonical_name ?? "tracked entity";
   const now = new Date().toISOString();
+
+  // Two sources pointing at the same organization attach to ONE lead —
+  // the signal links to it and both provenances are kept (F04 acceptance).
+  const key = (r: { website?: string; company_name: string }) => (r.website ?? r.company_name).toLowerCase().replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const existing = (await repo.leads(signal.project_id)).find((l) => key(l) === key({ website, company_name: name }) || l.company_name.toLowerCase() === name.toLowerCase());
+  if (existing) {
+    await repo.updateSignal({ ...signal, status: "CONVERTED", lead_id: existing.id });
+    await repo.addAuditEvent({ id: newId("aud"), project_id: signal.project_id, lead_id: existing.id, actor: "user", action: "lead.mention_attached", detail: signal.source_url, created_at: now });
+    return existing;
+  }
+
   const lead = LeadSchema.parse({
     id: newId("lead"), project_id: signal.project_id, entity_type: "company",
-    company_name: input.company_name?.trim() || host || signal.title.slice(0, 60),
-    website: input.website?.trim() || (host ? `https://${host}` : undefined),
+    company_name: name,
+    website,
     source: "mention",
     discovery_reason: `Mentioned "${entityName}" — ${signal.title}`,
     status: "DISCOVERED", thread_key: null, created_at: now, updated_at: now,
@@ -178,15 +198,27 @@ const EVIDENCE_TYPE_BY_SOURCE: Partial<Record<Signal["source_type"], EvidenceTyp
 export function signalsToEvidence(signals: Signal[], leadId: string, mkId: (p: string) => string): Evidence[] {
   return signals
     .filter((s) => s.lead_id === leadId && s.status === "CONVERTED")
-    .map((s) => ({
-      id: mkId("ev"), lead_id: leadId,
-      type: EVIDENCE_TYPE_BY_SOURCE[s.source_type] ?? "blog_post",
-      category: s.sentiment === "negative" ? "negative" as const : "content" as const,
-      claim: `Public mention (${s.mention_context}): “${s.snippet.slice(0, 200)}”`,
-      source_url: s.source_url,
-      observed_at: s.observed_at,
-      confidence: s.confidence >= 90 ? 0.9 : s.confidence >= 70 ? 0.75 : 0.6,
-      supports: "intent_signal" as const,
-      polarity: s.sentiment === "negative" ? "negative" as const : "positive" as const,
-    }));
+    .flatMap((s) => {
+      const negative = s.sentiment === "negative";
+      const hasIntent = s.intent === "high" || s.intent === "medium";
+      // A neutral technical reference or praise is a signal, not buying
+      // intent (review v6 F03): without expressed intent it becomes no
+      // intent_signal evidence at all. Negative mentions still count against.
+      if (!hasIntent && !negative) return [];
+      // Confidence comes from the INTENT expressed in the text — never from
+      // how confidently the mention matched the entity (F03: entity-match 95
+      // used to mint 0.9-confidence "intent").
+      const confidence = negative ? 0.6 : s.intent === "high" ? 0.75 : 0.55;
+      return [{
+        id: mkId("ev"), lead_id: leadId,
+        type: EVIDENCE_TYPE_BY_SOURCE[s.source_type] ?? "blog_post",
+        category: negative ? "negative" as const : "content" as const,
+        claim: `Public mention (${s.mention_context}, intent: ${s.intent}): “${s.snippet.slice(0, 200)}”`,
+        source_url: s.source_url,
+        observed_at: s.observed_at,
+        confidence,
+        supports: "intent_signal" as const,
+        polarity: negative ? "negative" as const : "positive" as const,
+      }];
+    });
 }
